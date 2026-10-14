@@ -8,7 +8,8 @@ ToolBook 8.1 decompilation notes, segment maps, and research documentation.
   - Object create path, graphics painters, OpenScript, symbol maps, open questions, debugger notes
   - BAS/RTM/W16 export maps and ordinal map
 - `maps/` — NE segment to Ghidra space mappings
-- `rename/` — Ghidra rename scripts index and naming progress
+- `rename/` — Ghidra rename scripts (`.java` and `.py`) and the nameable lists
+- `20261012/TB80BAS.map`, `20261012/TB80RTM.map` — full symbol maps
 - `research/` — key analysis notes (CDBSENDCREATE, property expansion, RTM paint path, closed candidates)
 
 ## Status
@@ -17,4 +18,4 @@ Record reader still unnamed. `CDBSENDCREATE` (BAS ordinal 51, 12c8:00bc) receive
 
 Live SoftICE confirmation of the create path is pending. Curve and arc disk layouts remain open.
 
-Full local trees (MAP files, complete rename scripts, TB80BAS.map / TB80RTM.map) stay in the working papers.
+Binary dumps and the printable PDF stay out of this repository.
