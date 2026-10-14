@@ -4,18 +4,14 @@ ToolBook 8.1 decompilation notes, segment maps, and research documentation.
 
 ## Contents
 
-- `20261012/` — consolidated notes from the 12 October 2026 session
-  - Object create path, graphics painters, OpenScript, symbol maps, open questions, debugger notes
-  - BAS/RTM/W16 export maps and ordinal map
-- `maps/` — NE segment to Ghidra space mappings
-- `rename/` — Ghidra rename scripts (`.java` and `.py`) and the nameable lists
-- `20261012/TB80BAS.map`, `20261012/TB80RTM.map` — full symbol maps
-- `research/` — key analysis notes (CDBSENDCREATE, property expansion, RTM paint path, closed candidates)
+- `20261012/` — the 12 October consolidation: create path, painters, OpenScript, symbol maps, debugger notes, export maps
+- `20261014/` — the working papers, condensed. Findings, what is still open, the 11.5 export, and what the shelf was
+- `maps/` — NE segment to Ghidra space
+- `rename/` — Ghidra rename scripts and the nameable lists
+- `research/` — the short notes that `20261014/` supersedes
 
 ## Status
 
-Record reader still unnamed. `CDBSENDCREATE` (BAS ordinal 51, 12c8:00bc) receives bounds as parameters; it does not parse `14 00 00`. The disk reader is a caller of `CDBSENDCREATE`, still not located.
+The record reader is still unnamed. `CDBSENDCREATE` receives bounds as parameters and does not parse `14 00 00`. The disk reader is a caller of it, and it has not been found. Content rectangles and the polygon record are decoded. Curves, arcs, and picture placement are not.
 
-Live SoftICE confirmation of the create path is pending. Curve and arc disk layouts remain open.
-
-Binary dumps and the printable PDF stay out of this repository.
+Binary dumps stay out of this repository. Personal names stay out. The correspondent is JohnDoe1.

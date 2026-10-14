@@ -1,6 +1,7 @@
 # Research notes index
 
-Key decompile analysis notes from the working papers.
+These are the short notes taken while the working papers were still the only copy.
+`20261014/` is the condensation. Prefer that when they disagree.
 
 ## tbwp0011
 
@@ -30,5 +31,3 @@ Key decompile analysis notes from the working papers.
 - `rtm-paint-path.md` — WM_PAINT → CLIENTTOPAGE → CDBPAINTCLIENT
 - `rtm-triage.md` — no 14 00 00 reader in RTM
 - `current-goals.md` — open research items
-
-Full notes remain in the local tbworkingpapers tree.
