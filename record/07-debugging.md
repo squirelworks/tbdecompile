@@ -20,7 +20,9 @@ Ordinal breakpoints are stable across boots. Selectors are not. `TB80BAS.Ordinal
 
 `/DUMP` writes the SoftICE console, not the address given, unless the dump experts are set. Several early `page.bin` and `rtm.bin` files are command logs or the DOS device chain (`CON`, `AUX`, `PRN`). A dump is real when it contains book strings at the file offsets already known, as `page.bin01511` did (`ASYM_TpID`, `Page#`, matching `9e954d01.tbk` at `0xB8B51`).
 
-Do not mix these commands into a WDW session.
+Do not mix these commands into a WDW session. The command card, the screen, and the 15 October book-open read are Appendix G of the reference manual. The assembly frame that card depends on is Appendix I. This chapter is the claim list. It is not a second copy of those cards.
+
+Standing orders that stay true, and that the short operational notes had in one place: `BC *` before the next breakpoint, because a live `GDI!POLYGON` breakpoint freezes SoftICE when the page scrolls. Segment numbers in `MAP` output are hex. Do not search all of memory. A wide search for `80 65` GPFed the VM. `BPX BAS(82):0376` is not an address. `MAP`, then the live selector, then the offset.
 
 ## 7.2 WDW
 
@@ -31,7 +33,7 @@ On the Watcom debugger:
 - Log with `log <file>`.
 - There is no trace that prints every call. The three logs in `tbwp0026` are named-export hits: 11 in W16, 53 in UTL, 173 in BAS.
 
-Those three logs are described in chapter 4. They do not contain the reader. The next useful break is after `CDBFILEOPEN`, on the lesson path, not another pass over the same exports.
+Those three logs are described in chapter 12. They do not contain the reader. The next useful break is after `CDBFILEOPEN`, on the lesson path, not another pass over the same exports. Appendix H is the Watcom screen and the command words. `!` still does not work there.
 
 GPF notes from the SoftICE sessions still apply in spirit: do not step into an unloaded segment, and do not single-step a far call into `KERNEL` unless that segment is present. The CMP expand host died in `TB80W16` at `001c:00000015` (`9A 9C 06 57 2A`, segment not present). That fault is parked. It is not the book-open path.
 

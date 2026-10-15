@@ -16,7 +16,7 @@
 
 Resource `0x77` is a compiler emit routine as well as the keyword pool. Resource `0x78` (id 120) is another emit routine. `COMPILERPROPINFOFROMINDEX` locks resource `0x70`. The property-name table is a different resource (BAS type `0x2D1`, id `0x2D0`). Do not treat every locked resource in that range as the keyword list.
 
-The byte classes, the back-reference formula, and the corpus counts are chapter 14. An early reading of the same bytes produced "italic" and "systime" and concluded the keyword table was wrong. That reading copied `0xC0`–`0xFF` from the output stream and used the wrong offset-table stride. It is superseded. Do not cite it.
+The byte classes, the back-reference formula, the corpus counts, and the handlers that have been expanded are chapter 14. The working description, including the two bugs and the compile test that has not been run, is Appendix J of the reference manual. An early reading of the same bytes produced "italic" and "systime" and concluded the keyword table was wrong. That reading copied `0xC0`–`0xFF` from the output stream and used the wrong offset-table stride. It is superseded. Do not cite it.
 
 High-bit opcodes (`0xE0`, `0xF0`, `0xFF`, and neighbors) emit whitespace, CR/LF, or a repeated span. After the input-stream back-reference fix, the 76 handlers in Logic Families decode. Examples that are real source, not Latin-1 of the bytecode:
 

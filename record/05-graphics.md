@@ -30,6 +30,10 @@ The polygon type table is not in the static image. Unpacked BAS still carries Op
 
 `SetPointArray` (`FUN_1408_00d8`, property `0x4050`) stores the count at `+0x30`, allocates `count * 4` with `OBJNEWNEAR` into `+0x32`, and copies the points. That is the runtime setter. The file does not contain a `0x4050` record.
 
+`LOCKPATTERN` (`1098:0876`) takes a pattern index at `[BP+0xC]`, accepts 1 through `0x80`, and calls `TOOLBOOKFATAL` outside that range. `UNLOCKPATTERN` is `1098:09FC`. It is a fill hatch, not a picture id. An earlier listing also saw a pattern index at object `+0x17` and `+0x5B`. `+0x17` is already the four-word copy in chapter 4. Do not treat those two notes as the same field until both are dumped on one object.
+
+The October 12 field card puts the polygon’s object pointer at `[BP+4]`. A far call’s first argument, after `ENTER`, is `[BP+6]` (the manual’s assembly card). The card did not record whether `PaintPolygon` was entered by a near call or a far call. Dump both slots once. The count at `+0x30` and the points at `+0x32` do not depend on that.
+
 ## 5.2 What is stored
 
 **Polygons.** `9e954d01.tbk` has 96 kind-`0400` records on 13 pages. P430 has 22. A broader search that ignores the kind word produces false positives. P430 draws as a chip: silver pins (`0xC0C0C0`) and a light-gray body (`0xE0E0E0`). One live 11-point polygon is a pin tip, not the body. The captured screen points were `(218,335)` through `(218,341)`, a 10 by 17 notch. The same points exist in the file as twips near page offset `0x9CB` of P430: `(3147,3862)` through `(3147,3973)`.
@@ -44,7 +48,7 @@ Pins that share identical point bytes stack on top of each other until the index
 
 **Curves.** Curve’s type id in `nc81base.sbk` is `0x05C7` (file offset `0x1810`). That id is not in the P420 page records. The point runs sit in the record at page `+0xA13`. A naive walk draws a tangle in screen space around 400–500. The TBX export of the flame is three 96-point red IrregularPolygons. **Thought.** The tangle is strokes concatenated that should be drawn separately. A length prefix or a zero terminator between groups has not been proven. There is no `Curve` name on the page.
 
-**Pictures.** Windows BMPs can be carved. One match against the TBX export paired 67 markers with 72 bitmaps. The widget still does not name the bitmap. Compressed pictures go through `TB80BMP` ordinal 3 and have been followed as far as a far call at `0x1FCD`. `Lz77Expand` is `FUN_1000_0031` in BMP.
+**Pictures.** The property that names a bitmap on a button is known. The bytes in the page blob that store it are not. TBX writes `NormalGraphic="bitmap id N"` and the same for invert, disabled, stretch, and checked. Those are `0x4097` through `0x409B` (chapter 2). `N` is a resource index. `DRAWPICTURECALLBACK` is the decompile’s name for the routine that writes a resolved GDI handle at object `+0x0C` / `+0x0E`. That offset is a reading of the listing, not a live dump. Windows BMPs can be carved. One match against the TBX export paired 67 markers with 72 bitmaps. An earlier note said 641 BMPs carved. That count is a header scan, not a widget binding, and it is not the number to use. Compressed pictures go through `TB80BMP` ordinal 3 and have been followed as far as a far call at `0x1FCD`. `Lz77Expand` is `FUN_1000_0031` in BMP.
 
 The shared near-start graphic in the lesson books is a 581 by 157, 8 bpp gold plate, not a text banner. Two notes locate the `nida81` splash building: file `0x413FAB` (323 by 344, 8 bpp, off-bits 310) and a carved copy taken from file `0x487BE` (27874 bytes). This record does not treat those two offsets as the same byte. The live `BITMAP` header that was found was width `0x143`, height `0x158`, 8 bpp, stride `0x258`, `bmBits` null. **Known** that the splash is a DIB. **Not known** which property on the page object holds its id.
 

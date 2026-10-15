@@ -9,7 +9,7 @@
 | M-003 | Known | Foolcourse is the process that serves a book. Foolbook is a local window. If Foolbook is started by a course, it pulls the book and skips the splash. | release notes, 2026-10-13 |
 | M-004 | Known | The dependency order is Foolversity, then Foolcourse, then Foolbook, then `openscript_analysis`. Foollege is the layer under Foolversity that holds courses. It is not a running server in the current release. | hierarchy note |
 | M-005 | Known | TBpipeline 1.0.0r4 parses `9e954d01.tbk` (129 pages) without running RTM. A known bug is an 18-versus-23 render count. | pipeline release note |
-| M-006 | Thought | A reader that prefers explicit points, then TBX Vertices, then bounds, will look like the lesson often enough to study it. It will not be a substitute for the Win98 runtime until the reader in chapter 4 has a name and the picture id is known. | project philosophy |
+| M-006 | Thought | A reader that prefers explicit points, then TBX Vertices, then bounds, will look like the lesson often enough to study it. It will not be a substitute for the Win98 runtime until the reader in chapter 4 has a name and the `0x4097` slot is located in the page blob. The property’s name is already known. | project philosophy |
 
 ## 9.1 Foolbook
 

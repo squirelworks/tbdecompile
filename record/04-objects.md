@@ -21,7 +21,7 @@ These offsets are the ones the papers and the live traces agree on.
 | `-2` | Type byte. `0x11` is an arc. The other type bytes are not mapped. | Known for `0x11` only |
 | `+0x0F` | Bounds: left, top, right, bottom. Written as twips. | Known |
 | `+0x17` `+0x19` `+0x1B` `+0x1D` | Four words copied by `FUN_12c8_0ef8` from a source structure at `+0x3E` `+0x40` `+0x42` `+0x44`. The disk `14 00 00` record does not sit at those source offsets. | Known as a copy. The source is not the disk record. |
-| `+0x1F` | BitBlt raster-op flag | Known |
+| `+0x1F` | BitBlt raster-op flag. An earlier note also said the bits are taken from a source structure at `+0x0A`, `+0x0C`, and `+0x0E`. That copy was not re-checked against the BitBlt trace. | Known as the raster-op byte. The source-bit copy is Thought. |
 | `+0x30` | Point count (word) | Known |
 | `+0x32` | Point array far pointer | Known |
 | `+0x3B` | GDI handle | Known |
@@ -33,20 +33,46 @@ These offsets are the ones the papers and the live traces agree on.
 
 ## 4.2 Author create, stated once
 
-`CDBSENDCREATE` receives bounds that are already formed. It does not compare a buffer to `14 00 00`. Type dispatch inside it selects among new-object and bounds-checked paths. The property registrar `FUN_1058_0a98` writes property id `0x4034`. It does not write painter pointers.
+`CDBSENDCREATE` receives bounds that are already formed. It does not compare a buffer to `14 00 00`. Nothing inside BAS calls it by name. One external thunk from `FUN_13d0_0822` reaches ordinal 51. That caller is author UI state (it tests bytes such as `0x26`, `0x36`, `0x38` and stores coordinates around object `+0x638`). It is not the book-open loop.
 
-Nothing inside BAS calls `CDBSENDCREATE` by name. One external thunk from `FUN_13d0_0822` reaches ordinal 51. That caller is author UI state (it tests bytes such as `0x26`, `0x36`, `0x38` and stores coordinates around object `+0x638`). It is not the book-open loop.
+**Do not break on ordinal 51 to find the reader.** The stop will fire when Instructor creates or rewrites an object. It will not fire because a lesson page was opened. The 15 October operational notes ended this section with “list the XREFs; the caller that passes a page blob is the reader.” That sentence is not true. The one caller that was found does not pass a page blob.
 
-**Do not break on ordinal 51 to find the reader.** The stop will fire when Instructor creates or rewrites an object. It will not fire because a lesson page was opened.
+The function is still real. `CDBNEWOBJECT` indexes objects as `param_6 * 0x76`. The size matches the live object. The index expression is the decompile, not a second measurement of the size.
+
+`param_5` selects the path. The string arithmetic in the decompile is Ghidra matching those constants against `s_CTbkSimpleOLEDispatch_CallMethod`. It is not a string compare in the program.
+
+| `param_5` | Path |
+|---|---|
+| `0x1014`, `0x1015` | `FUN_12c8_0850`, then `FUN_12c8_0e32` (allocator), then `FUN_12c8_0ef8` (field copier) |
+| `0x1021`, `0x1022` | `FUN_12c8_0a86` |
+| `0x3018`–`0x301B` | `CDBCHECKBOUNDDTL`, then `FUN_12c8_0e08` |
+| `0x3022` | `FUN_12c8_0d40` |
+| anything else | Ordinal 115, `TOOLBOOKFATAL` |
+
+`param_3` and `param_4` are the bounds pair. They are clamped against 32000 and `0x8300`. `param_6` and `param_7` are compared to the current object id. `param_9` is the error out-byte. `FUN_12c8_0850` has one caller, uses `ENTER 4,0`, locks a context, and tears the object down on error. It is not the record reader.
+
+`FUN_12c8_0ef8` writes the four bounds words two ways. If its source pointer is null, it copies globals that were set from the parameters (`DAT_1630_01FE` through `DAT_1630_0204`) into `+0x0F`, `+0x11`, `+0x13`, `+0x15`. Otherwise the default arm of its `param_6` switch copies four words from that pointer into the same slots. The same function copies source `+0x3E` / `+0x40` / `+0x42` / `+0x44` to object `+0x17` / `+0x19` / `+0x1B` / `+0x1D`, a byte from source `+0x06` through a type table, and source `+0x04` as the pattern lock. The disk `14 00 00` record is not that source structure.
+
+`param_6` in that switch is an object type, not the `param_5` above:
+
+| `param_6` | What the decompile does |
+|---|---|
+| `0x0F`, `0x10`, `0x13`, `0x14` | Polygon-like. `OBJNEWNEAR(count << 2)` for the point array. |
+| `0x11`, `0x12` | Left alone. `0x11` is the arc that was seen live. |
+| `0x24` | Copies four words from the source pointer, and does something else the listing did not name. |
+| default | Copies the four bounds words. |
+
+The property registrar is `FUN_1058_0a98` at `1058:0A98`. It writes property ids. It does not write painter pointers. The ids it writes are `0x4004` (bounds, nine times; the first is decompile line 30313), `0x4009`, `0x400D`, `0x4015` (idNumber), `0x401A`–`0x401C`, `0x4020`–`0x4022`, `0x4023` (script), `0x4027`, `0x402B`, `0x4031`–`0x4033`, `0x4034` (vertices), and `0x4035`. Names are only attached where the property resource or the TBX specimen has attached one. The others are slots, not captions.
 
 Older notes that drew this chain as the runtime path:
 
 - `tbworkingpapers/tbwp0002/bas-create-path.md`
 - `tbworkingpapers/tbwp0008/cdbsendcreate-sites.md`
 - `TBdecompile/20261015/00-how-toolbook-operates.md`, section 2
+- `TBdecompile/20261012/01-object-create-path.md`, the “still open” paragraph
 - `TBWorldview/ToolBook_Architecture.md`, the book-open flowchart that calls `CDBSENDCREATE` per widget
 
-Those files still describe a real function. They mis-place it.
+Those files still describe a real function. They mis-place it. The tables above are the part worth keeping.
 
 ## 4.3 File open, as far as it has been stepped
 

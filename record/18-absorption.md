@@ -29,7 +29,7 @@ A row marked superseded means the sheet still contains a sentence this record cl
 | `tbwp0007/core-sbk-confirmation.md` | kept | Chapter 15. |
 | `tbwp0007/denny-exchange-summary.md` | kept | Chapter 2 for the Save To XML steps. The 32-bit claim in that exchange is rejected (C-006). Personal names are not copied. |
 | `tbwp0007/ghidra-research-list.md` | superseded | Chapters 10 and 17. Create-path items in that list are superseded. |
-| `tbwp0007/minor-decompile-notes.md` | kept | Chapters 8 and 17. |
+| `tbwp0007/minor-decompile-notes.md` | kept | Chapters 2, 5, and 17. Graphic property ids `0x4097`–`0x409B`, `LOCKPATTERN`, `layer` at `0x4059`. The page-blob slot for the bitmap id is still open. |
 | `tbwp0007/new-dumps-analysis.md` | kept | Chapters 7 and 12. A dump is real only when it contains known book strings. |
 | `tbwp0007/page880-comparison.md` | kept | Chapter 13. Page880 is P1040, IdNumber 880. |
 | `tbwp0007/processing-log.md` | method | Chapter 18. A log, not a separate finding. |
@@ -135,7 +135,7 @@ A row marked superseded means the sheet still contains a sentence this record cl
 
 | Folder | Fate |
 |---|---|
-| `20261012/` | Earlier consolidation. Create-path wording is superseded by chapter 4. Painters and export notes still match chapters 5 and 2. |
+| `20261012/` | Earlier consolidation, also typeset as the 9-page 15 October contents. Create-path wording that calls the reader a caller of `CDBSENDCREATE` is superseded by chapter 4. The dispatch tables, the registrar’s property ids, and the painter offsets are kept there and in chapter 5. |
 | `20261014/` | Condensed working papers. `02-still-open.md` still calls the reader the caller of `CDBSENDCREATE`. That sentence is superseded. The rest of its open list matches chapter 10. |
 | `20261015/` | `00-how-toolbook-operates.md` section 2 and `01-theories-of-operation.md` section 1 still teach the author chain as runtime. Superseded by chapter 4. |
 | `20261016/00-consolidated.md` | The short correction. This volume is the expansion. |

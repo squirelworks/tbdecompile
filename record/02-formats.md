@@ -31,8 +31,15 @@ Property ids recovered from `TB80BAS` resource type `0x2D1`, id `0x2D0`, are `0x
 | `0x4023` | script |
 | `0x402E` | text |
 | `0x4034` | vertices |
+| `0x4050` | Point-array setter. Runtime only. Not a record marker on disk. |
+| `0x4059` | layer |
+| `0x4097` | normalGraphic |
+| `0x4098` | invertGraphic |
+| `0x4099` | disabledGraphic |
+| `0x409A` | stretchGraphic |
+| `0x409B` | checkedGraphic |
 
-`0x4050` is the runtime property id of the point-array setter. It is not a record marker on disk.
+The graphic ids are the names on a Button in the TBX specimen (`bitmap id N`) and in the property resource. `N` is a resource index, not a file offset. Which bytes inside a `14 00 00` chunk hold `0x4097` is still open. An early carve that reported 641 BMP headers is not this binding. The count used against the specimen is about 75 BMPs in the export, and 67 markers paired with 72 of them.
 
 ## 2.2 System books
 

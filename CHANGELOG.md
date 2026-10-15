@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.0.2 — 2026-10-16
+
+The statement is `record/`. The printable edition is `manual/20261016/`. v0.0.1's contents still put `CDBSENDCREATE` on book open. That placement is not in this release.
+
+- `record/` consolidates the working papers. Chapters 11–18 add keepers, the WDW spine, specimen pages, the OpenScript encoding, system-book tiers, the TBCBT cipher, the module list, and the absorption index
+- The reference manual is one contents volume (41 pages) and appendices A–J, each under 100 pages. Appendix J is OpenScript. The symbol-map dumps are not reprinted
+- Author-path dispatch and the registrar's property ids are stated as author-only. Ordinal 51 is not the reader
+- Graphic property names `0x4097`–`0x409B` are named. The page-blob slot is still open
+- `nehost/` stays local. Binary dumps stay out
+
 ## 2026-10-16 — record
 
 The loose working papers are consolidated into `record/`. That directory is the statement. The dated folders remain as the notes of those days, with banners on the pages that still describe `CDBSENDCREATE` as the runtime reader.

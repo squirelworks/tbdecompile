@@ -1,6 +1,6 @@
 # TBDecompile
 
-ToolBook II 8.1 decompilation notes. The current statement is [`record/`](record/00-how-to-read.md). The printable copy is [`record/ToolBook-record-20261016.pdf`](record/ToolBook-record-20261016.pdf).
+ToolBook II 8.1 decompilation notes. Release **v0.0.2** (16 October 2026). The current statement is [`record/`](record/00-how-to-read.md). The printable copy of the record is [`record/ToolBook-record-20261016.pdf`](record/ToolBook-record-20261016.pdf). The reference-manual edition that sets that record as the contents, and keeps the lookups in their own files, is [`manual/20261016/`](manual/20261016/README.md). The 15 October contents and appendix PDFs in this directory are v0.0.1. They are not current where they put `CDBSENDCREATE` on book open.
 
 Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`](record/18-absorption.md) names each one and the section that replaced it. When they disagree with `record/`, `record/` wins.
 
