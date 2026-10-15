@@ -1,0 +1,75 @@
+# BAS ordinal map (from ExportList.java)
+
+Source: Ghidra ExportList.java console output.
+
+| Ordinal | Name | Address |
+|---------|------|---------|
+| 1 | `CDBINIT` | `1058:0000` |
+| 2 | `CDBCREATEINSTANCE` | `1038:0000` |
+| 3 | `CDBDESTROYINSTANCE` | `1038:040a` |
+| 4 | `CDBCREATETHREAD` | `1038:0320` |
+| 5 | `CDBDESTROYTHREAD` | `1038:047a` |
+| 6 | `CDBCLIENTSTATUS` | `1038:04c6` |
+| 7 | `CDBFILENEW` | `1048:0028` |
+| 8 | `CDBFILEOPEN` | `1048:017a` |
+| 9 | `CDBFILESAVE` | `1048:030a` |
+| 10 | `CDBFILESAVEAS` | `1048:04ae` |
+| 11 | `CDBFILECLOSE` | `1048:0948` |
+| 12 | `CDBFILEPATH` | `1048:09e0` |
+| 13 | `CDBFILEMERGE` | `1048:0a18` |
+| 14 | `CDBVIEWBOOK` | `1050:00f0` |
+| 15 | `CDBVIEWPAGE` | `1040:0000` |
+| 16 | `CDBEDITBOOK` | `1050:007e` |
+| 17 | `CDBVIEWPAGEVALUE` | `1040:041e` |
+| 18 | `CDBVIEWBKGND` | `1040:01f2` |
+| 19 | `CDBGETSELECTPROP` | `1068:0000` |
+| 20 | `CDBCLONEINSTANCE` | `1038:009a` |
+| 21 | `CDBTHREADFROMINSTANCE` | `1038:036c` |
+| 22 | `CDBFILESTATUS` | `1050:0000` |
+| 23 | `CDBVIEWNONE` | `1040:02f8` |
+| 24 | `CDBSENDSELECT` | `1068:009e` |
+| 25 | `CDBSETSELECTPROP` | `1068:0686` |
+| 26 | `CDBPAINTCLIENT` | `1010:0506` |
+| 27 | `CDBDISPLAYSTATE` | `1010:0000` |
+| 28 | `CDBSENDUNDO` | `1068:07ca` |
+| 29 | `CDBCREATEBOOKREF` | `1048:0f5c` |
+| 30 | `CDBCREATEPAGEREF` | `1040:03b2` |
+| 31 | `CDBCREATEBKGNDREF` | `1040:0666` |
+| 32 | `CDBCREATEGRAPHICREF` | `1078:0076` |
+| 33 | `CDBREFVALUE` | `1078:0304` |
+| 34 | `CDBDEREFVALUE` | `1078:0400` |
+| 35 | `CDBSAMEVALUEP` | `1078:049e` |
+| 36 | `CDBPARENTVALUE` | `1078:07b2` |
+| 37 | `CDBQUERYVALUE` | `1078:0958` |
+| 38 | `CDBCLEARBOOKREFS` | `1048:10a6` |
+| 39 | `CDBGETVALUE` | `1078:0d54` |
+| 40 | `CDBSETVALUE` | `1078:1450` |
+| 41 | `CDBSENDVALUE` | `1078:1110` |
+| 42 | `CDBQUERYMULTISAVE` | `1048:0b90` |
+| 43 | `CDBMULTISAVE` | `1048:0e24` |
+| 44 | `CDBSENDFOCUS` | `1060:0000` |
+| 45 | `CDBGETFOCUSPROP` | `1060:019a` |
+| 46 | `CDBSETFOCUSPROP` | `1060:01d6` |
+| 47 | `CDBSETFOCUS` | `1060:0244` |
+| 48 | `CDBBOOKOFVALUE` | `1078:0612` |
+| 49 | `CDBLAYEROFVALUE` | `1078:06fe` |
+| 50 | `CDBQUERYFILEPATH` | `1078:0aaa` |
+| 51 | `CDBSENDCREATE` | `12c8:00bc` |
+| 52 | `CDBNEWOBJECT` | `12c8:02c2` |
+| 53 | `CDBCHUNKEND` | `12f0:0000` |
+| 54 | `CDBCHUNKFIND` | `12f0:0146` |
+| 55 | `CDBSKIPSEP` | `12f0:04b4` |
+| 56 | `CDBCHUNKLAST` | `12f0:0334` |
+| 69 | `CDBCHUNKREMOVE` | `12f0:0550` |
+| 228 | `OBJLOCK` | `1170:0308` |
+| 233 | `OBJNEWNEAR` | `1170:0552` |
+| 355 | `CDBCHECKBOUNDDTL` | `12c8:0000` |
+| 405 | `TBXEXECSCRIPT` | `1268:060c` |
+
+**Key entries for bounds work:**
+- Ordinal 51 `CDBSENDCREATE` at `12c8:00bc`
+- Ordinal 52 `CDBNEWOBJECT` at `12c8:02c2`
+- Ordinal 355 `CDBCHECKBOUNDDTL` at `12c8:0000`
+
+Full export list (606 ordinals) was provided by the user.
+This table holds the confirmed mappings relevant to the current research.

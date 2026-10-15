@@ -1,0 +1,197 @@
+{
+  "file": "Draw Objects.wbx",
+  "size": 452985,
+  "markers_8065": 1,
+  "records_140000": 92,
+  "name": "CAT_Draw_Objects",
+  "interesting_strings": [
+    {
+      "offset": "0x1b55",
+      "text": "Polygon"
+    },
+    {
+      "offset": "0x1b91",
+      "text": "IrregularPolygon"
+    },
+    {
+      "offset": "0x1c8b",
+      "text": "PaintObject"
+    },
+    {
+      "offset": "0x1ccb",
+      "text": "Picture"
+    },
+    {
+      "offset": "0x1ded",
+      "text": "Button"
+    },
+    {
+      "offset": "0x1edd",
+      "text": "RecordField"
+    },
+    {
+      "offset": "0x27bb",
+      "text": "&Print Pages..."
+    },
+    {
+      "offset": "0x28bd",
+      "text": "&Size to Page"
+    },
+    {
+      "offset": "0x2999",
+      "text": "Superscrip&t/Subscript"
+    },
+    {
+      "offset": "0x29b0",
+      "text": "superscriptSubscript"
+    },
+    {
+      "offset": "0x29d4",
+      "text": "normalscript"
+    },
+    {
+      "offset": "0x29e1",
+      "text": "Su&bscript"
+    },
+    {
+      "offset": "0x29f3",
+      "text": "subscript"
+    },
+    {
+      "offset": "0x29fd",
+      "text": "Su&perscript"
+    },
+    {
+      "offset": "0x2a17",
+      "text": "superscript"
+    },
+    {
+      "offset": "0x334a",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x358a",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x35a6",
+      "text": "ASYMA_CatalogTray_RightButtonDown"
+    },
+    {
+      "offset": "0x35e6",
+      "text": "rightButtonDown"
+    },
+    {
+      "offset": "0x36f2",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x3701",
+      "text": "ASYMA_CatalogTray_ButtonDoubleClick"
+    },
+    {
+      "offset": "0x38ed",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x3d5b",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x3d71",
+      "text": "ADASYM_PrimaryMouseButton"
+    },
+    {
+      "offset": "0x3d8b",
+      "text": "leftButton"
+    },
+    {
+      "offset": "0x3dbd",
+      "text": "#[ASYMA_CatalogTray_ObjectDropped"
+    },
+    {
+      "offset": "0x46f6",
+      "text": "behaviorPage"
+    },
+    {
+      "offset": "0x471b",
+      "text": "bk = objectContainer(currentPage "
+    },
+    {
+      "offset": "0x4841",
+      "text": "ASYMA_CatalogTray_RightButtonDown ("
+    },
+    {
+      "offset": "0x4985",
+      "text": "ASYMA_CatalogTray_ButtonDoubleClick "
+    },
+    {
+      "offset": "0x4da8",
+      "text": "leftButton = ASYM_PrimaryMouseButton()"
+    },
+    {
+      "offset": "0x4dd9",
+      "text": "rightButton = "
+    },
+    {
+      "offset": "0x4f84",
+      "text": "pos3 = screenToPageUnits("
+    },
+    {
+      "offset": "0x4fcb",
+      "text": "ASYMA_CatalogTray_ObjectDropped "
+    },
+    {
+      "offset": "0x525c",
+      "text": "isObject("
+    },
+    {
+      "offset": "0x60a9",
+      "text": "Page id 0 of Book \"C:\\Program Files\\click2learn\\Instructor8\\Catalog\\Draw Objects"
+    },
+    {
+      "offset": "0x6173",
+      "text": "CAT_Draw_Objects"
+    },
+    {
+      "offset": "0xdd09",
+      "text": "Sample Object Icon Textyt"
+    },
+    {
+      "offset": "0x39f0f",
+      "text": "CAT_Draw_Objects"
+    },
+    {
+      "offset": "0x40a49",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Triangle\\b0 \\par \\par You"
+    },
+    {
+      "offset": "0x40cc7",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Square\\b0 \\par \\par You c"
+    },
+    {
+      "offset": "0x40f43",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Pentagon\\b0 \\par \\par You"
+    },
+    {
+      "offset": "0x411c1",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Hexagon\\b0 \\par \\par You "
+    },
+    {
+      "offset": "0x4143d",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Octagon\\b0 \\par \\par You "
+    },
+    {
+      "offset": "0x416d9",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Freeform Polygon\\b0 \\par "
+    },
+    {
+      "offset": "0x423b1",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Simple Curve\\b0 \\par \\par"
+    },
+    {
+      "offset": "0x42d11",
+      "text": "{\\rtf1 {\\fonttbl {\\f0 \\fswiss MS Sans Serif;}}\\fs16 \\b Complex Curve\\b0 \\par \\pa"
+    }
+  ]
+}
