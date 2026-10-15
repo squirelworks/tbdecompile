@@ -1,0 +1,30 @@
+# 1. The corpus
+
+## Claims
+
+| Id | Grade | Statement | Source |
+|---|---|---|---|
+| C-001 | Known | The lesson files in this work are Nida Corporation electronics lessons, written as Click2learn ToolBook II 8.1 shells. The book version word is `01 00 00 08`. This Nida is not the drug-abuse institute that shares the letters. | TBWorldview WV-001 |
+| C-002 | Known | The catalog is a Navy ATT menu export (`nida:m3search`): menu `0_MASTER3` plus 20 rating tracks. 611 `.tbk` files are on disk. 290 catalog ids are unique. 321 files are not in the catalog. | courses listing, project notes 2026-10-08 |
+| C-003 | Known | The worked specimen is Logic Families, `9e954d01.tbk`. It is not self-contained. It names the NIDA system books and jumps into `nida81.tbk`. | lesson header at file `0xB1A96` |
+| C-004 | Known | Windows 98 can step the engine. 32-bit Windows XP can run it. 64-bit Windows cannot run the 16-bit NE images. Windows 11 is outside the range. | WV-028 |
+| C-005 | Known | The engine calls 16-bit `USER`, `GDI`, and `KERNEL`. A startup log that reports `USER32`, `GDI32`, and `KERNEL32` missing is not a broken install. | WV-027 |
+| C-006 | Not true | ToolBook 8.1, as held here, is a 32-bit product that needs Windows 10 or earlier. The images in hand are 16-bit NE. ToolBook 9.0 is the 32-bit product. | `TBdecompile/20261014/03-tbx.md` |
+
+## What the set is
+
+The books are computer-aided instruction for Navy electronics ratings. The menu export lists tracks such as GSE, EM, IC, GM, FC, ET, STG, AE, ATI, AO, ATO, AS, TM, CTM, FT, ETSS, STS, CTT, MN, and MV, at versions V03.2 through V03.4. `courses.xml` is that menu. It is not a drug-abuse curriculum.
+
+A lesson is a ToolBook II 8.1 book plus a shell. The shell is `nida81.tbk`. The system books are `nc81base.sbk`, `nc81recs.sbk`, `nc81test.sbk`, `nc81trnr.sbk`, and `NC81BANK.SBK`, with `nc81int.dll` and `nc81rec.dll` beside them. Removing the system books leaves a blue screen, breaks resize, and stops the menu. The lesson file itself still opens. Renaming `nida81.tbk` removes the splash and reports that the shell is not a book. The lesson can still be entered.
+
+`9e954d01.tbk` is the book every later measurement is checked against. It is Logic Families. At file offset `0xB1A96` it names `tb80r.sbk`, `nc81trnr.sbk`, `nc81base.sbk`, `nc81recs.sbk`, and `nc81test.sbk`, and it calls `initializebase`, `initializerecs`, `initializetest`, `openSession`, and `gotoPageList`. It also jumps to `nida81.tbk` and to `93954302.tbk`.
+
+## Who used it
+
+**Known.** The published users of this particular set are the Navy lessons on disk and the training shops that shipped ToolBook courses. This is not a living authoring market. Someone outside the set who still holds a native 8.x book has the same file problem. That last sentence is a thought, not a census (WV-030).
+
+## Machines
+
+The floor for a real run is Windows 98. That is the known-good debug host, not the top of the range. The ceiling is 32-bit Windows XP. The 16-bit NE images do not run on 64-bit Windows. A correspondent described 8.1 as 32-bit and 9.0 as the release that added 64-bit support. The binaries in this archive are 16-bit NE. Until a 32-bit 8.1 engine is actually in hand, the binaries win (C-006).
+
+SoftICE work is closed as of 11 October 2026. Later tracing used the Watcom debugger on a fresh Windows 98 image. Those two debuggers do not share commands. See chapter 7.

@@ -1,5 +1,7 @@
 # Still open
 
+**Superseded in part, 2026-10-16.** The opening sentence below still calls the reader "something that produces the structure `CDBSENDCREATE` already expects." Ordinal 51 is author-only. The current open list is `record/10-open.md`.
+
 The one that matters is unchanged. Something reads a `14 00 00` record and produces the structure `CDBSENDCREATE` already expects. `FUN_12c8_0ef8` is after that step. A live break on `CDBFILEOPEN` (BAS ordinal 8) that dumps both the disk record and the structure at `12c8:0ef8` would show it. Static searches of the HTML will not.
 
 Retired, so it is not searched again: on-disk `14 00 00 01` does not become `14 00 00 11` in memory. One early dump was read that way. Later live objects used `14 00 00 02`. A goals note from the same week still mentioned `11` as unconfirmed. It stays unconfirmed, and it is not the working theory.

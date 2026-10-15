@@ -1,0 +1,61 @@
+# 3. Runtime
+
+## Claims
+
+| Id | Grade | Statement | Source |
+|---|---|---|---|
+| R-001 | Known | The intended launch is `TB80RUN` (32-bit) spawning `TB80NET.EXE` with the book on the command line. The seam is that spawn, not an in-process thunk. | module catalog, `TB80RUN` survey |
+| R-002 | Known | `TB80RTM.EXE` is the 16-bit shell. It owns `TBKMain`, `TBKClient`, `TBKChildWindow`, `TBKReserved_1`, `SchedulerWndTB80`, and the frame class created with `TB80MAIN`. A lesson click is delivered to `TBKClient`. | SoftICE class list |
+| R-003 | Known | `TB80MAIN.EXE` is a 23552-byte 32-bit stub. It calls `TB80RMT CreateRemoteCallServer` and pumps keys. It is not the book engine. Failure text: “TB80MAIN: Loading ActiveX support failed.” | `TB80MAIN` decompile |
+| R-004 | Known | `TB80BAS` is the book server (“ToolBook Server DLL”), 606 exports. `CDBINIT` is ordinal 1. `CDBFILEOPEN` is ordinal 8. `CDBVIEWPAGE` is 15. `CDBVIEWBKGND` is 18. `CDBPAINTCLIENT` is ordinal 26. | export table, WV-011 |
+| R-005 | Known | `TB80RTM` `WM_PAINT` calls `CLIENTTOPAGE`, then ordinal 26. Shape drawing is in BAS, not in RTM. | `tbwp0018/rtm-paint-path.md` |
+| R-006 | Known | `TB80RMT` is not on the path that opens a lesson. The 1.5 `PHYSSIZE` index is not in these 8.1 books. | WV-014 |
+| R-007 | Known | `nc81int.dll` exports 47 trainer calls. `IntCheckComm130E` opens a port at 9600 8O1, sends a probe, and returns `0x3D` on match or `0x3C` on failure. Families: 130E, TD2000, 5050, 205E. | `nc81int` exports |
+| R-008 | Known | `nc81rec.dll` writes `0x46`-byte session records to `SESSION3.REC`. Exports include `RecStartSession`, `RecCloseSession`, `RecBookmarkSession`, `RecWriteResponse`, `RecReadVariable`. | `nc81rec` exports |
+
+## 3.1 Process
+
+`tbload.exe` finds the book marker and hands off through a vtable at `FUN_00406a70` (virtual call at `00406aa1`, vtable+4). That vtable is not resolved. **Thought:** that call is the first handoff out of the 32-bit search.
+
+`TB80RUN` does not open the book itself. It starts `TB80NET.EXE`. `TB80NET` is a 16-bit NE executable, not a DLL. It is the network access provider (zlib, `TBKNET3WNDPROC`, `TBK.INI`). It does not parse pages.
+
+`TB80W32.DLL` (about 246 exports) and `TB80W16.DLL` (about 406) are the thunk halves. W16 is also the `DoCmd*` command bus (`DoCmdDraw`, `DoCmdMouseDown`). `TBFILE32.DLL` supplies long filenames to the 16-bit engine. `TB80F32L.dll` is the flat 32-bit entry and the common-dialog hook.
+
+`TB80RTM` is the window. Classes seen live include `SchedulerWndTB80` and `TbkNet3TB80` (the latter owned by `TB80NET`). The lesson click does not arrive on `TBKChildWindow`. Break the `TBKClient` window procedure. `BMSG` does not see that 16-bit queue.
+
+## 3.2 Book server and neighbors
+
+| Module | What it is for | What it is not |
+|---|---|---|
+| `TB80BAS.DLL` | Objects, properties, painters, twip scale, file open | Not the window |
+| `TB80CMP.DLL` | OpenScript compile and expand. Resources `0x77` and `0x78` | Not the page walker |
+| `TB80UTL.DLL` | Type-name table, string manager, metrics, heaps | Not the `14 00 00` reader |
+| `TB80RCR.DLL` | Linked beside the book server. Exports only partly named | Not classified |
+| `TB80ENU1.DLL` / `ENU2` | English strings, 16-bit and 32-bit | Not code that opens a book |
+| `TB80BMP.DLL` | DIB, metafile, FX blit. Ordinal 3 is the bitmap reader | Not a picture store |
+| `TB80JPG.DLL` | JPEG. Version resource still says `TB60JPG.DLL` | |
+| `TB80LNL.DLL` | MCI, wave, MMIO. The notify callback is Lionel | |
+| `TB80MM.DLL` | `tbkmmNotify`, `imageNotify`, `mciNotify`, `timerNotify` | Does not classify objects |
+| `TB80OLE` / `OCX` / `ACX` / `VBX` | Clipboard, controls, automation | Not on the Logic Families paint path |
+
+`linkDLL` libraries add commands only when a handler links them: `TBDLG`, `TBWIN`, `TBDOS`, `TBREG`, `TBDB3`, `TBPDX`, `TBCBT`. `TBCBT` is the CBT scoring extension. Its segment 7 holds the password cipher. See chapter 7. `TBWIN` is `INIT_TBKWIN` and `TBM_EVALUATE`. Neither `TBWIN` nor `TB80NET` walks page records.
+
+Author binaries `TB80EDT.DLL` and `TB80.EXE` are not in this set. The runtime half of the author contract is visible: BAS exports `CDBEDITBOOK`, `CDBVIEWBOOK`, `CDBISVIEWERINGENERICEDITMODE`, `CDBSENDEDITLEAVETOALL*`, and `TBXAUTHORMODE`. RTM calls `GETAUTHORLOCALIZEDDLL`. That is bookmarked, not solved.
+
+## 3.3 NIDA layer
+
+A system book adds script above the book. A `linkDLL` adds commands. Most of what an author treats as “ToolBook” is one of those two, not a new entry point in BAS.
+
+`tb80r.sbk` is the Asymetrix reader book (Help, Bookmarking, Logging, Path manager, Popup Page Manager). It is not the engine. `tb80hyp.sbk` is hyperlink and help. `tb80anm.sbk` is path animation.
+
+The lesson calls `initializebase`, `initializerecs`, and `initializetest` by name. **Thought.** Those names have not been watched as a call log, and the order in `toolbook.lst` has not been watched live. `version.ini` in the set is `03.001.0006`, dated 04-18-05. `CAILT.DAT` maps course ids to Navy CDs. `9E954` maps to DIE. `STDAPPS.LST` is a short encoded list, not a book.
+
+`nc81int.dll` and `nc81rec.dll` are 32-bit PE. They are not Asymetrix. The trainer probe and the session file are the two behaviors that matter for getting a NIDA lesson to run as a lesson rather than as a picture of a page.
+
+## 3.4 What startup has been watched
+
+WDW on W16, before any book open, hits platform detection, OLE init, and the 32-bit thunk: `GETPLATFORMREF`, `IS32BITENV`, `GETRUNTIMELOCALIZEDDLL`, `ACXINITIALIZETOOLBOOKSUPPORT`, `ACXOLEINITIALIZE`, `LOADLIBRARYEX32W`, `GETPROCADDRESS32W`.
+
+WDW on UTL, after `INITTASK`, hits string and task utilities: `GETSTRMGRSTRING`, plugin init, `TBK.INI` profile reads, metrics, `GHEAPCREATE`. No record walk.
+
+The Unicorn host has not opened a book. Pass 06 asks for `TB80.INI` and exits. See chapter 7.

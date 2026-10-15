@@ -1,5 +1,7 @@
 # Consolidated findings — 2026-10-16
 
+The full statement is [record/](../record/00-how-to-read.md), including the printable PDF. This file is the short correction that volume expands.
+
 Brings the recent corrections and traces into the operating picture. Older notes that treated `CDBSENDCREATE` as a runtime waypoint are superseded by the finding below.
 
 ## 1. CDBSENDCREATE is author-only

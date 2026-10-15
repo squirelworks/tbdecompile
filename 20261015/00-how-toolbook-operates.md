@@ -1,5 +1,7 @@
 # How ToolBook Operates
 
+**Superseded in part, 2026-10-16.** Section 2 still describes `CDBSENDCREATE` as the runtime create path. That is the author path. The current statement is `record/04-objects.md`. Read this file for object layout and painters. Do not read section 2 as book open.
+
 A consolidated reading of what the decompiles, SoftICE traces, TBX exports, and disk analysis have shown about ToolBook II 8.1. Written so the operational picture can be read without walking the working papers.
 
 ## 1. What a book is

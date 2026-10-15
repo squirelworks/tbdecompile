@@ -1,5 +1,7 @@
 # Theories of Operation for the Open Gaps
 
+**Superseded in part, 2026-10-16.** Section 1 still calls the reader "the caller of `CDBSENDCREATE`." That call does not happen on book open. The length-prefixed walk is still the working model. The current statement is `record/04-objects.md` and `record/10-open.md`.
+
 Scaffolding for the pieces whose ToolBook implementation has not been recovered. Each theory is a working model that fits the evidence already in hand and can be tested or replaced. None of these are confirmed.
 
 ## 1. Disk record reader (caller of CDBSENDCREATE)

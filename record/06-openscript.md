@@ -1,0 +1,56 @@
+# 6. OpenScript
+
+## Claims
+
+| Id | Grade | Statement | Source |
+|---|---|---|---|
+| S-001 | Known | Handlers are compressed bytecode. The keyword table is NE resource `0x77` (type 100, id 119). The offset table is at byte 2 plus count times 4. There are 994 keywords. | decoder notes |
+| S-002 | Known | Bytes `0xC0`–`0xFF` copy from the compressed input stream, not from the output. An earlier decoder that copied from the output was wrong. | WV-032, decoder fix 2026-10-10 |
+| S-003 | Known | The decoder used for NIDA navigation stops at the first standalone `end`, so trailing decode garbage is dropped. | engine notes |
+| S-004 | Known | `9e954d01.tbk` yields 76 handlers on 39 pages. `nida81.tbk` yields 100 `buttonClick` handlers. `tb80r.sbk` yields 33, with the `to handle` prefix also compressed. | corpus counts |
+| S-005 | Known | `FUN_1008_2d31` is the expression evaluator. The modern engine implements `+ - * /` and `abs`, `sqrt`, `log`, `exp`, `sin`, `cos`, `atan`, `asin`, `acos`, and otherwise leaves the original text. | `openscript_analysis` 1.0.0r6 |
+| S-006 | Known | A `buttonClick` on `nida81.tbk` page `P20000` goes to `P20001` because the handler says so. Navigation is not “only a quoted page id.” | WV-033, WV-041 |
+| S-007 | Thought | A short script compiled by Instructor 8 and expanded with the existing decoder would lock the keyword map. That compile has not been done. | `tbwp0014/instructor8-compile-test.md` |
+
+## 6.1 What the bytecode is
+
+Resource `0x77` is a compiler emit routine as well as the keyword pool. Resource `0x78` (id 120) is another emit routine. `COMPILERPROPINFOFROMINDEX` locks resource `0x70`. The property-name table is a different resource (BAS type `0x2D1`, id `0x2D0`). Do not treat every locked resource in that range as the keyword list.
+
+The byte classes, the back-reference formula, and the corpus counts are chapter 14. An early reading of the same bytes produced "italic" and "systime" and concluded the keyword table was wrong. That reading copied `0xC0`–`0xFF` from the output stream and used the wrong offset-table stride. It is superseded. Do not cite it.
+
+High-bit opcodes (`0xE0`, `0xF0`, `0xFF`, and neighbors) emit whitespace, CR/LF, or a repeated span. After the input-stream back-reference fix, the 76 handlers in Logic Families decode. Examples that are real source, not Latin-1 of the bytecode:
+
+- `send next`
+- `go to page "P400"`
+- `go to page "P310" of book "nida81.tbk"`
+
+The common subset the courses actually use is `go to`, `send`, assignment, `put into`, `set to`, `get`, increment and decrement, nested `if` / `else` / `end if`, `step from` / `to`, and `name of this book` / `this page`. The engine stops at the first standalone `end`.
+
+`tb80r.sbk` uses the same bytecode. The difference is that the handler name prefix is compressed too. Encoding rules match. The byte histogram has more `0xFF` and `0xE0`.
+
+## 6.2 What a lesson does with it
+
+Logic Families is a menu of jumps, not a self-running program.
+
+| Page | What the handler does |
+|---|---|
+| P900 | Lesson menu. TTL → P1001. Other → P2001. Final quiz → P10001. Exit → `nida81` P20001. No Next. |
+| P1001, P2001 | Back returns to P900, not to `nida81` P20001. |
+| P300 | `selection1` is the IBM PC Compatible Computer line. `buttonClick` sends `lastbook nida81.tbk` and `nextpage` P310. |
+| P10001 | Assessment. Directions → `nida81` P10020. Exit → `nida81` P20001. Begin → P10210. |
+| P10410 | Section end. Menu returns to P900. |
+| P1290 | Quiz. Correct choice 5408. Again → P1292. Next → P1300. |
+
+A retry page returns to the quiz whose `again` field names it. `initializeRecs` on the Maybe2 shell clears responses when a session loads. That behavior is inferred from the shell script, not from a live `nc81rec` trace.
+
+The modern engine also accepts `send to`, a `get` that calls, `forward`, `break`, and `property of`. Predicates such as `is not in` are recorded rather than evaluated. Property writes are not applied to a live object. The TBX `.script` files are plain text and are easier to read than the bytecode. They are a playback path for the export, not a reader of the `.tbk`.
+
+## 6.3 Expressions
+
+The 148-case switch at `1008:2DC7` is `FUN_1008_2d31`. It stays in segment `1008`. It checks for names such as `log`, then uses the FPU (`FLD`, `FSTP`, `FCLEX`). It is not the record reader and not a paint path. The clean-room evaluator copies that set of operations and falls back to the original string when it does not recognize the right-hand side.
+
+## 6.4 What is not done
+
+The full keyword map is not locked. Resource `0x77` has 994 entries. The engine proves the ones the NIDA handlers use. A compile of a short script in Instructor 8, saved into a book, then expanded, would show whether the offset table and the names still match. That test is written down and not run.
+
+Nested property expansion, the opcodes past the common subset, and `forward` into a system-book handler are unimplemented or only sketched. `COMPILERCOMPILETEXT` is CMP ordinal 1. `COMPILEREXPANDTEXT` is ordinal 3. `CFUNEXECUTE` is 8. `CFUNEVALUATE` is 9. Those ordinals are the stable breakpoints if the compile test is run.
