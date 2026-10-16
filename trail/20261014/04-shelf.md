@@ -2,7 +2,7 @@
 
 > Trail, 2026-10-16. What the miscellaneous shelf was. Not a finding about the reader. If this file and `TBdecompile/record/` disagree, the record wins.
 
-`tbworkingpapers/miscellaneous/` was the pile of abandoned readers, dumps, and draw trials. Counted on 11 October 2026 it was about 3,200 files and 170 MB. Most of the pictures and the SoftICE dumps were deleted that night because they can be cut from the books again, or because they were the same splash saved under several names. What follows is the part worth keeping.
+The readable shelf is `tbworkingpapers/history/miscellaneous/`. On 11 October 2026 it was `tbworkingpapers/miscellaneous/`, about 3,200 files and 170 MB. Most of the pictures and the SoftICE memory dumps were deleted that night because they can be cut from the books again, or because they were the same splash saved under several names. What follows is the part worth keeping. The Numega kit and the Maybe2–Maybe4 trees did not survive the later move; see `tbworkingpapers/history/README.md`.
 
 ## Readers, in the order they were dropped
 

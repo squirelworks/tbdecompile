@@ -7,6 +7,6 @@ These two files are the short notes that used to live only in the working papers
 | `property-block-expansion.md` | `FUN_12c8_0ef8` copies four words. Author path. Not the reader. Chapter 4. |
 | `rtm-paint-path.md` | `WM_PAINT` goes to `CLIENTTOPAGE`, then BAS ordinal 26. Not the reader. Chapters 3 and 5. |
 
-The longer trail is `tbworkingpapers/sheets/`. Chapter 18 of the record names each sheet. The draft in `sheets/tbwp0028/chapters/` is frozen and lags the record.
+The longer trail is `tbworkingpapers/history/sheets/`. Chapter 18 of the record names each sheet. The draft in `history/sheets/tbwp0028/chapters/` is frozen and lags the record. The manual source is `tbworkingpapers/sheets/tbwp0030/`.
 
 `maps/html-segment-index.md` is the HTML-export segment table that had been sitting loose. It is a lookup. It is not a finding.

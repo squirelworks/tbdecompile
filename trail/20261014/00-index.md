@@ -9,6 +9,6 @@ Condensed from `tbworkingpapers`. The dumps, the carved pictures, the generated 
 | [01-findings.md](01-findings.md) | Record layout, painters, and the searches that closed |
 | [02-still-open.md](02-still-open.md) | What is still unnamed |
 | [03-tbx.md](03-tbx.md) | The 11.5 export, from correspondence. Names are masked |
-| [04-shelf.md](04-shelf.md) | What `miscellaneous/` was, so the folder can go |
+| [04-shelf.md](04-shelf.md) | What `miscellaneous/` was. The pile is now `tbworkingpapers/history/miscellaneous/` |
 
 Personal names are not in this folder. The correspondent is JohnDoe1.

@@ -1,6 +1,6 @@
 # 18. Where every loose sheet went
 
-The sheets now live under `tbworkingpapers/sheets/`. A row that says `tbwp0001/…` means `sheets/tbwp0001/…`. `tbwp0019`'s renamed dump would not copy. The notes are in `sheets/tbwp0019/`. The unreadable dump is still `tbworkingpapers/tbwp0019/`. `who-is-who` is not in this index and is not in this repository. History folders and miscellaneous dumps are not re-copied. Binary password deltas stay in the working papers.
+The absorbed sheets now live under `tbworkingpapers/history/sheets/`. A row that says `tbwp0001/…` means `history/sheets/tbwp0001/…`. The manual source stays at `tbworkingpapers/sheets/tbwp0030/`. `tbwp0019`'s notes, and the seventeen renamed JSON files that still read, are in `history/sheets/tbwp0019/`. The rest of that dump does not read. It is still `tbworkingpapers/tbwp0019/`. `who-is-who` is not in this index and is not in this repository. The shelf is `tbworkingpapers/history/miscellaneous/`. Binary password deltas stay in the working papers, under `history/sheets/tbwp0027/`.
 
 A row marked superseded means the sheet still contains a sentence this record closed. Read the sheet for the function body if you need it. Read this record for the claim.
 
