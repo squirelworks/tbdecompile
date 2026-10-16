@@ -1,6 +1,6 @@
 # Research notes index
 
-These three files are the short notes that used to live only in the working papers. They are not a second record. `TBdecompile/record/` is the statement. The dated folders `20261012/`, `20261014/`, `20261015/`, and `20261016/` are the trail of those days, and each of them now says so under the title.
+These two files are the short notes that used to live only in the working papers. They are not a second record. `TBdecompile/record/` is the statement. The dated folders `20261012/`, `20261014/`, `20261015/`, and `20261016/` are the trail of those days, and each of them now says so under the title.
 
 Do not prefer `20261014/` when it disagrees with `record/`. `20261014/02-still-open.md` still names `CDBSENDCREATE` in the reader sentence. That sentence is not current.
 
