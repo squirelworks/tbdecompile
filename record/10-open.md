@@ -48,9 +48,9 @@ Read these for the function bodies. Do not read them for the runtime path.
 |---|---|
 | `tbworkingpapers/tbwp0002/bas-create-path.md` | Put `CDBSENDCREATE` on book open. |
 | `tbworkingpapers/tbwp0008/cdbsendcreate-sites.md` | Same chain, more callers. The callers are author-side. |
-| `TBdecompile/20261015/00-how-toolbook-operates.md` §2 | Same chain, written as “the create path that has been identified.” |
-| `TBdecompile/20261015/01-theories-of-operation.md` §1 | Still calls the reader “the caller of `CDBSENDCREATE`.” |
-| `TBdecompile/20261014/02-still-open.md` | Same wording. The rest of that file’s open list is still the open list. |
+| `TBdecompile/trail/20261015/00-how-toolbook-operates.md` §2 | Same chain, written as “the create path that has been identified.” |
+| `TBdecompile/trail/20261015/01-theories-of-operation.md` §1 | Still calls the reader “the caller of `CDBSENDCREATE`.” |
+| `TBdecompile/trail/20261014/02-still-open.md` | Same wording. The rest of that file’s open list is still the open list. |
 | `TBWorldview/ToolBook_Architecture.md` book-open flowchart | Draws `CDBSENDCREATE` once per widget. |
 
 The correction, in one paragraph: Instructor calls `CDBSENDCREATE` when it creates or rewrites an object. A lesson open does not. The function that turns a `14 00 00` chunk into a live object during that open has not been named. It does not call ordinal 51. `FUN_12c8_0ef8` is on the author side of the same line.

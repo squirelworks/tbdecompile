@@ -7,7 +7,7 @@
 | O-001 | Known | A live object is `0x76` bytes. Bounds are four words at `+0x0F`, in twips. At 96 dpi, screen pixels are stored / 15, which is `(stored * 96 + 720) / 1440`. | live traces, `FUN_1008_01dd` |
 | O-002 | Known | `+0x1F` selects the BitBlt raster op. `+0x3B` is a GDI handle. `+0x30` is the point count. `+0x32` is the point-array far pointer, 4 bytes per point, stored twips. | polygon and BitBlt traces |
 | O-003 | Known | `CDBSENDCREATE` (BAS ordinal 51, `12c8:00BC`) creates or rewrites objects from the Instructor UI. The runtime book-open path does not call it. `FUN_12c8_0ef8` is downstream of that author path. | `tbwp0025/cdbsendcreate-is-author.md`, WV-042 |
-| O-004 | Superseded | The chain `CDBSENDCREATE` → `FUN_12c8_0850` → `FUN_12c8_0e32` → `FUN_12c8_0ef8` is the runtime reader. | `TBdecompile/20261015/00-how-toolbook-operates.md` §2, `tbwp0002`, `tbwp0008` |
+| O-004 | Superseded | The chain `CDBSENDCREATE` → `FUN_12c8_0850` → `FUN_12c8_0e32` → `FUN_12c8_0ef8` is the runtime reader. | `TBdecompile/trail/20261015/00-how-toolbook-operates.md` §2, `tbwp0002`, `tbwp0008` |
 | O-005 | Known | SoftICE and WDW both reached `OBJFILEOPEN` and the buffered read in `FUN_1160_03de`. The raw DOS path at offset `04F3` is skipped when the buffer is already satisfied. | 2026-10-16 consolidated note |
 | O-006 | Known | The W16, UTL, and BAS traces in `tbwp0026` do not contain a function that reads a `14 00 00` record. `CDBCHUNK*` walks text. `VALUENEWLONG` constructs a value. `OBJFILEOPEN` is downstream of the reader. | `tbwp0026/trace-review.md`, WV-044 |
 | O-007 | Thought | The runtime reader walks nested chunks by length, classifies them, and builds objects without calling `CDBSENDCREATE`. It sits in BAS after `CDBFILEOPEN` and before the first paint. It has no name. | open-question notes |
@@ -68,8 +68,8 @@ Older notes that drew this chain as the runtime path:
 
 - `tbworkingpapers/tbwp0002/bas-create-path.md`
 - `tbworkingpapers/tbwp0008/cdbsendcreate-sites.md`
-- `TBdecompile/20261015/00-how-toolbook-operates.md`, section 2
-- `TBdecompile/20261012/01-object-create-path.md`, the “still open” paragraph
+- `TBdecompile/trail/20261015/00-how-toolbook-operates.md`, section 2
+- `TBdecompile/trail/20261012/01-object-create-path.md`, the “still open” paragraph
 - `TBWorldview/ToolBook_Architecture.md`, the book-open flowchart that calls `CDBSENDCREATE` per widget
 
 Those files still describe a real function. They mis-place it. The tables above are the part worth keeping.

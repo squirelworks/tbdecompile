@@ -2,7 +2,7 @@
 
 > Condensation of that day. `02-still-open.md` still names `CDBSENDCREATE` in the reader sentence. That sentence is not current. The open list is `record/10-open.md`.
 
-Condensed from `tbworkingpapers`. The dumps, the carved pictures, the generated HTML, and the abandoned readers are not here. `20261012/` is the earlier consolidation. This folder is what the papers added after that, and what the shelf was.
+Condensed from `tbworkingpapers`. The dumps, the carved pictures, the generated HTML, and the abandoned readers are not here. `../20261012/` is the earlier consolidation. This folder is what the papers added after that, and what the shelf was.
 
 | File | What it keeps |
 |---|---|

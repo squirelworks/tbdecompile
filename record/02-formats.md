@@ -8,7 +8,7 @@
 | F-002 | Known | Page records are the only objects that start `80 65 00 05 00 02 02`. Widgets inside a page start `14 00 00`. | WV-003 |
 | F-003 | Known | `.tbk` and `.sbk` are the same container. The page name sits at offset `0x0B` of the page record. | WV-031 |
 | F-004 | Known | Field text is a `Text\0\0` property: 8 bytes, a 16-bit length, then the string. The string often starts with CRLF. | page reader notes |
-| F-005 | Known | A ToolBook 11.5 Save To XML, enabled by `saveSpecial=true`, writes a folder of XML plus resources. A `.tbkx` file is a ZIP of that folder. | `TBdecompile/20261014/03-tbx.md` |
+| F-005 | Known | A ToolBook 11.5 Save To XML, enabled by `saveSpecial=true`, writes a folder of XML plus resources. A `.tbkx` file is a ZIP of that folder. | `TBdecompile/trail/20261014/03-tbx.md` |
 | F-006 | Known | Binary 8.1 stores many draw objects as bounds. The 11.5 XML expands those bounds into Vertices lists. | P1040 pin bounds `5055,4605,5205,4860` match the TBX Vertices start |
 | F-007 | Known | Foolbook `.fbk` / `.fsk` is a 4-byte magic (`FBK1` / `FSK1`), one flags byte, then JSON. Bit 0 means the payload is zlib-compressed. | Foolbook format notes |
 

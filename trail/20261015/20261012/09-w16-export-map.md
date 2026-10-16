@@ -1,6 +1,6 @@
 # W16 export → decompile mapping
 
-> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+> Duplicate of `TBdecompile/trail/20261012/`. Do not edit this copy. The current statement is `record/`.
 
 Matched: 71 / 72
 

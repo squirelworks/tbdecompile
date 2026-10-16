@@ -13,4 +13,4 @@ Matched: 71 / 72
 | `TBKGRAPHICFX` | 8697 |
 
 W16 is the DoCmd* command bus and the graphics thunk layer. Not the record reader.
-Full table in local TBdecompile/20261012/09-w16-export-map.md.
+Full table in local TBdecompile/trail/20261012/09-w16-export-map.md.

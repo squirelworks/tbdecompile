@@ -1,6 +1,6 @@
 # 18. Where every loose sheet went
 
-The sheets stay on disk under `tbworkingpapers/` so the trail can be checked. They are not the current statement. `who-is-who` is not in this index and is not in this repository. History folders and miscellaneous dumps are not re-copied. Binary password deltas stay in the working papers.
+The sheets now live under `tbworkingpapers/sheets/`. A row that says `tbwp0001/…` means `sheets/tbwp0001/…`. `tbwp0019`'s renamed dump would not copy. The notes are in `sheets/tbwp0019/`. The unreadable dump is still `tbworkingpapers/tbwp0019/`. `who-is-who` is not in this index and is not in this repository. History folders and miscellaneous dumps are not re-copied. Binary password deltas stay in the working papers.
 
 A row marked superseded means the sheet still contains a sentence this record closed. Read the sheet for the function body if you need it. Read this record for the claim.
 
@@ -137,11 +137,11 @@ A row marked superseded means the sheet still contains a sentence this record cl
 
 | Folder | Fate |
 |---|---|
-| `20261012/` | Earlier consolidation, also typeset as the 9-page 15 October contents. Create-path wording that calls the reader a caller of `CDBSENDCREATE` is superseded by chapter 4. The dispatch tables, the registrar’s property ids, and the painter offsets are kept there and in chapter 5. |
-| `20261014/` | Condensed working papers. `02-still-open.md` still calls the reader the caller of `CDBSENDCREATE`. That sentence is superseded. `01-findings.md`, `03-tbx.md`, and `04-shelf.md` now point at the record under the title. The rest of the open list matches chapter 10. |
+| `trail/20261012/` | Earlier consolidation, also typeset as the 9-page 15 October contents. Create-path wording that calls the reader a caller of `CDBSENDCREATE` is superseded by chapter 4. The dispatch tables, the registrar’s property ids, and the painter offsets are kept there and in chapter 5. |
+| `trail/20261014/` | Condensed working papers. `02-still-open.md` still calls the reader the caller of `CDBSENDCREATE`. That sentence is superseded. `01-findings.md`, `03-tbx.md`, and `04-shelf.md` now point at the record under the title. The rest of the open list matches chapter 10. |
 | `maps/` and `rename/` | Lookups and name lists. A trail line under the title says they are not findings. |
-| `20261015/` | `00-how-toolbook-operates.md` section 2 and `01-theories-of-operation.md` section 1 still teach the author chain as runtime. Superseded by chapter 4. |
-| `20261016/00-consolidated.md` | The short correction. This volume is the expansion. |
+| `trail/20261015/` | `00-how-toolbook-operates.md` section 2 and `01-theories-of-operation.md` section 1 still teach the author chain as runtime. Superseded by chapter 4. The nested `20261012/` inside it is a duplicate of `trail/20261012/`. |
+| `trail/20261016/00-consolidated.md` | The short correction. This volume is the expansion. |
 | `rename/` | The scripts chapter 8 refers to. |
 | `maps/` | Segment crosswalks. Not typeset in the PDF. |
-| `nehost/` | Unicorn experiments. Not part of this record and not committed from the working tree unless asked. |
+| `tbpipeline/tbpipeline_bf/nehost/` | The Unicorn host. Not in this repository. Segment dumps stay there, not here. |

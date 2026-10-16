@@ -9,7 +9,7 @@
 | C-003 | Known | The worked specimen is Logic Families, `9e954d01.tbk`. It is not self-contained. It names the NIDA system books and jumps into `nida81.tbk`. | lesson header at file `0xB1A96` |
 | C-004 | Known | Windows 98 can step the engine. 32-bit Windows XP can run it. 64-bit Windows cannot run the 16-bit NE images. Windows 11 is outside the range. | WV-028 |
 | C-005 | Known | The engine calls 16-bit `USER`, `GDI`, and `KERNEL`. A startup log that reports `USER32`, `GDI32`, and `KERNEL32` missing is not a broken install. | WV-027 |
-| C-006 | Not true | ToolBook 8.1, as held here, is a 32-bit product that needs Windows 10 or earlier. The images in hand are 16-bit NE. ToolBook 9.0 is the 32-bit product. | `TBdecompile/20261014/03-tbx.md` |
+| C-006 | Not true | ToolBook 8.1, as held here, is a 32-bit product that needs Windows 10 or earlier. The images in hand are 16-bit NE. ToolBook 9.0 is the 32-bit product. | `TBdecompile/trail/20261014/03-tbx.md` |
 
 ## What the set is
 

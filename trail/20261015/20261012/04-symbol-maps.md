@@ -1,6 +1,6 @@
 # Symbol maps
 
-> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+> Duplicate of `TBdecompile/trail/20261012/`. Do not edit this copy. The current statement is `record/`.
 
 Generated from the Ghidra decompiles. Source: `tbwp0003/`.
 

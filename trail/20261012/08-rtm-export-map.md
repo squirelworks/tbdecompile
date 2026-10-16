@@ -16,4 +16,4 @@ Matched: 43 / 43
 | `CLIENTTOPAGE` | 86850 |
 
 Full table generated from ExportList.java against TB80RTM.EXE.c.
-See local TBdecompile/20261012/08-rtm-export-map.md for the complete matched list.
+See local TBdecompile/trail/20261012/08-rtm-export-map.md for the complete matched list.

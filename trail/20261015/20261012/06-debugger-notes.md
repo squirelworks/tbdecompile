@@ -1,6 +1,6 @@
 # Debugger notes (SoftICE / WDW)
 
-> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+> Duplicate of `TBdecompile/trail/20261012/`. Do not edit this copy. The current statement is `record/`.
 
 From field notes and the corrected breakpoint discussion.
 

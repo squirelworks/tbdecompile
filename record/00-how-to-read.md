@@ -6,7 +6,7 @@
 
 `TBdecompile/record/` is the consolidated record of the ToolBook II 8.1 work. The loose sheets under `tbworkingpapers/tbwpNNNN/` are the trail those findings were written on. They are not a second current record. When a loose sheet and this directory disagree, this directory wins. Chapter 18 names every loose sheet and the section that absorbed it.
 
-The dated folders `20261012/`, `20261014/`, and `20261015/` stay as the notes of those days. `20261016/00-consolidated.md` is the short correction this volume expands. Read those folders for the trail. Do not read `20261015/00-how-toolbook-operates.md` section 2, or `20261015/01-theories-of-operation.md` section 1, or `20261014/02-still-open.md` opening paragraph, as the runtime create path.
+The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` stay as the notes of those days. `trail/20261016/00-consolidated.md` is the short correction this volume expands. Read those folders for the trail. Do not read `trail/20261015/00-how-toolbook-operates.md` section 2, or `trail/20261015/01-theories-of-operation.md` section 1, or `trail/20261014/02-still-open.md` opening paragraph, as the runtime create path.
 
 ## Grades
 

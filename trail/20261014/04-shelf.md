@@ -19,7 +19,7 @@ The reader that replaced these is TBpipeline. The viewer that replaced the XML p
 
 ## Hosts that were not readers
 
-`nehost/` unfolded the Optloader stub under Unicorn and materialized the RTM segments. It did not implement USER, GDI, or OLE, so a lesson does not run there. The passes that were kept moved to `TBdecompile/nehost/` and then into TBpipeline. `nedllhost/` bound BAS segments: 461 resolved, 339 not. `bmpproxy/` is a Watcom stand-in for `TB80BMP` that logs ordinal 3 and ordinal 13. Source only.
+`nehost/` unfolded the Optloader stub under Unicorn and materialized the RTM segments. It did not implement USER, GDI, or OLE, so a lesson does not run there. The passes that were kept moved to `tbpipeline/tbpipeline_bf/nehost/` and then into TBpipeline. `nedllhost/` bound BAS segments: 461 resolved, 339 not. `bmpproxy/` is a Watcom stand-in for `TB80BMP` that logs ordinal 3 and ordinal 13. Source only.
 
 ## Format, as the shelf left it
 
@@ -29,7 +29,7 @@ The keyword resources in `TB80CMP` are `0x77` (992 strings), `0x78` (980), and `
 
 ## SoftICE, closed the same day
 
-Selectors die on reboot. `14 00 00 11` was not confirmed. A dump that starts with the SoftICE window missed. A lesson click is delivered to `TBKClient`. The polygon painter, the scale, and the arc and rectangle painters are the live results, and they are already in `20261012/`. The kit itself is a SoftICE 4.05 installer and ICEDUMP. It does not belong in this repository.
+Selectors die on reboot. `14 00 00 11` was not confirmed. A dump that starts with the SoftICE window missed. A lesson click is delivered to `TBKClient`. The polygon painter, the scale, and the arc and rectangle painters are the live results, and they are already in `trail/20261012/`. The kit itself is a SoftICE 4.05 installer and ICEDUMP. It does not belong in this repository.
 
 ## Names
 

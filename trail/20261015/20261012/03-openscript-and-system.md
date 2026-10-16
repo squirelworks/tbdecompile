@@ -1,6 +1,6 @@
 # OpenScript and NIDA system books
 
-> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+> Duplicate of `TBdecompile/trail/20261012/`. Do not edit this copy. The current statement is `record/`.
 
 ## OpenScript decoder
 
