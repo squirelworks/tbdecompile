@@ -1,33 +1,14 @@
 # Research notes index
 
-These are the short notes taken while the working papers were still the only copy.
-`20261014/` is the condensation. Prefer that when they disagree.
+These three files are the short notes that used to live only in the working papers. They are not a second record. `TBdecompile/record/` is the statement. The dated folders `20261012/`, `20261014/`, `20261015/`, and `20261016/` are the trail of those days, and each of them now says so under the title.
 
-## tbwp0011
+Do not prefer `20261014/` when it disagrees with `record/`. `20261014/02-still-open.md` still names `CDBSENDCREATE` in the reader sentence. That sentence is not current.
 
-- `bas-xref-walk.md` — CDBSENDCREATE has no internal named callers in BAS
-- `cdbsendcreate-and-nida81.md` — deeper calls and nida81 handler surface
+| File | What it still is |
+|---|---|
+| `property-block-expansion.md` | `FUN_12c8_0ef8` copies four words. Author path. Not the reader. Chapter 4. |
+| `rtm-paint-path.md` | `WM_PAINT` goes to `CLIENTTOPAGE`, then BAS ordinal 26. Not the reader. Chapters 3 and 5. |
 
-## tbwp0013
+The longer trail is `tbworkingpapers/`. Chapter 18 of the record names each sheet except the folder's own `README.md` and `tbwp0029/00-official-record.md`, which are pointers. As of the 16 October tidy, every current sheet either already named the record or carries one trail line under the title. A superseded line means the body still contains a closed sentence. Read the body for the function. Read the record for the claim. The draft in `tbwp0028/chapters/` is frozen and lags the record.
 
-- `14-00-00-pattern-search.md` — FUN_1028_2680 candidate (later closed)
-- `tbload-zzztbk-walk.md` — ZZZTBKBOOKLOC search and vtable handoff
-- `switch-1008-2dc7.md` — FPU/math dispatcher, not the record reader
-
-## tbwp0014
-
-- `fun-1028-2680-is-filter-registrar.md` — candidate closed
-- `paintpolygon-table-static-limit.md` — type table is runtime-built
-- `approach-correction-undisassembled.md` — HTML absence is not proof
-- `bas-seg182-leftover.md` — preload segment with missed fixups
-
-## tbwp0016
-
-- `property-block-expansion.md` — FUN_12c8_0ef8 source offsets
-- `page-background-index.md` — background link is not a direct id
-
-## tbwp0018
-
-- `rtm-paint-path.md` — WM_PAINT → CLIENTTOPAGE → CDBPAINTCLIENT
-- `rtm-triage.md` — no 14 00 00 reader in RTM
-- `current-goals.md` — open research items
+`maps/html-segment-index.md` is the HTML-export segment table that had been sitting loose. It is a lookup. It is not a finding.

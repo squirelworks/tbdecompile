@@ -1,5 +1,7 @@
 # Graphics painters (TB80BAS)
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 Confirmed from the decompile and SoftICE traces.
 
 | Function | Address | Role |

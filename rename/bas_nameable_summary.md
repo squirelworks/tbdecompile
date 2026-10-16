@@ -1,5 +1,7 @@
 # BAS Nameable Functions
 
+> Trail, 2026-10-16. Names that could be applied. Not applied names, and not the reader. If this file and `TBdecompile/record/` disagree, the record wins.
+
 Master list for brute-force naming. Generated 2026-10-11.
 
 ## Summary

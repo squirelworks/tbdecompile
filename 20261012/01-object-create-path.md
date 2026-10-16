@@ -1,5 +1,7 @@
 # Object create path and bounds
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 From the honest unpack (`tbwp0001/TB80BAS_noghidra.DLL`) loaded in Ghidra.
 Source writeup: `tbwp0002/bas-create-path.md`.
 

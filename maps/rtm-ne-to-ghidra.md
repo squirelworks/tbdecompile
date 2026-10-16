@@ -1,5 +1,7 @@
 # TB80RTM NE segment to Ghidra space
 
+> Trail, 2026-10-16. Lookup. NE segment to the Ghidra base used for this load. Not a finding. A live selector is not this base. If this file and `TBdecompile/record/` disagree, the record wins.
+
 | NE | Ghidra |
 |----|--------|
 | 0x01 | 1000 |

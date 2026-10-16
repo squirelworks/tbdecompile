@@ -1,5 +1,7 @@
 # Symbol maps
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 Generated from the Ghidra decompiles. Source: `tbwp0003/`.
 
 | File | Entries |

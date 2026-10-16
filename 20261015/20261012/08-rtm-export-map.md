@@ -1,5 +1,7 @@
 # RTM export → decompile mapping
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 Matched: 43 / 43
 
 | Export | Decompile line |

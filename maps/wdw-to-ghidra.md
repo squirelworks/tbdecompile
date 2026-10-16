@@ -1,5 +1,7 @@
 # WDW selector:offset → Ghidra segment:offset
 
+> Trail, 2026-10-16. Lookup. One boot's WDW selectors. They change on the next boot. If this file and `TBdecompile/record/` disagree, the record wins.
+
 Source: WDW screenshots 2026-10-15. Live selectors are temporary (this boot). Offsets within the segment are stable. Map is tbworkingpapers/tbwp0002/TB80BAS.map. C decompile is Toolbook/_decompiles/TB80BAS.DLL.c.
 
 ## Resolved (in map)

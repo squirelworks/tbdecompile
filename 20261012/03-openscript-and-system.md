@@ -1,5 +1,7 @@
 # OpenScript and NIDA system books
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 ## OpenScript decoder
 
 - Keyword table is resource 0x77 (type 100, id 119). Offset table at byte 2 + count*4.

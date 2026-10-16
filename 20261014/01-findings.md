@@ -1,5 +1,7 @@
 # Findings
 
+> Trail, 2026-10-16. Object offsets from 14 October. Chapter 4 is the statement. A later live trace wins over this table. If this file and `TBdecompile/record/` disagree, the record wins.
+
 The object is 0x76 bytes. These offsets are the ones the papers and the live traces agree on.
 
 | Offset | What |

@@ -1,5 +1,7 @@
 # RTM export → decompile mapping
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 Matched: 43 / 43
 
 | Export | Decompile line |

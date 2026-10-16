@@ -1,5 +1,7 @@
 # The 11.5 export
 
+> Trail, 2026-10-16. The 11.5 export, as known that day. Chapter 2 is the statement. The correspondent is JohnDoe1. No mail is copied here. If this file and `TBdecompile/record/` disagree, the record wins.
+
 From correspondence with JohnDoe1, 14 October 2026. The personal name and the mail are not in this record.
 
 ## How a book is saved

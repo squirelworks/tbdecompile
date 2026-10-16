@@ -1,5 +1,7 @@
 # Object create path and bounds
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 From the honest unpack (`tbwp0001/TB80BAS_noghidra.DLL`) loaded in Ghidra.
 Source writeup: `tbwp0002/bas-create-path.md`.
 

@@ -1,5 +1,7 @@
 # TBdecompile — Decompile Notes Index
 
+> Notes of 12 October 2026. The current statement is `TBdecompile/record/`. A sentence here that calls the reader a caller of `CDBSENDCREATE` is not current. Export tables are locations, not a claim about when a function runs.
+
 Consolidated notes from the ToolBook II 8.1 reverse-engineering work.
 Sources: BAS/RTM decompiles, SoftICE field notes, tbwp0002–0004, and the
 NIDA system-book analysis.

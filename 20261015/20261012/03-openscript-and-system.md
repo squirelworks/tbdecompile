@@ -1,5 +1,7 @@
 # OpenScript and NIDA system books
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 ## OpenScript decoder
 
 - Keyword table is resource 0x77 (type 100, id 119). Offset table at byte 2 + count*4.

@@ -1,5 +1,7 @@
 # Open questions
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 ## Bounds
 
 - Disk `14 00 00` record → object+0xF expansion rule.

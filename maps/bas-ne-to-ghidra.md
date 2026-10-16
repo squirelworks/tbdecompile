@@ -1,5 +1,7 @@
 # NE segment to Ghidra address
 
+> Trail, 2026-10-16. Lookup. NE segment to the Ghidra base used for this load. Not a finding. A live selector is not this base. If this file and `TBdecompile/record/` disagree, the record wins.
+
 NE segment number, file offset, length, and flags were checked against the unpacked binaries in `Toolbook/_unpacked`. They match, file for file, including BAS (199) and RTM (139).
 
 The Ghidra base is not stored in the DLL. It is `0x1000 + (NE - 1) * 8`, and the block is `CodeN` or `DataN`. That is how these listings were loaded. The DLL confirms the segment index. The listing confirms the address Ghidra gave it.

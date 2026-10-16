@@ -1,5 +1,7 @@
 # Rename scripts and nameable lists
 
+> Trail, 2026-10-16. Scripts and nameable lists. A name is a location. It is not a claim about when the function runs. If this file and `TBdecompile/record/` disagree, the record wins.
+
 Ghidra rename scripts and pattern-based nameable function lists for the ToolBook 8.1 modules.
 
 ## Scripts

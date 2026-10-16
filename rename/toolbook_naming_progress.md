@@ -1,5 +1,7 @@
 # ToolBook Function Naming Progress
 
+> Trail, 2026-10-16. Naming progress. Counts are of that day. Chapter 8 is the statement. If this file and `TBdecompile/record/` disagree, the record wins.
+
 Generated 2026-10-11. Pattern-based nameable functions across decompiled modules.
 
 ## Overall

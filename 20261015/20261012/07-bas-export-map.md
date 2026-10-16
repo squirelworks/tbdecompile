@@ -1,5 +1,7 @@
 # BAS export → decompile mapping
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 | Export | Decompile line | Map address |
 |--------|----------------|-------------|
 | `ANSILSTRNCMPI` | — |  |

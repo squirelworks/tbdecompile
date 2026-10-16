@@ -119,7 +119,7 @@ A row marked superseded means the sheet still contains a sentence this record cl
 | `tbwp0026/wdw-trace.md` | kept | Chapter 12. |
 | `tbwp0027/withpass-diff.bin` | kept | Chapter 16. Binary stays in the working papers. Not committed. |
 | `tbwp0028/00-scaffold.md` | index | Chapter 0. The scaffold this volume implements. |
-| `tbwp0028/chapters/00-how-to-read.md` | kept | Chapter 0. Rewritten so this directory is the statement. |
+| `tbwp0028/chapters/00-how-to-read.md` | kept | Chapter 0. Draft only. It is not the statement, and it lags the record after the author-dispatch tables and the graphic property ids. |
 | `tbwp0028/chapters/01-corpus.md` | kept | Chapter 1. |
 | `tbwp0028/chapters/02-formats.md` | kept | Chapter 2. |
 | `tbwp0028/chapters/03-runtime.md` | kept | Chapter 3. |
@@ -129,14 +129,17 @@ A row marked superseded means the sheet still contains a sentence this record cl
 | `tbwp0028/chapters/07-debugging.md` | kept | Chapter 7. |
 | `tbwp0028/chapters/08-naming.md` | kept | Chapter 8. |
 | `tbwp0028/chapters/09-modern.md` | kept | Chapter 9. |
-| `tbwp0028/chapters/10-open.md` | kept | Chapter 10. |
+| `tbwp0028/chapters/10-open.md` | kept | Chapter 10. The chapters in this folder are the frozen draft. Where they disagree with `record/`, the record wins. |
+
+`tbwp0029/00-official-record.md` and the `README.md` at the root of the working papers are pointers. They are not findings. There is no `tbwp0020`, `tbwp0021`, or `tbwp0022`.
 
 ## Dated folders already in this repository
 
 | Folder | Fate |
 |---|---|
 | `20261012/` | Earlier consolidation, also typeset as the 9-page 15 October contents. Create-path wording that calls the reader a caller of `CDBSENDCREATE` is superseded by chapter 4. The dispatch tables, the registrar’s property ids, and the painter offsets are kept there and in chapter 5. |
-| `20261014/` | Condensed working papers. `02-still-open.md` still calls the reader the caller of `CDBSENDCREATE`. That sentence is superseded. The rest of its open list matches chapter 10. |
+| `20261014/` | Condensed working papers. `02-still-open.md` still calls the reader the caller of `CDBSENDCREATE`. That sentence is superseded. `01-findings.md`, `03-tbx.md`, and `04-shelf.md` now point at the record under the title. The rest of the open list matches chapter 10. |
+| `maps/` and `rename/` | Lookups and name lists. A trail line under the title says they are not findings. |
 | `20261015/` | `00-how-toolbook-operates.md` section 2 and `01-theories-of-operation.md` section 1 still teach the author chain as runtime. Superseded by chapter 4. |
 | `20261016/00-consolidated.md` | The short correction. This volume is the expansion. |
 | `rename/` | The scripts chapter 8 refers to. |

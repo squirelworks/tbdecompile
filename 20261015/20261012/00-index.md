@@ -1,5 +1,7 @@
 # TBdecompile — Decompile Notes Index
 
+> Duplicate of `TBdecompile/20261012/`. Do not edit this copy. The current statement is `record/`.
+
 Consolidated notes from the ToolBook II 8.1 reverse-engineering work.
 Sources: BAS/RTM decompiles, SoftICE field notes, tbwp0002–0004, and the
 NIDA system-book analysis.
