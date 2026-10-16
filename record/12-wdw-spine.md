@@ -27,6 +27,8 @@ WDW has no full call trace. `break <symbol> resume on` plus `log <file>` logs na
 | UTL | 53 | `GETCHARINFO`, `GETSTRMGRSTRING`, task collections, `PLUGINSVCINIT`, `LOADRESSTR`, `CXTHELPINIT`, `GETTBKINIPROFILEINT` / `STRING`, `INITMETRICS`, `SETCONVERSIONDC`, `CXTTOPXT`, `GHEAPCREATE`, `GHEAPALLOC`, `SYMLOOKUPNUMBER` | Record walk. The type-name table lives here and was not the thing being stepped. |
 | BAS | 173 | `VALUETOSTRING`, `VALUENEWSTACK`, the `VALUENEW*` family, `OBJFILEOPEN` (`enter 025A`), `STACKGETSIZE`, `STACKPUSH`, `CDBCHUNKLAST`, `CDBCHUNKFIND`, `CDBCHUNKEND`, `RESMGR*` | A compare of a far pointer to `0x14`. Ordinal 51. |
 
+What those stack, heap, and `RESMGR*` hits do is chapter 19. They are still not the reader.
+
 `OBJFILEOPEN` in that BAS trace is the file-open path. The buffered reader is `FUN_1160_03de`, reached through `FUN_1258_00a8`. When the buffer satisfies the request, the raw DOS path at offset `04F3` is skipped. Live 4-byte reads returned an internal pointer (`FC B5 BD B0` in one dump), not a page header and not `03 4A 42 4F`.
 
 ## 12.3 Where to break next

@@ -40,6 +40,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [16-cipher.md](16-cipher.md) | TBCBT segment 7 and the keyed-password schemes |
 | [17-modules.md](17-modules.md) | Module roles, including the ones that are not the reader |
 | [18-absorption.md](18-absorption.md) | Every loose sheet, and where its claim went |
+| [19-heap-stack-resmgr.md](19-heap-stack-resmgr.md) | NearScript heap, the value stack, `RESMGR*`, and the callers the breakpass did not name |
 
 Lookup tables that are too long to typeset live in `maps/`:
 
@@ -63,4 +64,6 @@ If `tbworkingpapers/tbwp0001/openscript_notes.md` says the keyword table decodes
 
 Absence from a Ghidra HTML export is not absence from the binary. The listings have undisassembled runs. A candidate is closed only when the disassembly or a live trace shows what the function actually does.
 
-The printable form of this directory is [ToolBook-record-20261016.pdf](ToolBook-record-20261016.pdf).
+If a note says `HEAP*` or `TBHEAP*` allocates the `0x76`-byte object, or that `TBHEAPCLEARCRITSECT` has no definition, that sentence is superseded. Chapter 19.
+
+The printable form of this directory is [ToolBook-record-20261016.pdf](ToolBook-record-20261016.pdf). That file was typeset before chapter 19. It ends at chapter 18 until the contents are rebuilt.

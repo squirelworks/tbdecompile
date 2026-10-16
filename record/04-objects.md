@@ -37,7 +37,7 @@ These offsets are the ones the papers and the live traces agree on.
 
 **Do not break on ordinal 51 to find the reader.** The stop will fire when Instructor creates or rewrites an object. It will not fire because a lesson page was opened. The 15 October operational notes ended this section with “list the XREFs; the caller that passes a page blob is the reader.” That sentence is not true. The one caller that was found does not pass a page blob.
 
-The function is still real. `CDBNEWOBJECT` indexes objects as `param_6 * 0x76`. The size matches the live object. The index expression is the decompile, not a second measurement of the size.
+The function is still real. `CDBNEWOBJECT` indexes objects as `param_6 * 0x76`. The size matches the live object. The index expression is the decompile, not a second measurement of the size. The block that holds the array is `FUN_1278_3be6` (decompile line 121070): `GLOBALALLOC` or `GLOBALREALLOC` of `count * 0x76`. That is not `TBHEAPALLOC`. Chapter 19.
 
 `param_5` selects the path. The string arithmetic in the decompile is Ghidra matching those constants against `s_CTbkSimpleOLEDispatch_CallMethod`. It is not a string compare in the program.
 

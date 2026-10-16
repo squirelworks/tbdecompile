@@ -32,7 +32,7 @@ Addresses in this chapter are from the 2026-10-15 Windows 98 boots, DGROUP `347F
 | `CDBCLEARBOOKREFS` | `4C7F:10A6` | `00B8` | 28451 |
 | `CDBINIT` | | `00C8` | 30304 |
 
-`HEAP*` / `TBHEAP*` hand out the `0x76`-byte object. `TBHEAPCLEARCRITSECT` was the last stop before a window appeared on one boot. `TBHEAPALLOC` and `TBHEAPFREE` are call sites throughout the decompile. There is no standalone `TBHEAPCLEARCRITSECT` definition in that listing.
+`HEAP*` / `TBHEAP*` do not hand out the `0x76`-byte object. That sentence, and the sentence that `TBHEAPCLEARCRITSECT` has no definition, are not true. `TBHEAPCLEARCRITSECT` is decompile line 93984. The object array is `GLOBALALLOC` of `count * 0x76` in `FUN_1278_3be6`. Chapter 19 is the heap, the value stack, and `RESMGR*`. `TBHEAPCLEARCRITSECT` was a stop on the open path. It was not the last stop before the window. `VALUEFREE` was.
 
 ## 11.3 Page, instance, and the value bus
 
@@ -106,6 +106,6 @@ Painter offsets that do not move inside the segment are in chapter 8. `PaintPoly
 
 ## 11.6 Incidental on open
 
-Seen, and not the reader: `CDBREGISTEROLE2WINDOW` (`3767:0000`), `CDBREGISTERVBXFORM` (`4437:0000`), `VBXNEWVIEW` (`4437:0216`), `VALUEARRAYINFO` (`4357:02F2`), `VALUEARRAYSET` (`4357:0932`), `VALUEARRAYGET` (`4357:05D8`), `HEAPVALUETOPOINTER` (`450F:0F28`), `HEAPVALUETOFRAME` (`450F:0F4E`), `HEAPENTERCITSECT` (`450F:0DCE`), `HEAPLEAVECRITSECT` (`450F:0DF6`).
+Seen, and not the reader: `CDBREGISTEROLE2WINDOW` (`3767:0000`), `CDBREGISTERVBXFORM` (`4437:0000`), `VBXNEWVIEW` (`4437:0216`), `VALUEARRAYINFO` (`4357:02F2`), `VALUEARRAYSET` (`4357:0932`), `VALUEARRAYGET` (`4357:05D8`), `HEAPVALUETOPOINTER` (`450F:0F28`), `HEAPVALUETOFRAME` (`450F:0F4E`), `HEAPENTERCITSECT` (`450F:0DCE`), `HEAPLEAVECRITSECT` (`450F:0DF6`). What the heap stops are is chapter 19.
 
 `?SENDPROC@TBXBOBJ@@` was seen at `29AF:0000` (`cmp ax, 3014`). The decompile does not contain `SENDPROC@TBXBOBJ` as that name. Related symbols are `_SETPROC_TBXBOBJ` at line 2175, `_SENDPROC_TBXLAYER`, `_SENDPROC_TBXBASE`, and `_SENDPROC_TBXUSER`.
