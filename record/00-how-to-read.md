@@ -41,6 +41,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [17-modules.md](17-modules.md) | Module roles, including the ones that are not the reader |
 | [18-absorption.md](18-absorption.md) | Every loose sheet, and where its claim went |
 | [19-heap-stack-resmgr.md](19-heap-stack-resmgr.md) | NearScript heap, the value stack, `RESMGR*`, and the callers the breakpass did not name |
+| [20-cdb-obj.md](20-cdb-obj.md) | `CDB*` is the book API. `OBJ*` is the object file and object memory. Not a header and its definitions. |
 
 Lookup tables that are too long to typeset live in `maps/`:
 
@@ -66,4 +67,4 @@ Absence from a Ghidra HTML export is not absence from the binary. The listings h
 
 If a note says `HEAP*` or `TBHEAP*` allocates the `0x76`-byte object, or that `TBHEAPCLEARCRITSECT` has no definition, that sentence is superseded. Chapter 19.
 
-The printable form of this directory is [ToolBook-record-20261016.pdf](ToolBook-record-20261016.pdf). That file was typeset before chapter 19. It ends at chapter 18 until the contents are rebuilt.
+The printable form of this directory is [ToolBook-record-20261016.pdf](ToolBook-record-20261016.pdf). That file was typeset before chapters 19 and 20. It ends at chapter 18 until the contents are rebuilt.

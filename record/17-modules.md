@@ -23,7 +23,7 @@ The engine calls 16-bit `USER`, `GDI`, and `KERNEL`. A log that says `USER32` is
 
 | Module | Role | Not |
 |---|---|---|
-| `TB80BAS.DLL` | Objects, properties, painters, twip scale, file open. 606 exports. `CDBINIT` ordinal 1, `CDBFILEOPEN` 8, `CDBVIEWPAGE` 15, `CDBVIEWBKGND` 18, `CDBPAINTCLIENT` 26, `CDBSENDCREATE` 51 (author). | Not the window. |
+| `TB80BAS.DLL` | Objects, properties, painters, twip scale, file open. 606 exports. `CDBINIT` ordinal 1, `CDBFILEOPEN` 8, `CDBVIEWPAGE` 15, `CDBVIEWBKGND` 18, `CDBPAINTCLIENT` 26, `CDBSENDCREATE` 51 (author). The `CDB*` / `OBJ*` split is chapter 20. | Not the window. |
 | `TB80CMP.DLL` | Compile and expand. Resources `0x77`, `0x78`, `0x70`. | Not the page walker. 5.6 percent pattern-nameable because it is a compiler. |
 | `TB80UTL.DLL` | Type-name strings, string manager, metrics, heaps. | Not the `14 00 00` reader. |
 | `TB80RCR.DLL` | Linked beside the book server. Exports only partly named. | Not classified. |
