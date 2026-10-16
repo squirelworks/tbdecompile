@@ -21,6 +21,8 @@ The window is native. A direct start opens `using_foolbook.fbk` and a splash tha
 
 OpenScript in this player is the subset in chapter 6. ActiveX, Python, and C++ as replacement engines are a stated direction. They are not implemented.
 
+The book API and the object layer are separate modules in Foolbook (`engine/cdb.py`, `engine/obj.py`). A property get locks the `0x76` slot, runs the behavior, and unlocks. File open reaches the object file through the unnamed helpers, not by a direct call. That is chapter 20. It does not load `TB80BAS`, and it is not the reader.
+
 ## 9.2 Foolcourse and Foolversity
 
 Foolcourse is the only server in the current release. Foolbook does not listen. The earlier idea that Foolbook itself served on port 1337 was withdrawn: a local viewer should not be the thing that stays up after the tab closes.
