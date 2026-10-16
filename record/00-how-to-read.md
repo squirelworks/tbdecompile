@@ -34,7 +34,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [10-open.md](10-open.md) | Ranked gaps, and the notes that are closed |
 | [11-keepers.md](11-keepers.md) | One-boot live addresses and decompile line numbers |
 | [12-wdw-spine.md](12-wdw-spine.md) | The book-open spine and what the three traces hit |
-| [13-specimen-pages.md](13-specimen-pages.md) | P1040, P430, P420, P1170, and the TBX draw inventory |
+| [13-specimen-pages.md](13-specimen-pages.md) | P1040, P430, P440 inside that record, P420, P1170, and the TBX draw inventory |
 | [14-openscript-bytes.md](14-openscript-bytes.md) | Encoding, the back-reference fix, corpus counts |
 | [15-system-books.md](15-system-books.md) | `.sbk` tiers, NIDA shell, type-name table |
 | [16-cipher.md](16-cipher.md) | TBCBT segment 7 and the keyed-password schemes |
@@ -42,6 +42,8 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [18-absorption.md](18-absorption.md) | Every loose sheet, and where its claim went |
 | [19-heap-stack-resmgr.md](19-heap-stack-resmgr.md) | NearScript heap, the value stack, `RESMGR*`, and the callers the breakpass did not name |
 | [20-cdb-obj.md](20-cdb-obj.md) | `CDB*` is the book API. `OBJ*` is the object file and object memory. Not a header and its definitions. |
+| [21-stress.md](21-stress.md) | Stress of the Python models. Not a timing of `TB80BAS`. |
+| [22-value-vbx-execscript.md](22-value-vbx-execscript.md) | The value bus, a VBX control, and `EXECSCRIPT`. Three mechanisms. None of them is the `0x76` page object. |
 
 Lookup tables that are too long to typeset live in `maps/`:
 

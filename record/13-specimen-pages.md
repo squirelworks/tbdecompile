@@ -2,7 +2,7 @@
 
 Every number in this chapter is from `9e954d01.tbk` (Logic Families) or from its ToolBook 11.5 Save To XML, unless a path says otherwise. Screen pixels are stored twips / 15 at 96 dpi.
 
-The binary has 129 pages, each a record starting `80 65 00 05 00 02 02`. The export has 131 `Page.xml` files. P440 and P2920 have no `80 65` record. They are an export addition. All 129 binary names match a TBX page.
+The binary has 129 pages, each a record starting `80 65 00 05 00 02 02`. The export has 131 `Page.xml` files. P440 and P2920 have no `80 65` record of their own. All 129 binary names match a TBX page. P440's sentence and the house shapes that sit on its TBX bounds are inside the P430 record. See 13.5. P2920 has not been searched the same way.
 
 TBX folder names (`Page880`) are export ids, not the runtime page name (`P1040`). IdNumber 880 is page `P1040`.
 
@@ -63,6 +63,16 @@ Record layout: fill dword at `+4`, kind `04 00` at `+0x0C`, count word at `+0x1A
 P430 draws as a chip: silver pins (`0xC0C0C0`) and a light-gray body (`0xE0E0E0`). One live 11-point polygon is a pin tip, not the body. Captured screen points ran `(218,335)` through `(218,341)`, a 10 by 17 notch. The same points are in the file as twips near page offset `0x9CB`: `(3147,3862)` through `(3147,3973)`.
 
 Pins that share identical point bytes stack until the index at object `+0x52` is applied. The clean-room draw does not apply it.
+
+## 13.5 P440 — no page of its own
+
+The TBX page is `Page876`, `Name="P440"`, background id 2. The text field says the ICs sentence: classified into logic families by voltage, speed, and how many circuits they can drive. Four houses are irregular polygons. Next and Back are buttons with bitmap ids. The background field named `Page#` stores the text `P1270`. That is the background's stored sample, not this page's name.
+
+The 8.1 file has no page named P440. The loader read 129 pages. The sentence is at file offset `834271`, inside P430. That page starts at `0xC3312` and its blob is 42512 bytes, so the sentence is 34765 bytes into the blob.
+
+The house shapes are in that same blob. Drawing every shape in it draws the chip and the houses on one window, plus false hits from the scan, including a yellow polygon that covers the page. Keeping only shapes whose bounds overlap the TBX page, and dropping a box larger than the page, leaves the four houses, some chip shapes that share those bounds, and one yellow false polygon. It does not draw the blue background, the sentence, or the button bitmaps. Those are not in the shape extract.
+
+**Known.** P440 is not a missed `80 65` record, and it is not absent from the file. The sentence and the overlapping shapes are in the P430 record. **Thought.** The 11.5 export split that one record into a chip page and a house page. That split has not been watched in 11.5. P2920 is the other export page with no `80 65` record, and this search was not repeated for it.
 
 ## 13.3 P420 — the curve that is not yet a flame
 

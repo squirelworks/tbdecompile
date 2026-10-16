@@ -26,7 +26,7 @@ The engine calls 16-bit `USER`, `GDI`, and `KERNEL`. A log that says `USER32` is
 | `TB80BAS.DLL` | Objects, properties, painters, twip scale, file open. 606 exports. `CDBINIT` ordinal 1, `CDBFILEOPEN` 8, `CDBVIEWPAGE` 15, `CDBVIEWBKGND` 18, `CDBPAINTCLIENT` 26, `CDBSENDCREATE` 51 (author). The `CDB*` / `OBJ*` split is chapter 20. | Not the window. |
 | `TB80CMP.DLL` | Compile and expand. Resources `0x77`, `0x78`, `0x70`. | Not the page walker. 5.6 percent pattern-nameable because it is a compiler. |
 | `TB80UTL.DLL` | Type-name strings, string manager, metrics, heaps. | Not the `14 00 00` reader. |
-| `TB80RCR.DLL` | Linked beside the book server. Exports only partly named. | Not classified. |
+| `TB80RCR.DLL` | Controls, mouse hook, effect objects, button drawing. Init is `FUN_1010_0000`. | Not classified as the book reader. The init does not open a file. |
 | `TB80ENU1` / `ENU2` | English strings, 16-bit and 32-bit. | Not code that opens a book. |
 | `TB80BMP.DLL` | DIB, metafile, FX blit. Ordinal 3 is the bitmap reader. `Lz77Expand` is `FUN_1000_0031`. | Not a picture store. The widget still does not name the bitmap. |
 | `TB80JPG.DLL` | JPEG. Version resource still says `TB60JPG.DLL`. | |
@@ -66,4 +66,16 @@ Force-disassemble: walk undefined `C8` (`ENTER`) bytes first, then the prologue 
 
 `SENDMESSAGE` (321 hits in one RTM listing) and `LSTRLEN` (282) have mangled arguments. That is a decompiler problem. It wants a fresh decompile, not another reading of the same HTML.
 
-`maps/bas-ne-to-ghidra.md` and `maps/rtm-ne-to-ghidra.md` are the segment crosswalks. `maps/wdw-to-ghidra.md` is one boot's selectors. None of the three is a narrative.
+`maps/bas-ne-to-ghidra.md` and `maps/rtm-ne-to-ghidra.md` are the segment crosswalks. `maps/wdw-to-ghidra.md` is one boot's selectors. None of the three is a narrative. Appendix K of the reference manual is the procedure those maps belong to.
+
+## 17.5 RCR, from the 16 October stop
+
+There is no separate HTML listing. The decompile is `Toolbook/_decompiles/TB80RCR.DLL.c`. It has 293 functions: 191 still named `FUN_`, 53 `ASYMTBKFX*`, 13 `ASYMCTL*`, 10 `BMR*`, 8 `ASYMMTRK*`, plus help, `WEP`, and `BTNPROCBITMAPBUTTONPROC`. The Watcom list is that export set. The names are definitions in this file, not unnamed functions waiting to be matched.
+
+The stop was `TB80RCR.DLL`, selector `3C4F`. `ASYMTBKFXINIT` at `493A` is the decompile at line 25267: `FUN_1008_aa62`, then return 1. The far call `43EF:AA62` is that first call. `ASYMMTRKINIT` at `2E0A` is line 23315. The `cmp` of word `0044` is `DAT_1020_0044`. Zero means first time. The following `push 2042h` is the `GLOBALALLOC` flags. The listing allocates `0x84` bytes, locks them, registers two window messages, and calls `SETWINDOWSHOOKEX`.
+
+Those two are not the first instructions of the DLL. `entry` (line 9587) does `LOCALINIT`, `GETVERSION`, and `int 21h`, then `FUN_1008_d7ca`, which calls `FUN_1010_0000`. That function's order is `LOCALINIT`, `HELPINIT`, `ASYMTBKFXINIT`, `ASYMMTRKINIT`, and if the mouse init returns 0, `FUN_1010_c79e`. `WEP` calls `ASYMTBKFXEXIT` and `FUN_1010_ca82`.
+
+`BMRDRAWBUTTON`, `BMRDRAWBEVEL`, `BMRDRAWSHADOW1`, `BMRDRAWSHADOW2`, and `BMRDRAWSTATUSBAR` are the drawing. They are button faces and bevels. The init that was stopped does not open a book.
+
+A later stop in the same session was `43EF:2992`, `ASYMCTLPAUSE` (line 3606), not `ASYMCTLPAUSED` (line 3656). The prologue has not run, so `DS` is still `3327`. The watch `3327:1B02 = 5341` is not the word the compare reads. After `mov ds, ax` the compare is `41FF:1B02`, which is `DAT_1020_1b02`. `ASYMCTLPAUSE` calls `FUN_1008_34de` and, on a hit, `UNHOOKWINDOWSHOOKEX`. `ASYMCTLPAUSED` only returns 0 or 1. `ASYMCTLISAPPREGISTERED` at `2ACE` is the same lookup: `push 0`, `push [bp+6]`, `call near 34DE`. `ASYMCTLGETPROPERTY` at `2D40` calls `GETCURRENTTASK` and then that lookup.

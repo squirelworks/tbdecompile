@@ -5,7 +5,7 @@
 | Id | Grade | Statement | Source |
 |---|---|---|---|
 | M-001 | Known | The clean-room reader is not the engine. It does not score quizzes, place every bitmap, or run the NE images. | WV-005 |
-| M-002 | Known | Foolbook opens `.tbk`, `.sbk`, `.fbk`, and `.fsk`. Shapes come from kind `0400` polygons and from bounds-only rectangles. | Foolbook `engine/shapes.py` |
+| M-002 | Known | Foolbook 1.0.2 opens `.tbk`, `.sbk`, `.fbk`, and `.fsk`. A polygon becomes the point array `Polygon` is given. Twips convert with `(coord * dpi + 720) / 1440`. Each object is placed from its twip bounds. Twip `0, 0` is the window origin. | Foolbook `v1.0.2` |
 | M-003 | Known | Foolcourse is the process that serves a book. Foolbook is a local window. If Foolbook is started by a course, it pulls the book and skips the splash. | release notes, 2026-10-13 |
 | M-004 | Known | The dependency order is Foolversity, then Foolcourse, then Foolbook, then `openscript_analysis`. Foollege is the layer under Foolversity that holds courses. It is not a running server in the current release. | hierarchy note |
 | M-005 | Known | TBpipeline 1.0.0r4 parses `9e954d01.tbk` (129 pages) without running RTM. A known bug is an 18-versus-23 render count. | pipeline release note |
@@ -14,6 +14,8 @@
 ## 9.1 Foolbook
 
 The engine parses the 8.1 container. It does not load `TB80BAS`. Polygons use the kind `0400` layout (count at `+0x1A`, pairs at `+0x22`). Rectangles use the bounds-only tail (`01 00 00 04`). On Logic Families that is on the order of 165 shapes from the early polygon-and-rect pass, and 961 rectangles from the later marker scan. Both counts can be true. They are different patterns.
+
+Foolbook 1.0.2 places those shapes before the viewer sees them. The conversion is the one in chapter 5: `(coord * dpi + 720) / 1440`. At 96 dpi that is the `/15` case, with the 720 added so the division rounds. The placed polygon is a pixel point list. The placed rectangle is `x, y, w, h` in the window. Twip `0, 0` is the origin. The tag is `v1.0.2`. Foolcourse `v1.0.0r3` and Foolversity `v1.0.0r3` depend on that tag.
 
 System books: core `.fsk` first, user `.fsk` after, as mods. `.sbk` is accepted. It is not required for the v1 player.
 

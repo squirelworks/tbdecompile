@@ -33,7 +33,9 @@ On the Watcom debugger:
 - Log with `log <file>`.
 - There is no trace that prints every call. The three logs in `tbwp0026` are named-export hits: 11 in W16, 53 in UTL, 173 in BAS.
 
-Those three logs are described in chapter 12. They do not contain the reader. The next useful break is after `CDBFILEOPEN`, on the lesson path, not another pass over the same exports. Appendix H is the Watcom screen and the command words. `!` still does not work there.
+Those three logs are described in chapter 12. Appendix H is the Watcom screen and the command words. `!` still does not work there.
+
+On 2026-10-16 every `TB80RTM` export was broken in the Functions window before the run, and broken again after one single-step once the program was running. The program ran from start to end. Nothing fired either time. At the end the Assembly window was `0000:0000` and `????`. The miss is not "the breaks were set too early." WDW was not attaching those names to the code that executed. The 15 October hits were unpacked W16, UTL, and BAS, with `break <symbol>` and `@`. That has not been shown to work for this RTM window.
 
 GPF notes from the SoftICE sessions still apply in spirit: do not step into an unloaded segment, and do not single-step a far call into `KERNEL` unless that segment is present. The CMP expand host died in `TB80W16` at `001c:00000015` (`9A 9C 06 57 2A`, segment not present). That fault is parked. It is not the book-open path.
 
@@ -53,7 +55,7 @@ After a failed password, the typed string and the constants `0xA01` and `0x300` 
 
 ## 7.5 Ghidra
 
-Two NE loader bugs were fixed for this work: the entry-table segment byte was treated as signed, and `ne_cbenttab` was ignored. `TB80BAS` is the image with entry segment bytes at or above 128. The unpacker does not rewrite those bytes. The Ghidra patch does. An honest BAS image loads in the patched Ghidra 12.1.4 build.
+Two NE loader bugs were fixed for this work: the entry-table segment byte was treated as signed, and `ne_cbenttab` was ignored. `TB80BAS` is the image with entry segment bytes at or above 128. The unpacker does not rewrite those bytes. The Ghidra patch does. An honest BAS image loads in the patched Ghidra 12.1.4 build. The procedure for finishing the listing and renaming over time is Appendix K of the reference manual.
 
 Force-disassemble scripts recover functions the loader never reached. One walks undefined `C8` (`ENTER`) bytes. The next accepts a real `RET` / `RETF` before treating the following byte as code, and it only creates functions at entry-like symbols. Run `C8` first, then the prologue pass. They do not name anything, and they do not touch code that is already defined.
 

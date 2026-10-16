@@ -26,6 +26,8 @@ The painters live in `TB80BAS`. They are reached through a type dispatcher, not 
 | `PaintRoundRect` | `1230:2278` and alts | round rect |
 | `ScaleTwipsToScreen` | `1008:01DD` | none. Converts in place. |
 
+`FUN_1008_01dd` is that converter. For each pair it computes `(coord * factor + 0x2D0) / 0x5A0`. `0x5A0` is 1440, one inch in twips. `0x2D0` is 720, so the add is rounding. The x factor is `DAT_1630_01a6` and the y factor is `DAT_1630_01a8`. At 96 DPI the factor is 96 and the division is the same as dividing by 15. The `/15` rule is that case, not the function.
+
 The polygon type table is not in the static image. Unpacked BAS still carries Optloader segment-table debris. The HTML listing has zero cross-references to `FUN_1408_0376`. **Thought.** The table is built at load, or fixed up by an NE relocation that the listing does not show as a pointer. A break on the painter, then one frame up, is how the table gets found. Searching the file for the bytes `76 03 08 14` will not find it. The selector is assigned at load.
 
 `SetPointArray` (`FUN_1408_00d8`, property `0x4050`) stores the count at `+0x30`, allocates `count * 4` with `OBJNEWNEAR` into `+0x32`, and copies the points. That is the runtime setter. The file does not contain a `0x4050` record.

@@ -12,6 +12,8 @@
 | R-006 | Known | `TB80RMT` is not on the path that opens a lesson. The 1.5 `PHYSSIZE` index is not in these 8.1 books. | WV-014 |
 | R-007 | Known | `nc81int.dll` exports 47 trainer calls. `IntCheckComm130E` opens a port at 9600 8O1, sends a probe, and returns `0x3D` on match or `0x3C` on failure. Families: 130E, TD2000, 5050, 205E. | `nc81int` exports |
 | R-008 | Known | `nc81rec.dll` writes `0x46`-byte session records to `SESSION3.REC`. Exports include `RecStartSession`, `RecCloseSession`, `RecBookmarkSession`, `RecWriteResponse`, `RecReadVariable`. | `nc81rec` exports |
+| R-009 | Known | On 2026-10-16 the `TB80RTM` exports were broken before the run, and again after one step once the program was running. Neither pass fired. The run went from start to end. At the end the Assembly window was `0000:0000` and `????`. | that session |
+| R-010 | Thought | Those symbols were not bound to the code that executed. "Set too early" does not cover the second pass. Why a break set after one live step still missed is not known. | R-009 |
 
 ## 3.1 Process
 
@@ -59,3 +61,25 @@ WDW on W16, before any book open, hits platform detection, OLE init, and the 32-
 WDW on UTL, after `INITTASK`, hits string and task utilities: `GETSTRMGRSTRING`, plugin init, `TBK.INI` profile reads, metrics, `GHEAPCREATE`. No record walk.
 
 The Unicorn host has not opened a book. Pass 06 asks for `TB80.INI` and exits. See chapter 7.
+
+## 3.5 The RTM export list, and a dead task
+
+Watcom's Functions window for `TB80RTM` is 43 exports. `?CALLPROC32W@@Z` at the top of that window is the decorated `CallProc32W` import. The `K`s are Watcom's size marks, not part of a name.
+
+`EGYPT` is the old window prefix. The frame is `MAINWNDPROC`. The client is `EGYPTCLIENTWNDPROC`, the child is `EGYPTCHILDWNDPROC`, and `EGYPTNOTIFYPROC` takes the notifies. `STATUSBARWNDPROC` is the status bar. `SUBEDITCONTROLPROC` subclasses an edit control. `DDEWNDPROC` is DDE. `XDLLTRANSWINPROC` is a window owned by another DLL.
+
+The shell's own book calls are `ENUMWINSFOROPEN`, `BOOKQUERYSAVE`, `EGCDBSAVEBOOK`, and `HANDLEREMOVESCRIPTPROC`. `EGDYNALINKERRORFUNC` runs when a DLL did not load.
+
+Around that frame the names are the product: ASCII file dialogs, cache-file and CD-ROM save, optimized-save progress, the image store, a palette broadcast, the print dialogs, find and its condition dialog, two ask dialogs whose `PL` stem is still unread, resource pickers, `TOOLNOTIFY`, and the remote pair `XCTOLEREMOTECOMMAND` / `XCTOLEREMOTEGET`.
+
+The 12 October export map gives each name a line in `Toolbook/_decompiles/TB80RTM.EXE.c`. A first pass took every call in the next 400 lines and credited it to the export. That mixed in the next function. The following is only what is inside the export itself.
+
+`EGYPTCLIENTWNDPROC` switches on the message. `0x0F` is paint: `FUN_1070_0be0`, or `GETUPDATERECT`, or `FUN_1060_0dca`, depending on the flags at the window struct `+0x124` and `+0x126`. `0x14` returns 1, so the default background erase does not run. `0x02` calls ordinal 76. `0x07` and `0x08` are focus. `0x100`, `0x101`, and `0x102` are key down, key up, and char. `0x104` and `0x105` return without acting when `DAT_1450_0a41` is set. `0x113` is the timer. `0x4A` is `WM_COPYDATA`. Help ids `0x7DF9`, `0x7E02`, and `0x7E03` go through `CXTHELPSETCONTEXT`.
+
+`MAINWNDPROC` is 57 lines. The message is private: `0x41`, `0x4AA`, `0x4AB`, `0x4D8`, `0x4D9`. `0x111` is `WM_COMMAND`. A fixed set of command ids goes to `FUN_1098_0124`, and the rest to `FUN_1368_0000`.
+
+`BOOKQUERYSAVE` resolves the path with `ASYM_GETLONGFILENAME` when the process is 32-bit. If `DAT_1450_0a41` or `DAT_1450_0a45` is set it returns 7 and does not prompt. Otherwise it prompts through `FUN_1068_0034` with style `0x31`.
+
+`EGCDBSAVEBOOK` is the same shape and it does not call `CDBGETVALUEEX`. An empty name, or either of those two flags, sets the result to 7. Otherwise it prompts with style `0x24` or `0x30` and returns whether the answer was 6.
+
+`HANDLEREMOVESCRIPTPROC` is a dialog procedure. `0x110` sets the item text from ordinal 106. `0x111` with a zero id calls `ENDDIALOG`. `EGDYNALINKERRORFUNC` returns immediately unless the id is `0x1FAC` or the `_C_FILE_INFO_` id, then calls ordinal 161. `POSTPALCHNGTOOTHERS` is seven lines: `SENDMESSAGE` of `0x311`, which is `WM_PALETTECHANGED`, and return 1. `CHANGEPRINTERDIALOGPROC` reads and writes the profile string. `ASCIIFORMATDLGPROC` is a dialog on `0x110` and `0x111`, command ids `1`, `2`, `0x106B`, and `0x106C`. `PLASKDIALOGPROC` and `PLREQUESTDIALOGPROC` end the dialog. The `PL` stem is still not a word in the listing. The palette helpers `TBKPALAPPEND` and `CREATEPALETTE` sit in the next function, not in `POSTPALCHNGTOOTHERS`.

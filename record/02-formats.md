@@ -55,7 +55,7 @@ The graphic ids are the names on a Button in the TBX specimen (`bitmap id N`) an
 
 The schema says Bounds is required on a draw object and Vertices is optional. The schema spells IrregularPolygon wrong (`IrregularPloygon`). The binary stores bounds. The export expands them to Vertices. On P1040 the pin bounds `5055, 4605, 5205, 4860` match the start of the TBX Vertices list. That is the expansion direction: bounds in the 8.1 file, point list in the XML.
 
-The exported specimen of `9e954d01` has 131 `Page.xml` files, 14 backgrounds, about 75 BMPs, and 302 `.script` files. Two of those pages, P440 and P2920, have no `80 65` page record in the 8.1 binary. The binary has 129 pages. All 129 names match a TBX page. The two extras are an export addition, not a missed record.
+The exported specimen of `9e954d01` has 131 `Page.xml` files, 14 backgrounds, about 75 BMPs, and 302 `.script` files. Two of those pages, P440 and P2920, have no `80 65` page record of their own. The binary has 129 pages. All 129 names match a TBX page. They are not a missed page marker. P440's sentence and its house shapes are inside the P430 record (chapter 13). P2920 has not been searched the same way.
 
 Saving from the 11.5 trial converts the book. An 8.1 runtime cannot open that converted file. 8.1 stores an imported picture as a basic blob and turns it into a BMP. 11.5 stores WMF, JPG, TIF, BMP, PNG, and GIF as themselves.
 

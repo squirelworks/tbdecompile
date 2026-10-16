@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.0.8 — 2026-10-16
+
+- P440 has no page record of its own. The sentence and the house shapes that overlap its TBX bounds are inside the P430 record. P2920 was not searched the same way.
+- Foolbook 1.0.2 places shapes with `(coord * dpi + 720) / 1440`. Twip `0, 0` is the window origin.
+
+## v0.0.7 — 2026-10-16
+
+- Chapter 22. The value bus, a VBX control, and `EXECSCRIPT` are three mechanisms. None of them is the `0x76` page object.
+
+## v0.0.6 — 2026-10-16
+
+- Appendix K is the how-to-disassemble appendix: the work list, the two forced passes, and the difference between a name, a purpose, and an operation.
+
+## v0.0.5 — 2026-10-16
+
+- Chapter 21 records the stress run. Nested `step` and `if` now share a budget. A freed value is not the block that reused its index. Quotes are not split on `and`. Decoder output stops at its cap.
+
+## v0.0.4 — 2026-10-16
+
+- Appendix K is how Ghidra is used on these images, and how a listing is cleaned up over later passes. It does not name the record reader.
+- The cover, the table of contents, the preface, and the foreword are separate files. `python3 build.py front` reprints those sheets, including `toc.pdf`, without typesetting the contents.
+- The contents file is the record only. It is 49 pages and includes chapters 19 and 20. The earlier single-file PDF still ends at chapter 18.
+
 ## v0.0.2 — 2026-10-16
 
 The statement is `record/`. The printable edition is `manual/20261016/`. v0.0.1's contents still put `CDBSENDCREATE` on book open. That placement is not in this release.
