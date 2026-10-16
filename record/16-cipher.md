@@ -43,3 +43,27 @@ The stand-in key does not decrypt it. Brute-force hits that came back short (`vg
 ## 16.4 What is still open
 
 The 10-byte key used on a real NIDA `.sbk` has not been captured. Segment 7 has not been stepped on a failed password. Until that capture exists, do not treat a decrypted string from the stand-in key as a finding.
+
+## 16.5 Author password does not load TBCBT
+
+On 16 October 2026 the author asked for `C:\TBK\nc81base.sbk`: "Please enter the password to gain Author level access." The next box said that password was not correct. The window title stayed `(Untitled)`, then became `ssssssssssss.tbk`. The system book did not open.
+
+`ssssssssssss.tbk` became a password-protected book in that same session. `TBCBT.DLL` was not in the module list. The Extensions dialog on that book is the machine's OLE registry (`LMRT.DLL` and the other registered controls). It is not the `linkDLL` set, and `TBCBT` is not an entry on it.
+
+Writing the author password stores the property block in section 16.3. It does not map segment 7. `TBCBT` is present only when a handler `linkDLL`s it. A new book has no such handler. A refused system book never runs its script, so it does not link the DLL either.
+
+The stops while `ssssssssssss.tbk` was current:
+
+| Stop | What it did |
+|---|---|
+| `??0TASKCOLLECTION` | UTL constructor. One `0x3C`-byte block. The flags word pushed is `0x2042` (movable, zeroed, shared). Called twice, two incoming selectors. |
+| `GETTBKINIPROFILESTRING` | Reads `tbk.ini`. `AX` held a pointer (`AEA0`, `AD62`) when a string was found, and `0000` when it was not. |
+| `GETTBKINIPROFILEINT` | Same file. The default at `[bp+6]` was `0x32D0`, then `0x3304`. `AX` came back `0000` both times. |
+| `TB80ATH` `4E67:0642` | The author EXE. `AX` was `4E2F`, so the `je` was not taken. Stores ES, CX+`0x100`, SI, DI, BX (`0x80`), and DX at `DS:305C`. |
+| `GETCHARINFO` | Returns the cached dword at UTL `DS:0518`. That dword was zero. |
+| `GETSTRMGRSTRING` | String id at `[bp+6]` was `0001`, then the function decrements it. Id `0` is the empty case. |
+| `GETDATA@TASKCOLLECTION` | Lookup. Arguments were `0000` and `42F7`. |
+| `OBJFILEOPEN` | BAS, `enter 025A` (602-byte frame). This is the open of the `.tbk`. `BX` was `0x50`, `CX` was `0x32D`. |
+
+After the status line "The task has completed running", every register was zero and the assembly pane was `????`. The `OLEUI*`, `DATASTUB*`, and `COPENSCRIPT` names on that screen are the export list of a dead task. They did not run.
+

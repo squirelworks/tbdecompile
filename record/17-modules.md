@@ -35,7 +35,7 @@ The engine calls 16-bit `USER`, `GDI`, and `KERNEL`. A log that says `USER32` is
 | `TB80OLE` / `OCX` / `ACX` / `VBX` | Clipboard, controls, automation. | Not on the Logic Families paint path. |
 | `TB80FLT` | Filter registration. `FUN_1028_2680` calls `TBREGISTERFILTER`. The `0x14` there is a type-code limit. | Not the reader. |
 | `TB80RCA.DLL` | Author UI widgets. | Not book open, not the cipher. |
-| `TBCBT.DLL` | CBT scoring. Segment 7 is the cipher (chapter 16). | Not the reader. Not loaded as segment 7 in the session that listed the other code segments. |
+| `TBCBT.DLL` | CBT scoring. Segment 7 is the cipher (chapter 16). | Not the reader. Not loaded when the author password-protected `ssssssssssss.tbk` (section 16.5). Not loaded as segment 7 in the session that listed the other code segments. |
 | `TBDLG`, `TBWIN`, `TBDOS`, `TBREG`, `TBDB3`, `TBPDX` | `linkDLL` commands. | Not page walkers. |
 | `DIBUTIL.DLL` | DIB helper beside BMP. | Not the object format. |
 

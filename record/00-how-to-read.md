@@ -37,7 +37,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [13-specimen-pages.md](13-specimen-pages.md) | P1040, P430, P440 inside that record, P420, P1170, and the TBX draw inventory |
 | [14-openscript-bytes.md](14-openscript-bytes.md) | Encoding, the back-reference fix, corpus counts |
 | [15-system-books.md](15-system-books.md) | `.sbk` tiers, NIDA shell, type-name table |
-| [16-cipher.md](16-cipher.md) | TBCBT segment 7 and the keyed-password schemes |
+| [16-cipher.md](16-cipher.md) | TBCBT segment 7, the keyed-password schemes, and the author write that does not load TBCBT |
 | [17-modules.md](17-modules.md) | Module roles, including the ones that are not the reader |
 | [18-absorption.md](18-absorption.md) | Every loose sheet, and where its claim went |
 | [19-heap-stack-resmgr.md](19-heap-stack-resmgr.md) | NearScript heap, the value stack, `RESMGR*`, and the callers the breakpass did not name |

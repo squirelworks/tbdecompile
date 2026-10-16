@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.8r1 — 2026-10-17
+
+- An author password on `ssssssssssss.tbk` did not load `TBCBT`. `nc81base.sbk` was refused and did not open. Chapter 16.5.
+- The printable parts are the release assets. v0.0.8 tagged the edition and uploaded no PDFs.
+
 ## v0.0.8 — 2026-10-16
 
 - P440 has no page record of its own. The sentence and the house shapes that overlap its TBX bounds are inside the P430 record. P2920 was not searched the same way.
