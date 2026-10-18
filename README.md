@@ -13,6 +13,7 @@ Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`]
 - `trail/20261012/` — the earlier consolidation
 - `maps/` — NE segment to Ghidra, and one boot's WDW selectors. Lookups, not a narrative
 - `rename/` — Ghidra rename scripts and the nameable lists
+- `repair/` — how a bad listing was repaired, and the script that held. Not a second record.
 - `editions/v0.0.1/` — the previous printable edition
 
 `nehost` is not in this repository. The host and the pass logs are `tbpipeline/tbpipeline_bf/nehost/`.
