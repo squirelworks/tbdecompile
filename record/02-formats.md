@@ -43,7 +43,7 @@ The graphic ids are the names on a Button in the TBX specimen (`bitmap id N`) an
 
 ## 2.2 System books
 
-`.sbk` files use the same container. The NIDA `.sbk` files are resource containers: the object-type name table (ComboBox, Stage, Picture, Hotword, RecordField, PaintObject, Curve, AngledLine, Pie, Arc, IrregularPolygon, Polygon, Line, RoundedRectangle, Ellipse, Group, Field, Button, Rectangle, then Page, Background, Book) and menu resources. They are password-protected. The password is not in this record, and the decompile does not need it.
+`.sbk` files use the same container. The NIDA `.sbk` files are resource containers: the object-type name table (ComboBox, Stage, Picture, Hotword, RecordField, PaintObject, Curve, AngledLine, Pie, Arc, IrregularPolygon, Polygon, Line, RoundedRectangle, Ellipse, Group, Field, Button, Rectangle, then Page, Background, Book) and menu resources. They are password-protected. The stored ciphertext and the empty-key decode are chapter 16.6. The decompile does not need the password to read the records.
 
 **Thought, narrowed.** A search for the plain words `to handle` finds no OpenScript in those `.sbk` files. A later reader found compressed handler streams in `tb80r.sbk` (33 handlers), stored as keyword opcodes rather than the words `to handle`. “No script at all” is too strong. What those streams do when a lesson runs has not been traced. `nc81base`, `nc81recs`, `nc81test`, and `nc81trnr` still have no decoded `to handle` text.
 

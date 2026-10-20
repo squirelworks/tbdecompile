@@ -11,6 +11,8 @@
 | D-005 | Known | The Unicorn host has not opened a lesson. Pass 06 exits after `TB80.INI`. The entry does not ask for the book. | WV-006, WV-036 |
 | D-006 | Known | TBCBT NE segment 7 holds `KEYEDPASSWORDENCRYPTEX`, `MAKEKEYEDPASSWORDEX`, `ENCRYPTEX`, and `DECRYPTEX`. | WV-043 |
 | D-007 | Known | NE segment numbers are not Ghidra’s `CodeN` names. Segment 1 is `1000`, segment 2 is `1008`, and the usual step is 8, with gaps. | `TBdecompile/maps/rtm-ne-to-ghidra.md` |
+| D-008 | Known | From 2026-10-20 the live host is Bochs 3.1. The debugger sits outside the Win98 SE guest. SoftICE does not have to be loaded for a break. | Appendix L |
+| D-009 | Known | Offsets in the Ghidra listing equal offsets in the guest. Selectors do not. After each boot they are taken from the LDT and checked by segment size. | Appendix L, `maps/bochs-20261020.md` |
 
 ## 7.1 SoftICE
 
@@ -51,7 +53,7 @@ The path that does open a page is the pipeline host, which parses the file inste
 
 `TBCBT` segment 7 (Ghidra `Code7`, base `1030`) holds the four cipher exports. A SoftICE module list that showed segments `01`, `0E`, `02`, `0B`, `08`, `0D`, `04`, `03` had not loaded segment 7. The dialog is an ordinary Windows dialog. The cipher is not in the dialog procedure.
 
-After a failed password, the typed string and the constants `0xA01` and `0x300` remain in memory. Searching for those constants finds the call site even while segment 7 is unloaded. The three addition schemes, the with-password file delta, and the fact that the stand-in key does not decrypt it are chapter 16. Section 16.5 is the 16 October author session: `ssssssssssss.tbk` became password-protected and `TBCBT` was not in the module list. The NIDA `.sbk` passwords are not recorded here. They are not required to read the decompile.
+After a failed password, the typed string and the constants `0xA01` and `0x300` remain in memory. Searching for those constants finds the call site even while segment 7 is unloaded. The three addition schemes, the with-password file delta, and the fact that the stand-in key does not decrypt it are chapter 16. Section 16.5 is the 16 October author session: `ssssssssssss.tbk` became password-protected and `TBCBT` was not in the module list. The NIDA `.sbk` passwords are chapter 16.6. They are not required to read the records.
 
 ## 7.5 Ghidra
 
@@ -60,3 +62,11 @@ Two NE loader bugs were fixed for this work: the entry-table segment byte was tr
 Force-disassemble scripts recover functions the loader never reached. One walks undefined `C8` (`ENTER`) bytes. The next accepts a real `RET` / `RETF` before treating the following byte as code, and it only creates functions at entry-like symbols. Run `C8` first, then the prologue pass. They do not name anything, and they do not touch code that is already defined.
 
 `SENDMESSAGE` (321 hits in one RTM listing) and `LSTRLEN` (282 hits) have mangled arguments. That is a decompiler problem, not a missing function. It wants a fresh decompile, not another reading of the same HTML.
+
+## 7.6 Bochs
+
+The debugger is outside the guest. A breakpoint does not need SoftICE, and it does not need a program inside Windows. The cost is speed.
+
+The command card, the start line, and the stops from the 20 October lesson open are Appendix L. The selectors from that boot are `maps/bochs-20261020.md`. They are dead after the next reboot. Rebuild them before setting `vb`.
+
+What that session watched is chapter 4.6. This section does not repeat it.

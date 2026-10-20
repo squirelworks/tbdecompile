@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.0.9 — 2026-10-20
+
+- Appendix L is the Bochs card. Chapter 7.6 points at it. The selectors from that boot are `maps/bochs-20261020.md`.
+- Chapter 4.6. A lesson open reads an object body through `1178:08B2` → `1188:04DA` → `1188:08D6` → `1160:02CC`. `HUGEGETDATA` was not on that path. The handler for the traced handle is still open.
+- Chapter 16.6. Empty-key `ENCRYPTEX` uses `BMWBMWBMW` at `DS:0x28`. The NIDA system books store `62 70 49 6a 7a`, which is `admin`. The keyed 10-byte path is still open. `cipher/empty_key.py` is the empty-key pair.
+- Chapter 14. The plain-prefix counts are restated: 75 `buttonClick` and one `EnterPage` in `9e954d01.tbk`, and 100 `buttonClick` in `nida81.tbk`. The expander that matches this chapter is `openscript_analysis` `v1.0.0r9`.
+
 ## v0.0.8r1 — 2026-10-17
 
 - An author password on `ssssssssssss.tbk` did not load `TBCBT`. `nc81base.sbk` was refused and did not open. Chapter 16.5.

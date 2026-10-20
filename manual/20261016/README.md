@@ -20,6 +20,7 @@ Each file is under 100 pages. Breaks, where a file was split, fall between headi
 | `appendix-i-assembly.pdf` | 4 |
 | `appendix-j-openscript.pdf` | 5 |
 | `appendix-k-ghidra.pdf` | 20 |
+| `appendix-l-bochs.pdf` | 3 |
 | `toc.pdf` | 2 |
 
 Source bundles are the markdown files beside this list. The record in `TBdecompile/record/` remains the statement those contents were copied from.

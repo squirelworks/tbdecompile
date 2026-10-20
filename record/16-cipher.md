@@ -1,6 +1,6 @@
 # 16. The password cipher
 
-The NIDA system books are password-protected. A lesson runtime opens them without presenting the password. Instructor and the author path are what ask. This chapter records where the cipher is and how the addition works. It does not record a working book password. The short strings tried against a stand-in key are not that password.
+The NIDA system books are password-protected. A lesson runtime opens them without presenting the password. Instructor and the author path are what ask. This chapter records where the cipher is and how the addition works. Section 16.6 is the empty-key branch and the ciphertext stored on the NIDA system books. The keyed 10-byte path in 16.2 is still open. The short strings tried against a stand-in key are not that password.
 
 ## 16.1 Where it lives
 
@@ -42,7 +42,7 @@ The stand-in key does not decrypt it. Brute-force hits that came back short (`vg
 
 ## 16.4 What is still open
 
-The 10-byte key used on a real NIDA `.sbk` has not been captured. Segment 7 has not been stepped on a failed password. Until that capture exists, do not treat a decrypted string from the stand-in key as a finding.
+This section is the keyed path only. The empty-key branch is 16.6 and does not use this table. The 10-byte key used on a real NIDA `.sbk` has not been captured. Segment 7 has not been stepped on a failed password. Until that capture exists, do not treat a decrypted string from the stand-in key as a finding.
 
 ## 16.5 Author password does not load TBCBT
 
@@ -67,3 +67,13 @@ The stops while `ssssssssssss.tbk` was current:
 
 After the status line "The task has completed running", every register was zero and the assembly pane was `????`. The `OLEUI*`, `DATASTUB*`, and `COPENSCRIPT` names on that screen are the export list of a dead task. They did not run.
 
+
+## 16.6 Empty key
+
+`ENCRYPTEX` with an empty key does not use the 10-byte table in 16.2. The nine bytes at `DS:0x28` are `BMWBMWBMW`, indexed by position modulo 9. A letter encrypts as `((K + c - 0x82) mod 58) + 0x41`. The inverse is what `DECRYPTEX` does: subtract `K`, and if the result is negative add 58, then add `0x41`. `cipher/empty_key.py` is that pair. It is not the keyed branch.
+
+**Known.** `62 6d 77 62` decrypts to `aaaa`. One `a` encrypts to `62`.
+
+**Known.** `nc81base.sbk` stores `62 70 49 6a 7a` at file `0x1F6C`. That decrypts to `admin`. The same five bytes are in `NC81BANK.SBK`, `nc81recs.sbk`, `nc81test.sbk`, and `nc81trnr.sbk`. Round-trip of `admin` produces those bytes. This is the author password those books store. It is not required to read the records.
+
+The keyed path in 16.4 is unchanged.

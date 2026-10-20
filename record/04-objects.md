@@ -10,7 +10,8 @@
 | O-004 | Superseded | The chain `CDBSENDCREATE` → `FUN_12c8_0850` → `FUN_12c8_0e32` → `FUN_12c8_0ef8` is the runtime reader. | `TBdecompile/trail/20261015/00-how-toolbook-operates.md` §2, `tbwp0002`, `tbwp0008` |
 | O-005 | Known | SoftICE and WDW both reached `OBJFILEOPEN` and the buffered read in `FUN_1160_03de`. The raw DOS path at offset `04F3` is skipped when the buffer is already satisfied. | 2026-10-16 consolidated note |
 | O-006 | Known | The W16, UTL, and BAS traces in `tbwp0026` do not contain a function that reads a `14 00 00` record. `CDBCHUNK*` walks text. `VALUENEWLONG` constructs a value. `OBJFILEOPEN` is downstream of the reader. | `tbwp0026/trace-review.md`, WV-044 |
-| O-007 | Thought | The runtime reader walks nested chunks by length, classifies them, and builds objects without calling `CDBSENDCREATE`. It sits in BAS after `CDBFILEOPEN` and before the first paint. It has no name. | open-question notes |
+| O-007 | Superseded | The runtime reader has no name and has not been watched. | open-question notes. The 20 October read is O-008. |
+| O-008 | Known | On a lesson open the object body is read by `1178:08B2` → `1188:04DA` → `1188:08D6` → `1160:02CC`. `HUGEGETDATA` is a different tree and was not on this path. Message `0xE` runs after the bytes are in memory. | Bochs, 2026-10-20. Section 4.6. Appendix L. |
 
 ## 4.1 The live object
 
@@ -91,17 +92,31 @@ Closed, so they are not searched again as the reader:
 | `FUN_1028_2680` | Filter registrar. Calls `TBREGISTERFILTER`. The `0x14` is a type-code limit, not the record marker. |
 | `FUN_1008_2d31` (switch at `1008:2DC7`) | OpenScript math. `+ - * /`, `abs`, `sqrt`, `log`, `exp`, `sin`, `cos`, `atan`, `asin`, `acos`. |
 | `TB80RTM` | No named file open. Paint goes to BAS ordinal 26. |
-| BAS segments `1018`, `1278`, `1478`, `14b8`, `1508`, `10d0`, `1030`, `14a8`, `1160`, `1070` | Sampled. No stream walker. `1160` is debugging (`CDBGETNEURONURL`, `CDBATTACHBREAKADDRESS`). |
+| BAS segments `1018`, `1278`, `1478`, `14b8`, `1508`, `10d0`, `1030`, `14a8`, `1070` | Sampled. No stream walker. |
+| `1160:03DE` | The buffered read seen on 16 October. The lesson-open body read is `1160:02CC`, section 4.6. |
 | `FUN_10b0_00a6` | Dispatches on type codes including `0x14`. It is a type dispatcher, not a reader. |
 | Code at `12e8:0000` | OLE object clone. |
 | BAS segment 182 | Real preload code, 39 far calls with a zero segment and no reloc. Not on the book-open path. |
 
 **Known.** No static search of the disassembled image has found the bytes `14 00 00` used as a compare against a far pointer that then builds an object. Thirteen undisassembled runs contain the word `14 00`. Those are far-call immediates, `MOV CX, 0x14`, or jump displacements.
 
-**Thought.** The reader trusts the length-prefixed layout and does not search for the marker. That would explain the missing literal. It is not proven. The way to prove it is a break after `CDBFILEOPEN`, before the first paint, on a lesson page, with the page blob address in hand.
+**Known.** The 20 October read does not compare the marker. It uses the length in the handle-table entry. The marker is still in the bytes, at record offset 50 in the traced object and at 52 in 146 of 206. Section 4.6.
 
 ## 4.5 Page and background
 
 **Known.** `80 65` records are the pages. `9e954d01.tbk` has 129 of them.
 
 **Known.** A TBX page can name a background by an id, such as 23 on P10213, that does not appear as a word or a dword in the matching binary page. The link is indirect. Parent and z-order are not in the page record that has been decoded. Absolute bounds are not stored for every shape. The P1170 bracket was computed from bounds relative to a parent. The parent offset has not been applied to the P420 rects.
+
+## 4.6 The 20 October read
+
+Bochs, Win98 SE, debugger outside the guest. Appendix L is the command card. Selectors in this section are that boot only.
+
+**Known.** `1048:2174` opens the book. Each object then hits `1178:08B2`. That calls `1188:04DA` (allocate `header + body`) and `1188:08D6`. `08D6` calls `1160:02CC`. The traced call read `0x19C` bytes from file position `0xB7221` into the block at offset 6. A flag `0x40` on the entry caused one more read, 2 bytes, at `0xB73BD`. `HUGEGETDATA` was not hit.
+
+**Known.** The on-disk table is 206 entries of `0x18` bytes at file `0x10D6`. Index `0x12` is this record: position `0xB7221`, length `0x19C`, type byte `0x25`. Handles `0x0C1E`, `0x0C36`, and `0x0C4E` are `0x18` apart in memory. A 20-byte dump of the live entry matched the file through `+0x13`, except status (0 in memory, 1 on disk). Bytes `+0x14` through `+0x17` were not dumped. On disk those four bytes are `00 21 25 00`: a zero, the nibble-swapped index, the type, and a zero.
+
+**Known.** After the read, `1178:08B2` sends message `0xE` through `1180:02CE` and `1180:03C8`. Handle `0x0C1E` returned `10B0:0000`. There, `0xE` calls `FUN_10b0_54e0`, which calls `FUN_10c8_018e` only when the error byte is still 0. That is a near-handle fixup, not the file read. Handle `0x0C4E` returned `10F8:0000`, which has no `0xE` case. The handler for handle `0x0C36` (this 412-byte record) was not captured. On the object that was dumped, message `0xE` changed only block bytes 0 through 3, to a far pointer to the reader object. The 412 body bytes did not change.
+
+**Thought.** Record byte 12 matches the table's type byte in 142 of 206 entries, so it is the class code. The `0x12` seen on the `03C8` stack was a different object. It is not yet that byte.
+

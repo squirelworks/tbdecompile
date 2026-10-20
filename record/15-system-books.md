@@ -42,7 +42,7 @@ Sizes are the files that were triaged. JBO is at `0xC00` unless noted.
 
 An early triage said system `.sbk` files do not contain OpenScript. That is superseded for `tb80r.sbk` only. The other rows above still have no decoded handler text.
 
-The four NIDA books `nc81base`, `nc81recs`, `nc81test`, and `nc81trnr` are password-protected resource containers. Runtime opens them without the password. The author path is the one that asks. The password is not required to read this decompile. Chapter 16 is the cipher, not the password.
+The four NIDA books `nc81base`, `nc81recs`, `nc81test`, and `nc81trnr` are password-protected resource containers. Runtime opens them without the password. The author path is the one that asks. The password is not required to read the records. The ciphertext those books store is chapter 16.6.
 
 ## 15.4 Trainer and session DLLs
 

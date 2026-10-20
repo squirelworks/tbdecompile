@@ -68,6 +68,10 @@ Do not reopen "the keyword table is the wrong resource" from the early half of t
 | `nc81base.sbk`, `nc81recs.sbk`, `nc81test.sbk`, `nc81trnr.sbk` | 0 decoded | High-byte runs do not decode as this bytecode. Early pattern counts (61, 17, 94, 62) were not handlers. |
 | `tb80anm.sbk`, `tb80hyp.sbk` | 0 decoded | Same. Strings and menus, not this handler format. |
 
+Of the 76 handlers in `9e954d01.tbk`, 75 are `buttonClick` and one is `EnterPage`. The 100 in `nida81.tbk` are all `buttonClick`. A handler whose name is not stored as plain text is not in those counts. The 11.5 export of `nida81.tbk` has eleven handler names. Ten of them are absent from this scan.
+
+`openscript_analysis` `v1.0.0r9` reads this resource the same way: count at byte 0, id index, back-reference from the input, `0xFF` as a new character plus a count. It does not follow a back-reference that lands on another back-reference. The `EnterPage` handler does not need that chase. The release before it read the count from byte 2, skipped `0xC0`–`0xDF`, and repeated the previous output byte.
+
 Lesson books store the handler name as plain text and compress the body. `tb80r.sbk` compresses the name as well. Encoding rules match. "No script at all in any system book" is too strong for `tb80r.sbk` and still true, as decoded text, for the four `nc81*` books.
 
 ## 14.5 What the courses actually do with it

@@ -1,6 +1,6 @@
 # TBDecompile
 
-ToolBook II 8.1 decompilation notes. Release **v0.0.8r1** (17 October 2026). The current statement is [`record/`](record/00-how-to-read.md). The printable copy is [`manual/20261016/`](manual/20261016/README.md): cover, table of contents, preface, and foreword are separate files, then the contents, then appendices A through K. Appendix K is how to disassemble. `toc.pdf` is the sheet reprinted on its own. Chapter 16.5 is the author session in which `ssssssssssss.tbk` became password-protected and `TBCBT` did not load. Chapter 13 says where P440's text sits. Chapter 22 is the value bus, VBX, and `EXECSCRIPT`. The 15 October contents and appendix PDFs are in [`editions/v0.0.1/`](editions/v0.0.1). They are not current where they put `CDBSENDCREATE` on book open.
+ToolBook II 8.1 decompilation notes. Release **v0.0.9** (20 October 2026). The current statement is [`record/`](record/00-how-to-read.md). The printable copy is [`manual/20261016/`](manual/20261016/README.md): cover, table of contents, preface, and foreword are separate files, then the contents, then appendices A through L. Appendix K is how to disassemble. Appendix L is the Bochs card. `toc.pdf` is the sheet reprinted on its own. Chapter 16.5 is the author session in which `ssssssssssss.tbk` became password-protected and `TBCBT` did not load. Chapter 13 says where P440's text sits. Chapter 22 is the value bus, VBX, and `EXECSCRIPT`. The 15 October contents and appendix PDFs are in [`editions/v0.0.1/`](editions/v0.0.1). They are not current where they put `CDBSENDCREATE` on book open.
 
 Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`](record/18-absorption.md) names each one and the section that replaced it. When they disagree with `record/`, `record/` wins.
 
@@ -11,7 +11,7 @@ Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`]
 - `trail/20261015/` — how ToolBook operates. Section 2 of the operating note is superseded (author path, not runtime)
 - `trail/20261014/` — the working papers, condensed. The opening of `02-still-open.md` is superseded
 - `trail/20261012/` — the earlier consolidation
-- `maps/` — NE segment to Ghidra, and one boot's WDW selectors. Lookups, not a narrative
+- `maps/` — NE segment to Ghidra, one WDW boot, and the Bochs boot of 2026-10-20. Lookups, not a narrative.
 - `rename/` — Ghidra rename scripts and the nameable lists
 - `repair/` — how a bad listing was repaired, and the script that held. Not a second record.
 - `editions/v0.0.1/` — the previous printable edition
@@ -20,6 +20,6 @@ Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`]
 
 ## Status
 
-The record reader is still unnamed. `CDBSENDCREATE` (BAS ordinal 51) is author-only and is not on the runtime path. Content rectangles and the kind-`0400` polygon record are decoded. Curves, arcs, and picture placement are not. TBCBT NE segment 7 holds the password cipher. The live key has not been captured.
+The record reader is the chain in chapter 4.6. `CDBSENDCREATE` (BAS ordinal 51) is author-only and is not on that path. Still open: the dispatcher for the traced handle, and which fields of the body are the page. Content rectangles and the kind-`0400` polygon record are decoded. Curves, arcs, and picture placement are not. TBCBT NE segment 7 holds the password cipher. The empty-key branch is chapter 16.6. The keyed 10-byte key has not been captured.
 
 Binary dumps stay out of this repository. Personal names stay out. The correspondent is JohnDoe1.

@@ -28,7 +28,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [04-objects.md](04-objects.md) | Live object, file open, the unnamed reader |
 | [05-graphics.md](05-graphics.md) | Painters and what is stored versus computed |
 | [06-openscript.md](06-openscript.md) | Bytecode, handlers, the modern subset |
-| [07-debugging.md](07-debugging.md) | SoftICE, WDW, Unicorn, where the cipher lives |
+| [07-debugging.md](07-debugging.md) | SoftICE, WDW, Unicorn, Bochs, where the cipher lives |
 | [08-naming.md](08-naming.md) | What has been named, and what a name is worth |
 | [09-modern.md](09-modern.md) | Foolbook, Foolcourse, Foolversity, TBpipeline |
 | [10-open.md](10-open.md) | Ranked gaps, and the notes that are closed |
@@ -37,7 +37,7 @@ The dated folders `trail/20261012/`, `trail/20261014/`, and `trail/20261015/` st
 | [13-specimen-pages.md](13-specimen-pages.md) | P1040, P430, P440 inside that record, P420, P1170, and the TBX draw inventory |
 | [14-openscript-bytes.md](14-openscript-bytes.md) | Encoding, the back-reference fix, corpus counts |
 | [15-system-books.md](15-system-books.md) | `.sbk` tiers, NIDA shell, type-name table |
-| [16-cipher.md](16-cipher.md) | TBCBT segment 7, the keyed-password schemes, and the author write that does not load TBCBT |
+| [16-cipher.md](16-cipher.md) | TBCBT segment 7, the keyed path, the empty-key path, and the author write that does not load TBCBT |
 | [17-modules.md](17-modules.md) | Module roles, including the ones that are not the reader |
 | [18-absorption.md](18-absorption.md) | Every loose sheet, and where its claim went |
 | [19-heap-stack-resmgr.md](19-heap-stack-resmgr.md) | NearScript heap, the value stack, `RESMGR*`, and the callers the breakpass did not name |
@@ -52,6 +52,7 @@ Lookup tables that are too long to typeset live in `maps/`:
 | [maps/rtm-ne-to-ghidra.md](../maps/rtm-ne-to-ghidra.md) | TB80RTM NE segment to Ghidra space |
 | [maps/bas-ne-to-ghidra.md](../maps/bas-ne-to-ghidra.md) | TB80BAS NE segment to Ghidra space |
 | [maps/wdw-to-ghidra.md](../maps/wdw-to-ghidra.md) | One boot's WDW selector:offset against the decompile |
+| [maps/bochs-20261020.md](../maps/bochs-20261020.md) | One boot's Bochs selectors. Dead after the next reboot. |
 
 NE segment numbers are not Ghidra `CodeN` names. Segment 1 is `1000`, segment 2 is `1008`, and the usual step is 8, with gaps. Live selectors change every boot. Offsets inside a segment do not.
 
