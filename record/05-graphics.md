@@ -4,7 +4,8 @@
 
 | Id | Grade | Statement | Source |
 |---|---|---|---|
-| G-001 | Known | Polygon kind `04 00`: fill dword at `+4`, `+0x0C` = `04 00`, count word at `+0x1A`, twip pairs at `+0x22`. Screen = twips / 15. | P430 render, live `GDI!POLYGON` |
+| G-001 | Superseded | Polygon kind `04 00` with an inline point list at `+0x22`. | The specimen's class `0x10` keeps the count at `+0x30` and a near pointer at `+0x32`. G-002. `research/store-20261022.md`. |
+| G-012 | Known | A resource id is the fourth word of the 8-byte directory entry. A button stores that id plus one, at graphics-block `+0x15`. | `FUN_1128_1e44` accepts a match only when the scanned word is the fourth. 396/396 buttons. |
 | G-002 | Known | The polygon painter is BAS `FUN_1408_0376` (segment `0x82` offset `0x376`). It copies object `+0x30` / `+0x32` to `DS:30AC` and calls `GDI!POLYGON`. | SoftICE, 2026-10-10 |
 | G-003 | Known | Content rectangles are bounds-only. In the page blob the tail is four twip words, a zero dword, a fill dword, then `01 00 00 04`. `9e954d01.tbk` has 961 of that marker. | Foolbook `shapes.py` count, P1040 |
 | G-004 | Known | An arc object is type `0x11`. Four twip pairs at `+0x25`, `+0x29`, `+0x2D`, `+0x31`. Bounds at `+0x0F`. Fill at `+0x18`. Painter is BAS segment `0x7B`. | live arc, 2026-10-10 |

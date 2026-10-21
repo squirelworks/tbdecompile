@@ -77,3 +77,8 @@ After the status line "The task has completed running", every register was zero 
 **Known.** `nc81base.sbk` stores `62 70 49 6a 7a` at file `0x1F6C`. Those bytes are the author password. The same five bytes are in `NC81BANK.SBK`, `nc81recs.sbk`, `nc81test.sbk`, and `nc81trnr.sbk`. The password is not required to read the records. It is not printed here.
 
 The keyed path in 16.4 is unchanged.
+
+## 16.7 The lesson books
+
+`9e954d01.tbk` and `nida81.tbk` store 0 in the first word of the book record. Neither has the password block this chapter describes. The author program that asks for the password is not in this archive. Chapter 16.5 already recorded that the prompt does not load `TBCBT`.
+

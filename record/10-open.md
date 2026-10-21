@@ -7,10 +7,10 @@ These block a faithful page.
 | Gap | Grade | Why it is still open | Next step that would close it |
 |---|---|---|---|
 | Runtime record reader | Known as the read in chapter 4.6: `1178:08B2` → `1188:04DA` → `1188:08D6` → `1160:02CC`. | The bytes are in memory before message `0xE`. Still open: the dispatcher for handle `0x0C36`, and which fields of the 412-byte body are the page. | One Bochs stop at the return of `1180:03C8` for that handle. Appendix L. Do not break ordinal 51. |
-| Picture id | Known for a button (G-008) and known as stored bytes (G-009). | A picture that is not a button has no located id. Which of the 67 images a given id names has not been walked on a page. | One non-button object whose paint calls `FUN_1028_180e`. Do not break `TB80BMP`. |
+| Picture id | Known for a button and the directory (G-012). | The id is the fourth word. The button stores it plus one. A background picture is the block at `+0x37` when that block is present. | Which of the non-bitmap huge entries are palettes. |
 | Property expansion | Known that `FUN_12c8_0ef8` copies four words from a structure that is not the disk record. | Offsets `+0x3E` and friends do not match a `14 00 00` header. | Only useful on the author path. For runtime, fold this into the reader break. Do not keep it as a separate `CDBSENDCREATE` hunt. |
 | Tbload vtable | Thought. `FUN_00406a70` calls vtable+4 after the marker search. | The 32-bit search is found. The callee is not. | One break at `00406aa1` with the book path in a register. Low value until the reader is the goal again. |
-| Polygon type table | Partly known. `FUN_1058_2ae4` writes the draw segment at init (chapter 5.4). | The static pointer that reaches `PaintPolygon` at `1408:0376` is still not named, and class `0xF` is not yet called the polygon. | Read the draw call in the `0x1408` registration. Do not search the file for `76 03 08 14`. |
+| Polygon type table | Known for the specimen. | Class `0xF` and class `0x10` both call `POLYGON`. This book uses `0x10`, count at `+0x30`, points at `+0x32`. | Class `0x14` curves, and the eight class `0x19` records in `nida81.tbk`. |
 
 ## 10.2 Medium
 
@@ -18,11 +18,11 @@ These block a faithful page.
 |---|---|---|
 | P420 stroke breaks | Thought | Three 96-point groups in TBX. One tangled dump from `+0xA13`. Look for length prefixes between runs before inventing a new curve format. |
 | Arc on disk | Known live, unknown on disk | Type `0x11`, four pairs, fill at `+0x18`. Angles not located. No `GDI!PIE`. |
-| Stroke color and pen width | Stroke known (G-011). Width open | Fill is `+0x1B` on a draw object and `+0x5B` on a background. The width byte is not named. |
+| Stroke color and pen width | Stroke known (G-011). Width is the pen table | Fill is `+0x1B` on a draw object and `+0x5B` on a background. Styles 1 through 9 are none, dot, dash, solid, then inside-frame widths 2, 3, 4, 6, and 8. | The table is `DS:0x1708` in the unpacked DLL. Not re-checked on a painted line. |
 | Palette on an 8 bpp BMP | Known that segment `1150` builds a palette | Not known which palette a given carved BMP must use. |
 | `DRAWTEXT` beyond three offsets | Open | `param_5+0x4A`, `+0x4C`, `+0x50` are the paint path. The disk handle is word 1 at `+0x24` (O-009). |
 | Per-pin index `+0x52` | Known the field exists | Not applied. Shared point bytes stack. |
-| Background, parent, z-order | Live pointer known | Page `+0x47` / `+0x49` names the class 4 record (O-011). The on-disk page still does not show the TBX id as a word. Parent and z-order are open. |
+| Background, parent, z-order | Background known on disk | Page `+0x47` names the class 4 record, 131/131 (O-011). Parent is the near pointer at `+0x04`. Z-order is the list at `+0x2C`, not a byte. | The on-disk bytes of that list header were not dumped. |
 | `initializebase` and `toolbook.lst` order | Thought | Names are in the lesson. The call log is not. |
 | OpenScript keyword lock | Thought | Instructor 8 compile, then expand. Not run. |
 | `SENDMESSAGE` / `LSTRLEN` arguments | Known mangled | Re-decompile. Not a new algorithm. |

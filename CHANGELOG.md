@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.10r3 — 2026-10-22
+
+- The specimen's object store is `research/store-20261022.md`. The page list is book `+0x10`. All 131 backgrounds resolve. A field is class `0xA`. A polygon outline is the block at `+0x32`. A bitmap id is the fourth directory word. Neither lesson book stores a password block.
+
 ## v0.0.10r2 — 2026-10-21
 
 - Chapter 5. A button's picture ids are in the block at live `+0x28` (G-008). A stored bitmap is an 8-byte prefix and then a BMP; `9e954d01.tbk` has 67 (G-009). The lookup is a per-type directory in segment `1028`, not `TB80BMP` and not `TB80FLT` (G-010). Fill and stroke are G-011.
