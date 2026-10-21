@@ -29,8 +29,8 @@ Sizes are the files that were triaged. JBO is at `0xC00` unless noted.
 | Core | `tb80a.sbk` | 2.4 MB | Author-side companion. Not on playback. |
 | Core | `tb80i.sbk` | 619 KB | Instructor system book. |
 | Core | `INST80.SBK` | 70 KB | Installer book. Referenced by Inst80. Names `tb80r`. |
-| Useful | `tb80hyp.sbk` | 141 KB | Hyperlink and help. No decoded `to handle` text. |
-| Useful | `tb80anm.sbk` | 64 KB | Path animation. No decoded `to handle` text. |
+| Useful | `tb80hyp.sbk` | 141 KB | Hyperlink and help. The binary scan finds no `to handle` text. The TBKX export does. |
+| Useful | `tb80anm.sbk` | 64 KB | Path animation. The binary scan finds no `to handle` text. The TBKX export does. |
 | Useful | `tb80aicc.sbk` | 86 KB | AICC strings. Not shown to be required for a local page. |
 | Useful | `tb80actr.sbk` | 208 KB | ActiveX runtime. |
 | Parked | `tb80acta.sbk` | 2.1 MB | ActiveX author. |
@@ -40,7 +40,7 @@ Sizes are the files that were triaged. JBO is at `0xC00` unless noted.
 | Not on the local path | `tb80x.sbk` | 256 KB | Unclassified specialty. |
 | Not on the local path | `tb80lmx.sbk` | 62 KB | Small. JBO at `0xE00`. |
 
-An early triage said system `.sbk` files do not contain OpenScript. That is superseded for `tb80r.sbk` only. The other rows above still have no decoded handler text.
+An early triage said system `.sbk` files do not contain OpenScript. That is superseded for `tb80r.sbk`. The 21 October TBKX exports of `tb80r`, `tb80anm`, and `tb80hyp` also contain the handler source. A binary scan that looks for the words `to handle` still misses them. The other rows above still have no exported handler text.
 
 The four NIDA books `nc81base`, `nc81recs`, `nc81test`, and `nc81trnr` are password-protected resource containers. Runtime opens them without the password. The author path is the one that asks. The password is not required to read the records. The ciphertext those books store is chapter 16.6.
 
@@ -55,3 +55,8 @@ The four NIDA books `nc81base`, `nc81recs`, `nc81test`, and `nc81trnr` are passw
 ## 15.5 `linkDLL` versus a system book
 
 A system book adds script above the book. A `linkDLL` adds commands, and only when a handler links it. The set that shows up that way is `TBDLG`, `TBWIN`, `TBDOS`, `TBREG`, `TBDB3`, `TBPDX`, and `TBCBT`. `TBWIN` is `INIT_TBKWIN` and `TBM_EVALUATE`. Neither `TBWIN` nor `TB80NET` walks page records. `TBCBT` is the CBT scoring extension and the password cipher. It is not the record reader.
+
+## 15.6 Providers are not `sysBooks`
+
+Segment 1278 loads class providers: a TBX DLL, a VBX DLL, a 32-bit TBX DLL, or another ToolBook book. It does not push `sysBooks`. The names sit on the book's class table. `a613` names `TB80ANM.SBK` and `TB80R.SBK`. When the provider is a book, or a TBX calls `REGISTERSYSBOOK`, the book goes on a bound list. The Author program adds that list to `sysBooks` through `CDBADDBOUNDSYSBOOKS`. The note is `research/class-providers.md`.
+

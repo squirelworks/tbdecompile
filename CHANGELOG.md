@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.0.10 — 2026-10-21
+
+- A field's text handle is word 1 of the block at object `+0x24`. `FUN_1440_0160` does not read `+0x42`. Chapter 5's `DRAWTEXT` offsets stay the paint path.
+- Segment 1278 loads class providers, not `sysBooks`. `a613` names `TB80ANM.SBK` and `TB80R.SBK`.
+- Class `0x3A` is the book's `ClassTbl`. Class `0x26` is `Viewer`. The next free class number in the sample books is `0x3D`.
+- The TBKX exports of `tb80r`, `tb80anm`, and `tb80hyp` contain the handler source. A scan for the words `to handle` does not.
+
 ## v0.0.9 — 2026-10-20
 
 - Appendix L is the Bochs card. Chapter 7.6 points at it. The selectors from that boot are `maps/bochs-20261020.md`.

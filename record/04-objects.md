@@ -12,6 +12,8 @@
 | O-006 | Known | The W16, UTL, and BAS traces in `tbwp0026` do not contain a function that reads a `14 00 00` record. `CDBCHUNK*` walks text. `VALUENEWLONG` constructs a value. `OBJFILEOPEN` is downstream of the reader. | `tbwp0026/trace-review.md`, WV-044 |
 | O-007 | Superseded | The runtime reader has no name and has not been watched. | open-question notes. The 20 October read is O-008. |
 | O-008 | Known | On a lesson open the object body is read by `1178:08B2` → `1188:04DA` → `1188:08D6` → `1160:02CC`. `HUGEGETDATA` is a different tree and was not on this path. Message `0xE` runs after the bytes are in memory. | Bochs, 2026-10-20. Section 4.6. Appendix L. |
+| O-009 | Known | A field's text handle is word 1 of the block behind object `+0x24`. `FUN_1440_0160` reads that pointer and does not read `+0x42`. Word 0 is unread. | XML match, 497/497 and 226/226. `research/field-text.md`. |
+| O-010 | Known | Class `0x3A` is the book's `ClassTbl`: `0x2C`-byte rows. Class `0x26` is `Viewer`. In the sample books the next free number is `0x3D`. | `research/class-table.md`. |
 
 ## 4.1 The live object
 

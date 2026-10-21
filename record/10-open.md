@@ -20,7 +20,7 @@ These block a faithful page.
 | Arc on disk | Known live, unknown on disk | Type `0x11`, four pairs, fill at `+0x18`. Angles not located. No `GDI!PIE`. |
 | Stroke color and pen width | Open | Fill is known. Segment `1018` creates pens and does not say who frees them. |
 | Palette on an 8 bpp BMP | Known that segment `1150` builds a palette | Not known which palette a given carved BMP must use. |
-| `DRAWTEXT` beyond three offsets | Open | `param_5+0x4A`, `+0x4C`, `+0x50`. |
+| `DRAWTEXT` beyond three offsets | Open | `param_5+0x4A`, `+0x4C`, `+0x50` are the paint path. The disk handle is word 1 at `+0x24` (O-009). |
 | Per-pin index `+0x52` | Known the field exists | Not applied. Shared point bytes stack. |
 | Background, parent, z-order | Known the TBX id is not a word in the page | P1170 bracket is parent-relative. The parent link is not decoded. |
 | `initializebase` and `toolbook.lst` order | Thought | Names are in the lesson. The call log is not. |

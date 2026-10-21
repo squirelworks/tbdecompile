@@ -56,7 +56,7 @@ The shared near-start graphic in the lesson books is a 581 by 157, 8 bpp gold pl
 
 BAS segment `1150` builds the book palette (`CREATEPALETTE`, `SELECTPALETTE`, `REALIZEPALETTE`). An 8 bpp BMP needs that palette. Segment `1018` creates and deletes pens, brushes, and bitmaps. Who owns the lifetime is open. Fill color is known. Stroke color and pen width are not.
 
-Field text is `DRAWTEXT` from `param_5+0x4A`, `+0x4C`, and `+0x50`. The rest of the field layout is open.
+Field text is `DRAWTEXT` from `param_5+0x4A`, `+0x4C`, and `+0x50`. The disk handle is a different field: word 1 of the block at object `+0x24` (`research/field-text.md`). The rest of the field layout is open.
 
 ## 5.3 What a render is allowed to claim
 
