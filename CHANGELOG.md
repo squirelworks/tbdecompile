@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.0.10r2 — 2026-10-21
+
+- Chapter 5. A button's picture ids are in the block at live `+0x28` (G-008). A stored bitmap is an 8-byte prefix and then a BMP; `9e954d01.tbk` has 67 (G-009). The lookup is a per-type directory in segment `1028`, not `TB80BMP` and not `TB80FLT` (G-010). Fill and stroke are G-011.
+- Chapter 5.4. Class 8 is the rectangle, class `0xC` the ellipse, class `0xD` the rounded rectangle.
+- Chapter 4.5. A live page names its background at `+0x47` / `+0x49`. The on-disk page is still not matched.
+- Chapter 4.7. Script mode and script word by class, including the book at `+0x24`. A group's 10-byte child entry.
+- Word 0 of a field's `+0x24` block is the style-run handle. The note is `research/paint-20261021.md`.
+
 ## v0.0.10r1 — 2026-10-21
 
 - The author password is no longer printed. Chapter 16.6 keeps the stored bytes only.

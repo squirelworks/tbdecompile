@@ -12,8 +12,9 @@
 | O-006 | Known | The W16, UTL, and BAS traces in `tbwp0026` do not contain a function that reads a `14 00 00` record. `CDBCHUNK*` walks text. `VALUENEWLONG` constructs a value. `OBJFILEOPEN` is downstream of the reader. | `tbwp0026/trace-review.md`, WV-044 |
 | O-007 | Superseded | The runtime reader has no name and has not been watched. | open-question notes. The 20 October read is O-008. |
 | O-008 | Known | On a lesson open the object body is read by `1178:08B2` → `1188:04DA` → `1188:08D6` → `1160:02CC`. `HUGEGETDATA` is a different tree and was not on this path. Message `0xE` runs after the bytes are in memory. | Bochs, 2026-10-20. Section 4.6. Appendix L. |
-| O-009 | Known | A field's text handle is word 1 of the block behind object `+0x24`. `FUN_1440_0160` reads that pointer and does not read `+0x42`. Word 0 is unread. | XML match, 497/497 and 226/226. `research/field-text.md`. |
+| O-009 | Known | A field's text handle is word 1 of the block behind object `+0x24`. Word 0 is the style-run handle. `FUN_1440_0160` does not read `+0x42`. | XML match, 497/497 and 226/226. `research/field-text.md`. |
 | O-010 | Known | Class `0x3A` is the book's `ClassTbl`: `0x2C`-byte rows. Class `0x26` is `Viewer`. In the sample books the next free number is `0x3D`. | `research/class-table.md`. |
+| O-011 | Known | A live class 5 page holds its background as a far reference at `+0x47` / `+0x49`. Not yet matched to an on-disk page. | `research/paint-20261021.md`. Chapter 4.5. |
 
 ## 4.1 The live object
 
@@ -108,7 +109,9 @@ Closed, so they are not searched again as the reader:
 
 **Known.** `80 65` records are the pages. `9e954d01.tbk` has 129 of them.
 
-**Known.** A TBX page can name a background by an id, such as 23 on P10213, that does not appear as a word or a dword in the matching binary page. The link is indirect. Parent and z-order are not in the page record that has been decoded. Absolute bounds are not stored for every shape. The P1170 bracket was computed from bounds relative to a parent. The parent offset has not been applied to the P420 rects.
+**Known.** A TBX page can name a background by an id, such as 23 on P10213, that does not appear as a word or a dword in the matching binary page. The on-disk link is still not matched. Parent and z-order are not in the page record that has been decoded. Absolute bounds are not stored for every shape. The P1170 bracket was computed from bounds relative to a parent. The parent offset has not been applied to the P420 rects.
+
+**Known, live record only.** A class 5 page holds a far reference at `+0x47` / `+0x49` (O-011). Property `0x4016` asks that object for its size. Property `0x429d` is forwarded when the reference is nonzero. The class 4 record has the fill, the pattern, and the size. Property `0x4036` returns only the low word. Follow the dword. The note is `research/paint-20261021.md`.
 
 ## 4.6 The 20 October read
 
@@ -121,4 +124,12 @@ Bochs, Win98 SE, debugger outside the guest. Appendix L is the command card. Sel
 **Known.** After the read, `1178:08B2` sends message `0xE` through `1180:02CE` and `1180:03C8`. Handle `0x0C1E` returned `10B0:0000`. There, `0xE` calls `FUN_10b0_54e0`, which calls `FUN_10c8_018e` only when the error byte is still 0. That is a near-handle fixup, not the file read. Handle `0x0C4E` returned `10F8:0000`, which has no `0xE` case. The handler for handle `0x0C36` (this 412-byte record) was not captured. On the object that was dumped, message `0xE` changed only block bytes 0 through 3, to a far pointer to the reader object. The 412 body bytes did not change.
 
 **Thought.** Record byte 12 matches the table's type byte in 142 of 206 entries, so it is the class code. The `0x12` seen on the `03C8` stack was a different object. It is not yet that byte.
+
+## 4.7 Scripts and groups
+
+The detail is `research/paint-20261021.md`. These are live-record offsets.
+
+**Known.** `FUN_10d0_12e0` picks the script by the class word at record `−2`. Book (class 1): mode in the low two bits of `+0x22`, word at `+0x24`. Page and background: mode `+0x30`, word `+0x2A`. An ordinary object: mode `+0x0A`, word `+0x0B`. The top bits of book `+0x22` are the color-screen flags. Mode 0 is inline. Mode 2 is a type 9 resource. The shared script is a separate request, type `0x13`. Modes 1 and 3 have no branch.
+
+**Known.** A group's count is `+0x24`. The entries at `+0x2E` are 10 bytes: the child, then its left, top, right, and bottom. No separate stream-in was found. Whether load rewrites the child word was not checked.
 
