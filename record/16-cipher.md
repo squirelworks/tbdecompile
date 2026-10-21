@@ -74,6 +74,6 @@ After the status line "The task has completed running", every register was zero 
 
 **Known.** `62 6d 77 62` decrypts to `aaaa`. One `a` encrypts to `62`.
 
-**Known.** `nc81base.sbk` stores `62 70 49 6a 7a` at file `0x1F6C`. That decrypts to `admin`. The same five bytes are in `NC81BANK.SBK`, `nc81recs.sbk`, `nc81test.sbk`, and `nc81trnr.sbk`. Round-trip of `admin` produces those bytes. This is the author password those books store. It is not required to read the records.
+**Known.** `nc81base.sbk` stores `62 70 49 6a 7a` at file `0x1F6C`. Those bytes are the author password. The same five bytes are in `NC81BANK.SBK`, `nc81recs.sbk`, `nc81test.sbk`, and `nc81trnr.sbk`. The password is not required to read the records. It is not printed here.
 
 The keyed path in 16.4 is unchanged.
