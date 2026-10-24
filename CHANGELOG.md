@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.10r4 — 2026-10-24
+
+- The Reader session is `research/reader-20261024.md`. P400 is the INTRODUCTION page and the 74LS174N chip. Alt+Right is Next. F3 toggles Author. The erase rectangles are still unrecorded. Foolbook 1.0.5r32 still reads a polygon as an inline list and still hides the field named `correct`.
+
 ## v0.0.10r3 — 2026-10-22
 
 - The specimen's object store is `research/store-20261022.md`. The page list is book `+0x10`. All 131 backgrounds resolve. A field is class `0xA`. A polygon outline is the block at `+0x32`. A bitmap id is the fourth directory word. Neither lesson book stores a password block.
