@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.10r5 — 2026-10-25
+
+- Chapter 15.7. The ToolBook 11.5 files named `tb80anm.sbk`, `tb80hyp.sbk`, and `tb80r.sbk` are a 29,147-byte stub. They are not the Instructor 8.1 books in the size table.
+
 ## v0.0.10r4 — 2026-10-24
 
 - The Reader session is `research/reader-20261024.md`. P400 is the INTRODUCTION page and the 74LS174N chip. Alt+Right is Next. F3 toggles Author. The erase rectangles are still unrecorded. Foolbook 1.0.5r32 still reads a polygon as an inline list and still hides the field named `correct`.

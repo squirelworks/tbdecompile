@@ -60,3 +60,16 @@ A system book adds script above the book. A `linkDLL` adds commands, and only wh
 
 Segment 1278 loads class providers: a TBX DLL, a VBX DLL, a 32-bit TBX DLL, or another ToolBook book. It does not push `sysBooks`. The names sit on the book's class table. `a613` names `TB80ANM.SBK` and `TB80R.SBK`. When the provider is a book, or a TBX calls `REGISTERSYSBOOK`, the book goes on a bound list. The Author program adds that list to `sysBooks` through `CDBADDBOUNDSYSBOOKS`. The note is `research/class-providers.md`.
 
+## 15.7 The 11.5 names are not these books
+
+The ToolBook 11.5 common-file set uses the same filenames as the Instructor 8.1 system books. The files are not those books. Do not replace the rows in 15.3 with them.
+
+An inventory of that set on 24 October 2026 (opentoolbook8) found two stubs:
+
+| Bytes | Names | Version resource |
+|---|---|---|
+| 29,147 | 62 names, one hash. Includes `tb105hyp.sbk` and `tb80actr.sbk`, `tb80aicc.sbk`, `tb80anm.sbk`, `tb80ftp.sbk`, `tb80hyp.sbk`, `tb80r.sbk`. | TB110 `11.00.37` |
+| 29,145 | `tb110actr.sbk`, `tb110aicc.sbk`, `tb110anm.sbk`, `tb110ftp.sbk`, `tb110hyp.sbk`, `tb110r.sbk`. | TB115 `11.50.12` |
+
+On both stubs the 16 bytes at `0xC00` are zero. The object-store header appears once, near offset 16440, not at `0xC00`. Neither stub returned book script. The 29,145-byte file shares a prefix with `tb115hyp.sbk` and is not that book cut short. The Instructor copies of `tb80anm`, `tb80hyp`, and `tb80r` stay 64,023, 140,613, and 953,705 bytes. Those three are not in the 11.5 archives.
+
