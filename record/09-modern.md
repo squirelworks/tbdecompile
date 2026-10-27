@@ -7,7 +7,7 @@
 | M-001 | Known | The clean-room reader is not the engine. It does not score quizzes, place every bitmap, or run the NE images. | WV-005 |
 | M-002 | Known | Foolbook 1.0.2 opens `.tbk`, `.sbk`, `.fbk`, and `.fsk`. A polygon becomes the point array `Polygon` is given. Twips convert with `(coord * dpi + 720) / 1440`. Each object is placed from its twip bounds. Twip `0, 0` is the window origin. | Foolbook `v1.0.2` |
 | M-003 | Known | Foolcourse is the process that serves a book. Foolbook is a local window. If Foolbook is started by a course, it pulls the book and skips the splash. | release notes, 2026-10-13 |
-| M-004 | Known | The dependency order is Foolversity, then Foolcourse, then Foolbook, then `openscript_analysis`. Foollege is the layer under Foolversity that holds courses. It is not a running server in the current release. | hierarchy note |
+| M-004 | Known | The dependency order is Foolversity, then Foollege, then Foolcourse, then Foolbook, then `openscript_analysis`. Foollege holds the students. Foolcollege is the same layer, not a second program. It is not a running server in the current release. | hierarchy note |
 | M-005 | Known | TBpipeline 1.0.0r4 parses `9e954d01.tbk` (129 pages) without running RTM. A known bug is an 18-versus-23 render count. | pipeline release note |
 | M-006 | Thought | A reader that prefers explicit points, then TBX Vertices, then bounds, will look like the lesson often enough to study it. It will not be a substitute for the Win98 runtime until the reader in chapter 4 has a name and the `0x4097` slot is located in the page blob. The property’s name is already known. | project philosophy |
 
@@ -29,7 +29,7 @@ The book API and the object layer are separate modules in Foolbook (`engine/cdb.
 
 Foolcourse is the only server in the current release. Foolbook does not listen. The earlier idea that Foolbook itself served on port 1337 was withdrawn: a local viewer should not be the thing that stays up after the tab closes.
 
-Foolversity writes students, schools, and curricula. Foolcourse reads them. The hierarchy, as stated, is: a Foollege sits under Foolversity and has Foolcourses; a Foolcourse has Foolbooks; a Foolbook can run OpenScript. Foollege is not the current server. A later Foolcollege was discussed as the place that would hold several courses for several students. That program does not exist yet.
+Foolversity writes students, schools, and curricula. Foolcourse reads them. The hierarchy is: Foolversity holds the courses; a Foollege under it holds the students; Foolcourse holds the instruction; a Foolbook opens the book. Foollege and Foolcollege are the same thing. The name Foolcollege was used for a later server that would run those students and hand courses to Foolbook. That server is Foollege. It is not running yet.
 
 Install is a virtual environment and `pip install` of the Foolversity git URL. A system Python on Debian will refuse the install. That is PEP 668, not a missing package. If a dependency has not changed, a reinstall should not download it again unless a fresh-start flag is set. That rule was written after several reinstalls pulled `openscript_analysis` for no content change.
 

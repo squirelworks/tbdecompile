@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.11r1 — 2026-10-27
+
+- Chapter 9. Foollege and Foolcollege are the same layer. Foollege holds the students. It is not a second program, and it is not a running server. The v0.0.11 PDF still has the old sentence.
+
 ## v0.0.11 — 2026-10-27
 
 - The printable book is one file, `manual/20261027/TBdecompile-v0.0.11.pdf` (172 pages), and the same book in parts. Cover, table of contents, preface, and foreword are separate. The contents are one file (58 pages). Each appendix is its own file. A part that would reach 100 pages is broken between headings. None of the parts did. `python3 manual/build.py` typesets them from `record/` and `manual/sources/`.
