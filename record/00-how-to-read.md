@@ -70,4 +70,4 @@ Absence from a Ghidra HTML export is not absence from the binary. The listings h
 
 If a note says `HEAP*` or `TBHEAP*` allocates the `0x76`-byte object, or that `TBHEAPCLEARCRITSECT` has no definition, that sentence is superseded. Chapter 19.
 
-The printable form of this directory is [ToolBook-record-20261016.pdf](ToolBook-record-20261016.pdf). That file was typeset before chapters 19 and 20. It ends at chapter 18 until the contents are rebuilt.
+The printable form of this directory is [TBdecompile-v0.0.11.pdf](../manual/20261027/TBdecompile-v0.0.11.pdf). That file is the whole book. The same book is also the separate sheets in [manual/20261027/](../manual/20261027/README.md): front matter, the contents, and one file per appendix. A sheet that would reach 100 pages is broken between headings. `python3 manual/build.py` reprints them.

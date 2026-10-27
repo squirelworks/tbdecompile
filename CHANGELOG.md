@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.11 — 2026-10-27
+
+- The printable book is one file, `manual/20261027/TBdecompile-v0.0.11.pdf` (172 pages), and the same book in parts. Cover, table of contents, preface, and foreword are separate. The contents are one file (58 pages). Each appendix is its own file. A part that would reach 100 pages is broken between headings. None of the parts did. `python3 manual/build.py` typesets them from `record/` and `manual/sources/`.
+
 ## v0.0.10r5 — 2026-10-25
 
 - Chapter 15.7. The ToolBook 11.5 files named `tb80anm.sbk`, `tb80hyp.sbk`, and `tb80r.sbk` are a 29,147-byte stub. They are not the Instructor 8.1 books in the size table.
