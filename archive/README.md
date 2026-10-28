@@ -10,6 +10,7 @@ Old work. The record is `record/`. When a sheet and the record disagree, the rec
 | `efforts/viewer2` | A catalog in front of that page frame. |
 | `efforts/viewer3` | The same catalog, left so viewer2 would not be edited again. |
 | `efforts/maybe` | A viewer that loads system shells and lesson JSON. It does not parse a TBK. `Maybe-Finished.zip` and `Maybe2-Finished.zip` are the packed copies. Maybe3 and Maybe4 were empty directories. |
+| `efforts/coursemanager` | Early lesson viewer from the github.io site (`coursemanager/viewer4/`). Loads pre-converted lesson JSON from `lessonshells/`. Does not parse TBK. |
 | `efforts/runtime` | The clean-room reader that became Foolbook. Python. |
 | `efforts/runtime_cpp` | The same idea in C++, drawing a few pages to SVG. |
 | `efforts/sbk` | System-book handlers copied out as JavaScript. |
