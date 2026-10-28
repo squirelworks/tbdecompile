@@ -1,0 +1,9 @@
+step 1 alt+Right done 05:11:52
+step 2 alt+Right done 05:12:54
+step 3 alt+Right done 05:13:55
+step 4 alt+Right done 05:14:57
+step 5 alt+Left done 05:15:59
+step 6 alt+Left done 05:17:01
+step 7 alt+Left done 05:18:03
+step 8 alt+Left done 05:19:04
+ALLDONE

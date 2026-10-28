@@ -15,4 +15,4 @@ These files are the short notes that used to live only in the working papers, pl
 
 Segment 1578 rebuilds objects pasted from the clipboard. Segment 1508 reads and writes rich text. Neither runs when a `.tbk` loads. The live-object array stays `FUN_1278_3be6` (chapter 19). It is not segment 1160.
 
-The longer trail is `tbworkingpapers/history/sheets/`. Chapter 18 of the record names each sheet. The draft in `history/sheets/tbwp0028/chapters/` is frozen and lags the record. The manual source is `tbworkingpapers/sheets/tbwp0030/`.
+The longer trail is `archive/trail/`. Chapter 18 of the record names each sheet. The draft in `archive/trail/tbwp0028/chapters/` is frozen and lags the record. The 16 October manual source is `archive/sheets/tbwp0030/`.

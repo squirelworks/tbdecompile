@@ -2,7 +2,7 @@
 
 ToolBook II 8.1 decompilation notes. Release **v0.0.11** (27 October 2026). The current statement is [`record/`](record/00-how-to-read.md). The printable copy is [`manual/20261027/`](manual/20261027/README.md): one PDF of the whole book, and the same book in parts. Cover, table of contents, preface, and foreword are separate files, then the contents, then appendices A through L. A part that would reach 100 pages is broken between headings. Appendix K is how to disassemble. Appendix L is the Bochs card. `toc.pdf` is the sheet reprinted on its own. Chapter 16.5 is the author session in which `ssssssssssss.tbk` became password-protected and `TBCBT` did not load. Chapter 13 says where P440's text sits. Chapter 22 is the value bus, VBX, and `EXECSCRIPT`. The 16 October sheets are in [`manual/20261016/`](manual/20261016/README.md). The 15 October contents and appendix PDFs are in [`editions/v0.0.1/`](editions/v0.0.1). They are not current where they put `CDBSENDCREATE` on book open.
 
-Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`](record/18-absorption.md) names each one and the section that replaced it. When they disagree with `record/`, `record/` wins.
+Loose sheets are in [`archive/`](archive/README.md). [`record/18-absorption.md`](record/18-absorption.md) names each one and the section that replaced it. When they disagree with `record/`, `record/` wins.
 
 ## Contents
 
@@ -16,6 +16,7 @@ Loose sheets under `tbworkingpapers/` are the trail. [`record/18-absorption.md`]
 - `repair/` — how a bad listing was repaired, and the script that held. Not a second record.
 - `research/` — short notes that are not a second record. The 21 October notes are the field text handle, the class table, class providers, and the paint offsets.
 - `editions/v0.0.1/` — the previous printable edition
+- `archive/` — old viewers, early runtimes, and the loose sheets. Not a second reader. Foolbook is the reader.
 
 `nehost` is not in this repository. The host and the pass logs are `tbpipeline/tbpipeline_bf/nehost/`.
 

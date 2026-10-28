@@ -1,0 +1,113 @@
+9395T909.TBK
+Size: 8959570
+Pages: 227
+Handlers: 184
+
+TO HANDLE buttonClick
+--{Go to next page}
+  go to page "p2001"
+END
+---
+TO HANDLE buttonClick
+ system lastbook
+ system nextpage
+ lastbook=name of this book
+--Code for Trainer 1
+ get setTrainerAddress(1)
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+ system lastbook
+ system nextpage
+ lastbook=name of this book
+--Code for Trainer 1
+ get setTrainerAddress(1)
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+ system lastbook
+ system nextpage
+ lastbook=name of this book
+--Code for Trainer 1
+ get setTrainerAddress(1)
+---
+TO HANDLE buttonClick
+ system lastbook
+ system nextpage
+ lastbook=name of this book
+--Code for Trainer 1
+ get setTrainerAddress(1)
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---

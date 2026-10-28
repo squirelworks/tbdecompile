@@ -1,0 +1,114 @@
+main	module	id	title
+DC Circuits	Mod 02 Introduction to Electricity	93951108	Introduction to Technical Graphics
+AC Circuits	Mod 08 AC Test Equipment	93952208	Intro to Function Generators - 444
+AC Circuits	Mod 08 AC Test Equipment	93952210	Intro to Function Generators - 4040
+AC Circuits	Mod 08 AC Test Equipment	93952211	Function Generator Use - 4040
+AC Circuits	Mod 08 AC Test Equipment	93952212	Intro to Oscilloscopes
+AC Circuits	Mod 08 AC Test Equipment	93952213	Oscilloscope Use - 444
+AC Circuits	Mod 10 Capacitance and RC Circuits	93952409	RC Parallel Circuit Oper
+AC Circuits	Mod 12 Resonance	93952603	LCR Circuit TS
+AC Circuits	Mod 12 Resonance	93952605	Series Resonant Circuits
+AC Circuits	Mod 13 Transformers	93952701	Intro to Transformers
+AC Circuits	Mod 13 Transformers	93952702	Transformer Operation
+AC Circuits	Mod 14 Relays & Switches	93952802	Relay and Switches Operation Experiment
+AC Circuits	Mod 14 Relays & Switches	93952803	TS Relays and Switches
+AC Circuits	Mod 14 Relays & Switches	93952805	Electrical Circuits Exp
+AC Circuits	Mod 14 Relays & Switches	93952806	Electrical Circuits TS
+Analog Circuits	Mod 15 Diodes and Diode Circuits	93953102	Junction Diodes
+Analog Circuits	Mod 15 Diodes and Diode Circuits	93953104	Junction Diode TS Exp
+Analog Circuits	Mod 15 Diodes and Diode Circuits	93953106	Diode Limiter Operation
+Analog Circuits	Mod 15 Diodes and Diode Circuits	93953107	Diode Clamper Operation
+Analog Circuits	Mod 15 Diodes and Diode Circuits	93953108	Limiter & Clamper TS Exp
+Analog Circuits	Mod 16 Transistor Circuits	93953202	Transistor Operation
+Analog Circuits	Mod 16 Transistor Circuits	93953203	Intro to Transistor Amps
+Analog Circuits	Mod 16 Transistor Circuits	93953206	Common Collector Amplifier
+Analog Circuits	Mod 16 Transistor Circuits	93953207	Common Collector Amp Exp
+Analog Circuits	Mod 16 Transistor Circuits	93953208	Common Base Amplifier
+Analog Circuits	Mod 16 Transistor Circuits	93953209	Common Base Amp Exp
+Analog Circuits	Mod 17 Power Supplies	93953303	Bridge Rectifier Operation
+Analog Circuits	Mod 17 Power Supplies	93953307	Zener Diode Operation
+Analog Circuits	Mod 20 Transistor Pulse Circuits	93953601	Intro to Multivibrator Cir
+Analog Circuits	Mod 20 Transistor Pulse Circuits	93953602	Astable Multivibrator Oper
+Analog Circuits	Mod 20 Transistor Pulse Circuits	93953608	Schmitt Trigger TS Exp
+Analog Circuits	Mod 21 Trigger Device Circuits	93953703	SCR Trigger Operation
+Analog Circuits	Mod 21 Trigger Device Circuits	93953704	SCR Power Control Operation
+Analog Circuits	Mod 21 Trigger Device Circuits	93953705	SCR Circuit TS Exp
+Digital Circuits	Mod 26 Combination Logic Functions	93954304	Base 10 to Binary Conversion
+Digital Circuits	Mod 26 Combination Logic Functions	93954306	4 Bit Comparator
+Digital Circuits	Mod 27 Flip-Flop Circuits	93954403	Clocked RS Flip-Flop
+Digital Circuits	Mod 27 Flip-Flop Circuits	93954404	D-Type Flip-Flop
+Advanced Electronics	Mod 32 Basic Motors	9395T304	AC Motors and Generators
+Advanced Electronics	Mod 32 Basic Motors	9395Z203	Three-phase Power Generation
+Advanced Electronics	Mod 33 Advanced Motor Operation	9395T312	Brushless DC Motors
+Advanced Electronics	Mod 33 Advanced Motor Operation	93955602	DC Shunt Motors
+Advanced Electronics	Mod 33 Advanced Motor Operation	93955603	DC Series Motors
+Advanced Electronics	Mod 33 Advanced Motor Operation	93955604	DC Compound Motors
+Advanced Electronics	Mod 33 Advanced Motor Operation	93955605	Time Control of DC Motors
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T603	Telephone Equipment
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T610	Introduction to Telecommunications
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T605	Types of Telecommunications Careers
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T606	History of Telecommunications
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T607	Special Interest Groups and Forums
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T608	Telecommunications Jargon and Acronyms
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T611	Connection Links
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T612	Introduction to Network Systems
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T613	Broadcast Systems
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T614	Spread Spectrum
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T615	Cellular Telephony
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T616	Information Systems
+Advanced Electronics	Mod 41 Basic Telephone Systems	9395T617	Satellite Systems
+Advanced Electronics	Mod 42 Transducer Systems	93957107	Introduction to Transducers
+Advanced Electronics	Mod 42 Transducer Systems	93957101	Nature of Light
+Advanced Electronics	Mod 42 Transducer Systems	93957106	Heat Transducer Operation
+Advanced Electronics	Mod 42 Transducer Systems	93957201	Nature of Motion
+Advanced Electronics	Mod 42 Transducer Systems	93957202	Motion Transducers
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N103	PLC Programming
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N104	PLC Troubleshooting
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N200	RSLogix Familiarization
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N201	APS Familiarization
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N202	Bit Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N203	Timer and Counter Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N204	I/O and Interrupt Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N205	Comparison Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N206	Math Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N207	Move and Logical Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N208	File Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N209	Bit Shift, FIFO, and LIFO Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N210	Sequencer Instructions
+Advanced Electronics	Mod 43 Programmable Logic Controllers	9395N211	Control Instructions
+Math	Mod 44 Basic Mathematics	93950101	Addition & Subtraction
+Math	Mod 44 Basic Mathematics	93950108	Exponents & Square Roots
+Math	Mod 44 Basic Mathematics	93950109	Metric Notation
+Math	Mod 45 Algebra	93950207	Roots and Radicals
+Math	Mod 45 Algebra	93950208	Graphs
+Math	Mod 45 Algebra	93950209	Systems of Linear Equations
+Math	Mod 45 Algebra	93950210	Introduction to Statistics
+Math	Mod 46 Trigonometry	93950307	Applications of Trigonometry
+Math	Mod 47 Calculus	93950407	Applications of Derivatives
+Math	Mod 47 Calculus	93950408	Integration
+Math	Mod 47 Calculus	93950409	Definite Integrals
+Math	Mod 47 Calculus	93950410	Applications of Definite Integrals
+Math	Mod 48 Computer Math	93950507	Boolean Algebra Equations
+Math	Mod 48 Computer Math	93950508	Karnaugh Maps
+Math	Mod 48 Computer Math	93950509	Algorithms and Flow Charts
+Math	Mod 48 Computer Math	93950510	Sequences and Matrices
+Math	Mod 49 Measurements	93950601	Introduction to Measurements
+Math	Mod 49 Measurements	93950602	Metric Conversion
+Math	Mod 49 Measurements	93950603	Angular and Circular Measurements
+Math	Mod 49 Measurements	93950604	Area Measurements
+Math	Mod 49 Measurements	93950605	Volume Measurements
+Math	Mod 49 Measurements	93950606	Velocity and Acceleration Measurements
+Math	Mod 49 Measurements	93950607	Force Measurements
+Math	Mod 49 Measurements	93950608	Work and Power Measurements
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D801	Acoustics
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D802	Shipboard Telephones
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D803	Sound Powered Telephones
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D804	Misc S/P Phone Equipment
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D805	S/P Fault Recognition
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D806	Amplified Voice System
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D807	Sound Powered Amplifiers
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D808	Central Announcing Systems
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D809	Intercommunicating Units
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D810	Basic Alarm, Safety and Warning
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D811	IC/SM Alarm Panel
+Miscelleanous Systems	Mod 50 Specialized Comm Systems	9395D812	Alarm Sensors

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+  html, body { margin: 0; height: 100%; background: #d4d0c8; color: #000;
+    font: 16px/1.4 Tahoma, "MS Sans Serif", sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; }
+  .window { width: 800px; background: #d4d0c8; border: 2px solid;
+    border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000; }
+  .title { background: #000080; color: #fff; padding: 3px 6px; font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center; }
+  #booktitle { flex: 1; color: #fff; }
+  .finish-title { margin: 8px 16px 16px; font-size: 22px; font-weight: bold; }
+  .title button { font: 12px Tahoma, sans-serif; }
+  .stage { position: relative; height: 460px; margin: 4px; background: #fff;
+    border: 2px solid; border-color: #808080 #fff #fff #808080; overflow: hidden; }
+  .stage p { margin: 12px 16px; }
+  .stage img { position: absolute; image-rendering: pixelated; }
+  .stage img.stack { position: static; display: block; margin: 8px 16px; }
+  .choices, .jumps, form.answer { position: absolute; left: 16px; bottom: 12px; display: flex; gap: 8px; align-items: center; }
+  form.answer input { font: 14px Tahoma, sans-serif; border: 2px solid; border-color: #808080 #fff #fff #808080; padding: 2px 4px; }
+  button, .choices button, .jumps button { font: 14px Tahoma, sans-serif;
+    background: #d4d0c8; border: 2px solid; border-color: #fff #404040 #404040 #fff;
+    padding: 2px 10px; }
+  button:active { border-color: #404040 #fff #fff #404040; }
+  .status { display: flex; align-items: center; gap: 8px; padding: 4px 6px;
+    border-top: 2px solid; border-color: #fff #808080 #808080 #fff; }
+  .status .caption { flex: 1; padding: 1px 6px; border: 1px solid; border-color: #808080 #fff #fff #808080; }
+  .status .count { min-width: 72px; text-align: center; border: 1px solid; border-color: #808080 #fff #fff #808080; }
+  #miss { position: absolute; left: 16px; bottom: 12px; color: #800000; font-size: 13px; }
+  dialog { border: 2px solid; border-color: #fff #404040 #404040 #fff; background: #d4d0c8;
+    font: 14px Tahoma, sans-serif; }
+  dialog menu { display: flex; gap: 8px; justify-content: flex-end; padding: 0; }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="title"><span id="booktitle">Sample Lesson</span><button id="exit" type="button">Exit</button></div>
+  <div class="stage" id="stage"></div>
+  <div class="status">
+    <span class="caption" id="caption">Ready</span>
+    <button id="back" type="button">Back</button>
+    <span class="count" id="count">0 / 0</span>
+    <button id="next" type="button">Next</button>
+    <button id="menu" type="button">Menu</button>
+  </div>
+</div>
+<dialog id="ask">
+  <p id="asktext"></p>
+  <menu>
+    <button value="yes" type="button">Yes</button>
+    <button value="no" type="button">No</button>
+  </menu>
+</dialog>
+<script type="text/xml" id="book-xml">
+<!--
+  One book per file. Append a lesson by copying a <page> block before </book>.
+
+  Required on every page:
+    id    ToolBook page id (P400, PINFO). This is the link target, not the display number.
+    n     status-bar number. Not used for navigation.
+
+  Optional children, in any order:
+    <p>text</p>
+    <image src="../tbk_images/picture/BOOK_offset_WxH_bpp_hash.bmp"
+           x="40" y="80" w="240" h="320" role="figure"/>
+    <go id="next" to="P410"/>
+    <go id="back" to="P390"/>
+    <go id="fig"  to="P1082"/>
+    <go id="quiz" to="Q6700"/>
+    <go id="book" to="P310" book="nida81"/>
+    <choice to="P1300" correct="yes">answer text</choice>
+    <quiz type="choice|number|text" match="5" tolerance="0" case="no"
+          ok="Q6700ok" bad="Q6700bad" help="P400">
+      <choice to="Q6700ok" correct="yes">5</choice>
+      <choice to="Q6700bad">2</choice>
+    </quiz>
+
+  title on <book> is the overall title. The blue bar and the window title both show it.
+  The status caption stays the page id. Do not put a page title in the blue bar.
+  type="choice" has 2 to 4 choice children. correct="yes" is the key.
+  type="number" compares the field to match, plus or minus tolerance.
+  type="text" compares the field to match. case="no" ignores case.
+  ok and bad are the pages for a right and wrong answer.
+  The frame stores the response and the skip count. The page does not.
+
+  src is relative to this file. Leave x/y off and the frame stacks the picture
+  under the text at its native size. role="chrome" is drawn by the frame, not the page.
+  A hotspot is a <go> with x y w h, laid over an image already on the page.
+-->
+<book id="sample01" title="Sample Lesson" shell="nida81">
+  <page id="PINFO" n="1" kind="menu">
+    <p>Lesson menu. The blue bar is the book title attribute, not this page.</p>
+    <go id="start" to="P400" label="Begin"/>
+    <go id="fig" to="P1082" label="Figures"/>
+  </page>
+
+  <page id="P400" n="2">
+    <p>Page two. The picture link points at a carved BMP. The file name is the book id, the offset in the TBK, and the pixel size.</p>
+    <image src="../tbk_images/picture/10001001_066a9f_240x320_8bpp_fda22435a9ad.bmp"
+           x="500" y="36" w="240" h="320" role="figure"/>
+    <go id="next" to="P410"/>
+    <go id="back" to="PINFO"/>
+  </page>
+
+  <page id="P410" n="3">
+    <p>Page three. Same tag, second file. Shared shell art uses the 10001001 prefix; a course figure uses that course's book id.</p>
+    <image src="../tbk_images/picture/10001001_0024bf_580x387_8bpp_1e42452fd71e.bmp"
+           x="40" y="88" w="580" h="387" role="figure"/>
+    <go id="next" to="P1291"/>
+    <go id="back" to="P400"/>
+    <go id="fig" to="P1082" label="Figures"/>
+    <go id="quiz" to="Q6700" label="Quiz"/>
+  </page>
+
+  <page id="P1082" n="4" kind="figures">
+    <p>Figures for this lesson. A figure page is still a page id. Back returns to the page that opened it.</p>
+    <image src="../tbk_images/picture/10001001_079aff_574x220_8bpp_a564d9ce4eec.bmp"
+           x="40" y="88" w="574" h="220" role="figure"/>
+    <go id="back" to="last"/>
+  </page>
+
+  <page id="P1291" n="5" kind="quiz">
+    <p>A quiz page lists choices. The frame counts the answer. The page only says where each choice goes.</p>
+    <choice to="P1300" correct="yes">The output can drive several inputs</choice>
+    <choice to="P1292">The output can drive one input</choice>
+    <go id="back" to="P410"/>
+  </page>
+
+  <page id="P1300" n="6">
+    <p>Correct. The next pages are the continuation quiz: a choice, a number, then a typed answer.</p>
+    <go id="next" to="Q6700"/>
+    <go id="back" to="P1291"/>
+  </page>
+
+  <page id="P1292" n="7">
+    <p>Not that one. The other choice is still on the question page.</p>
+    <go id="back" to="P1291" label="Return"/>
+  </page>
+
+  <page id="Q6700" n="8" kind="quiz">
+    <p>How many other inputs can a fan-out of 5 drive?</p>
+    <quiz type="choice" test="1" number="1" help="P400">
+      <choice to="Q6700ok" correct="yes">5</choice>
+      <choice to="Q6700bad">2</choice>
+      <choice to="Q6700bad">10</choice>
+      <choice to="Q6700bad">1</choice>
+    </quiz>
+    <go id="back" to="P410"/>
+  </page>
+
+  <page id="Q6700ok" n="9">
+    <p>Correct. Fan-out 5 drives 5 inputs.</p>
+    <go id="next" to="Q6701" label="Next question"/>
+    <go id="back" to="Q6700"/>
+  </page>
+
+  <page id="Q6700bad" n="10">
+    <p>Not that count. The question is still open.</p>
+    <go id="back" to="Q6700" label="Return"/>
+  </page>
+
+  <page id="Q6701" n="11" kind="quiz">
+    <p>Typical TTL supply voltage, in volts.</p>
+    <quiz type="number" match="5" tolerance="0" ok="Q6701ok" bad="Q6701bad" help="P400"/>
+    <go id="back" to="Q6700"/>
+  </page>
+
+  <page id="Q6701ok" n="12">
+    <p>Correct. TTL uses 5 volts.</p>
+    <go id="next" to="Q6702"/>
+    <go id="back" to="Q6701"/>
+  </page>
+
+  <page id="Q6701bad" n="13">
+    <p>That value does not match. Tolerance is 0, so only 5 passes.</p>
+    <go id="back" to="Q6701" label="Return"/>
+  </page>
+
+  <page id="Q6702" n="14" kind="quiz">
+    <p>Name the logic family those voltages belong to.</p>
+    <quiz type="text" match="TTL" case="no" ok="PDONE" bad="Q6702bad"/>
+    <go id="back" to="Q6701"/>
+  </page>
+
+  <page id="PDONE" n="15" kind="finish">
+    <p>Congratulations on finishing:</p>
+    <booktitle/>
+    <go id="menu" to="PINFO" label="Lesson menu"/>
+  </page>
+
+  <page id="Q6702bad" n="16">
+    <p>Not the family name on the key.</p>
+    <go id="back" to="Q6702" label="Return"/>
+  </page>
+
+  <!-- copy from here to append a page
+  <page id="P420" n="8">
+    <p>New page text.</p>
+    <image src="../tbk_images/picture/BOOK_offset_WxH_bpp_hash.bmp"
+           x="40" y="88" w="240" h="320" role="figure"/>
+    <go id="next" to="P430"/>
+    <go id="back" to="P410"/>
+  </page>
+  -->
+</book>
+
+</script>
+<script>
+const stage = document.getElementById("stage");
+const ask = document.getElementById("ask");
+let bookUrl = new URL("book.xml", location.href);
+let pages = new Map();
+let order = [];
+let current = null;
+let history = [];
+let skipped = 0;
+let answered = new Set();
+
+function goEl(page, id) {
+  return [...page.querySelectorAll("go")].find(g => g.getAttribute("id") === id);
+}
+
+function show(id, remember) {
+  const page = pages.get(id);
+  if (!page) return;
+  if (remember && current) history.push(current);
+  current = id;
+  stage.replaceChildren();
+  for (const p of page.querySelectorAll(":scope > p")) {
+    const el = document.createElement("p");
+    el.textContent = p.textContent;
+    stage.append(el);
+  }
+  if (page.querySelector(":scope > booktitle")) {
+    const el = document.createElement("p");
+    el.className = "finish-title";
+    el.textContent = document.getElementById("booktitle").textContent;
+    stage.append(el);
+  }
+  let stacked = 0;
+  for (const im of page.querySelectorAll(":scope > image")) {
+    if (im.getAttribute("role") === "chrome") continue;
+    const el = document.createElement("img");
+    el.src = new URL(im.getAttribute("src"), bookUrl).href;
+    el.alt = im.getAttribute("src").split("/").pop();
+    const x = im.getAttribute("x"), y = im.getAttribute("y");
+    if (x == null || y == null) {
+      el.className = "stack";
+      stacked += 1;
+    } else {
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+    }
+    if (im.getAttribute("w")) el.width = +im.getAttribute("w");
+    if (im.getAttribute("h")) el.height = +im.getAttribute("h");
+    el.addEventListener("error", () => {
+      const note = document.createElement("div");
+      note.id = "miss";
+      note.textContent = "Missing image: " + el.alt;
+      stage.append(note);
+    });
+    stage.append(el);
+  }
+  const jumps = document.createElement("div");
+  jumps.className = "jumps";
+  for (const g of page.querySelectorAll(":scope > go")) {
+    if (g.getAttribute("id") === "next" || g.getAttribute("id") === "back") continue;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = g.getAttribute("label") || g.getAttribute("id");
+    b.addEventListener("click", () => follow(g));
+    jumps.append(b);
+  }
+  if (jumps.childElementCount) stage.append(jumps);
+  const choices = document.createElement("div");
+  choices.className = "choices";
+  for (const c of page.querySelectorAll(":scope > choice")) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = c.textContent;
+    b.addEventListener("click", () => {
+      if (c.getAttribute("correct") !== "yes") skipped += 1;
+      show(c.getAttribute("to"), true);
+    });
+    choices.append(b);
+  }
+  if (choices.childElementCount) stage.append(choices);
+  const quiz = page.querySelector(":scope > quiz");
+  if (quiz) renderQuiz(page, quiz);
+  const n = page.getAttribute("n") || "?";
+  document.getElementById("count").textContent = n + " / " + order.length;
+  document.getElementById("caption").textContent = page.getAttribute("id");
+  document.getElementById("next").disabled = !goEl(page, "next");
+  document.getElementById("back").disabled = !goEl(page, "back") && history.length === 0;
+}
+
+function grade(quiz, raw) {
+  const type = quiz.getAttribute("type") || "text";
+  const match = quiz.getAttribute("match") || "";
+  if (type === "number") {
+    const got = Number(raw);
+    const want = Number(match);
+    const tol = Number(quiz.getAttribute("tolerance") || "0");
+    return raw.trim() !== "" && Number.isFinite(got) && Math.abs(got - want) <= tol;
+  }
+  const fold = quiz.getAttribute("case") === "no";
+  const a = raw.trim().replace(/\s+/g, " ");
+  const b = match.trim().replace(/\s+/g, " ");
+  return fold ? a.toLowerCase() === b.toLowerCase() : a === b;
+}
+
+function renderQuiz(page, quiz) {
+  const type = quiz.getAttribute("type") || "choice";
+  if (type === "choice") {
+    const box = document.createElement("div");
+    box.className = "choices";
+    const options = [...quiz.querySelectorAll(":scope > choice")];
+    for (const c of options) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.textContent;
+      b.addEventListener("click", () => {
+        answered.add(page.getAttribute("id"));
+        show(c.getAttribute("to"), true);
+      });
+      box.append(b);
+    }
+    stage.append(box);
+    return;
+  }
+  const form = document.createElement("form");
+  form.className = "answer";
+  const input = document.createElement("input");
+  input.type = type === "number" ? "number" : "text";
+  input.step = "any";
+  input.setAttribute("aria-label", "Answer");
+  const check = document.createElement("button");
+  check.type = "submit";
+  check.textContent = "Check";
+  form.append(input, check);
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    answered.add(page.getAttribute("id"));
+    const right = grade(quiz, input.value);
+    show(quiz.getAttribute(right ? "ok" : "bad"), true);
+  });
+  stage.append(form);
+  if (quiz.getAttribute("help")) {
+    const help = document.createElement("button");
+    help.type = "button";
+    help.textContent = "Help";
+    help.addEventListener("click", () => show(quiz.getAttribute("help"), true));
+    form.append(help);
+  }
+  input.focus();
+}
+
+function follow(g) {
+  if (!g) return;
+  const to = g.getAttribute("to");
+  if (to === "last") {
+    const prev = history.pop();
+    if (prev) show(prev, false);
+    return;
+  }
+  if (g.getAttribute("book")) {
+    document.getElementById("caption").textContent = "Other book: " + g.getAttribute("book") + " " + to;
+    return;
+  }
+  show(to, true);
+}
+
+function load(xmlText, url) {
+  bookUrl = url;
+  const doc = new DOMParser().parseFromString(xmlText, "application/xml");
+  if (doc.querySelector("parsererror")) {
+    stage.textContent = "XML did not parse. Check the page you last appended.";
+    return;
+  }
+  const book = doc.querySelector("book");
+  const bookTitle = book.getAttribute("title") || "";
+  document.getElementById("booktitle").textContent = bookTitle;
+  document.title = bookTitle;
+  pages = new Map();
+  order = [];
+  for (const page of book.querySelectorAll(":scope > page")) {
+    pages.set(page.getAttribute("id"), page);
+    order.push(page.getAttribute("id"));
+  }
+  history = [];
+  skipped = 0;
+  answered = new Set();
+  show(order[0], false);
+}
+
+document.getElementById("next").addEventListener("click", () => {
+  const page = pages.get(current);
+  if (page.querySelector(":scope > quiz") && !answered.has(current)) skipped += 1;
+  follow(goEl(page, "next"));
+});
+document.getElementById("back").addEventListener("click", () => {
+  const g = goEl(pages.get(current), "back");
+  if (g) follow(g);
+  else if (history.length) show(history.pop(), false);
+});
+document.getElementById("menu").addEventListener("click", () => show("PINFO", true));
+document.getElementById("exit").addEventListener("click", () => {
+  document.getElementById("asktext").textContent =
+    skipped ? "You skipped " + skipped + " question(s). Exit the lesson?" : "Are you sure you want to Exit the Lesson?";
+  ask.showModal();
+});
+ask.addEventListener("click", (ev) => {
+  if (ev.target.value === "yes") ask.close();
+  if (ev.target.value === "no") ask.close();
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "ArrowRight") document.getElementById("next").click();
+  if (ev.key === "ArrowLeft") document.getElementById("back").click();
+});
+
+const embedded = document.getElementById("book-xml").textContent;
+load(embedded, new URL("book.xml", location.href));
+fetch(bookUrl)
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(t => load(t, bookUrl))
+  .catch(() => {});
+</script>
+</body>
+</html>

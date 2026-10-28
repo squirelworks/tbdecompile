@@ -1,0 +1,100 @@
+-- ToolBook mass "Save As EXE" utility
+-- Swap the save line to "save as XML" when the correct command is known.
+--
+-- Usage:
+--   1. Open this book in ToolBook (Author level).
+--   2. Run the button or call doMassSaveAsEXE() from the Command window.
+--   3. Select a source folder of .tbk files.
+--   4. Select a destination folder for the .exe files.
+--
+-- Notes:
+--   - Uses the documented "save as EXE" command.
+--   - Closes each book after saving.
+--   - Skips files that fail to open.
+--   - The save command is isolated so it can be replaced later.
+
+to get doMassSaveAsEXE
+	local string srcFolder, destFolder
+	local string fileList, oneFile, baseName, destPath
+	local int i, n
+	
+	-- pick source
+	srcFolder = askFileName("Select a folder of .tbk files", "*.tbk", "", "", "open")
+	if srcFolder is null then
+		return "cancelled"
+	end
+	srcFolder = ASYM_PathOfFile(srcFolder)
+	
+	-- pick destination
+	destFolder = askFileName("Select destination folder for EXE files", "*.exe", "", "", "save")
+	if destFolder is null then
+		return "cancelled"
+	end
+	destFolder = ASYM_PathOfFile(destFolder)
+	
+	-- build file list (simple: use getFiles if available, else manual)
+	-- ToolBook does not have a built-in directory listing in all versions.
+	-- This version expects the user to have the files in one folder and
+	-- uses a simple sequential name pattern or a pre-built list.
+	-- For a more robust version, replace the fileList construction below.
+	
+	fileList = getFilesInFolder(srcFolder, "*.tbk")
+	if fileList is null or fileList = "" then
+		request "No .tbk files found in" && srcFolder
+		return "no files"
+	end
+	
+	n = textlineCount(fileList)
+	step i from 1 to n
+		oneFile = textline i of fileList
+		baseName = ASYM_ShortFileName(oneFile)
+		-- strip .tbk
+		if last chars 4 of baseName is ".tbk" then
+			baseName = chars 1 to charCount(baseName) - 4 of baseName
+		end
+		destPath = destFolder & baseName & ".exe"
+		
+		-- open the book
+		clear sysError
+		open book oneFile
+		if sysError <> null then
+			-- skip
+		else
+			-- === SAVE LINE (swap this later) ===
+			save as EXE destPath, true
+			-- === END SAVE LINE ===
+			
+			close book
+		end
+	end step
+	
+	request "Done." && n && "files processed."
+	return "ok"
+end
+
+-- Helper: crude directory listing via DOS if needed
+-- Replace with a better method if available in your ToolBook version
+to get getFilesInFolder folder, mask
+	local string result, tempFile, line
+	local int i
+	
+	tempFile = ASYM_GetTempFile("lst")
+	if tempFile is null then
+		return null
+	end
+	
+	-- Use DOS dir command
+	get ASYM_ShellExecute("open", "cmd.exe", "/c dir /b " & quote & folder & mask & quote & " > " & quote & tempFile & quote, folder, 0)
+	
+	-- wait a moment
+	pause 1 seconds
+	
+	if ASYM_IsFile(tempFile) then
+		openFile tempFile
+		readFile tempFile to result
+		closeFile tempFile
+		get RemoveFile(tempFile)
+	end
+	
+	return result
+end

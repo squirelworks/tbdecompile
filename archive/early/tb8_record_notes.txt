@@ -1,0 +1,24 @@
+ToolBook II 8.1 book records (verified on artifacts/courses, 2026-10-06)
+
+Shell
+- File is a Click2learn stub. Book stream starts at ZZZTBKBOOKLOC = 0xC00.
+- Stream signature 03 4A 42 4F, version dword 01 00 00 08.
+
+Object records
+- Marker, present in all 150 course books (34,547 hits): 80 65 00 05 00 02 02
+- Next dword is an object id.
+- Next 32 bytes are a fixed name field. Unused tail is stale heap bytes, so the name is the leading C string only.
+- At offset 43 from the marker the property block begins 14 00 00 01, then six little-endian words that differ per object.
+- In 93950101.TBK this marker hits 299 objects. Names are page ids: P0, P1, P10, P100, P410, PINFO, P1001, ...
+
+Handlers
+- OpenScript is stored as text mixed with tokens. High bytes are opcodes; ASCII fragments are the untokenized words.
+- 93950101 has 85 handlers, almost all buttonClick. Nearby page refs include P1082, P1182, P1292, P1970.
+- A readable skeleton looks like: TO HANDLE buttonClick -- {Go ...} END
+- Quoted targets are not always inline; many page ids are token operands, not strings.
+
+Images
+- Ordinary BMP files are embedded whole and were carved to artifacts/tbk_images (641 unique pictures, 113 icons).
+- Shared chrome is stored once and reused, so later books often add no new BMP.
+- A second form is a BITMAPINFOHEADER with no BM file header. In 93950101 only four of these decoded: 627x24 and 627x28 8bpp strips (progress/highlight bars), not page art.
+- Drawn objects and ToolBook compressed DIBs are still not decoded. dexvert's TB1.5 notes do not match this 8.1 index; PHYSSIZE does not occur in these books.

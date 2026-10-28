@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  One book per file. Append a lesson by copying a <page> block before </book>.
+
+  Required on every page:
+    id    ToolBook page id (P400, PINFO). This is the link target, not the display number.
+    n     status-bar number. Not used for navigation.
+
+  Optional children, in any order:
+    <p>text</p>
+    <image src="../tbk_images/picture/BOOK_offset_WxH_bpp_hash.bmp"
+           x="40" y="80" w="240" h="320" role="figure"/>
+    <go id="next" to="P410"/>
+    <go id="back" to="P390"/>
+    <go id="fig"  to="P1082"/>
+    <go id="quiz" to="Q6700"/>
+    <go id="book" to="P310" book="nida81"/>
+    <choice to="P1300" correct="yes">answer text</choice>
+    <quiz type="choice|number|text" match="5" tolerance="0" case="no"
+          ok="Q6700ok" bad="Q6700bad" help="P400">
+      <choice to="Q6700ok" correct="yes">5</choice>
+      <choice to="Q6700bad">2</choice>
+    </quiz>
+
+  title on <book> is the overall title. The blue bar and the window title both show it.
+  The status caption stays the page id. Do not put a page title in the blue bar.
+  type="choice" has 2 to 4 choice children. correct="yes" is the key.
+  type="number" compares the field to match, plus or minus tolerance.
+  type="text" compares the field to match. case="no" ignores case.
+  ok and bad are the pages for a right and wrong answer.
+  The frame stores the response and the skip count. The page does not.
+
+  src is relative to this file. Leave x/y off and the frame stacks the picture
+  under the text at its native size. role="chrome" is drawn by the frame, not the page.
+  A hotspot is a <go> with x y w h, laid over an image already on the page.
+-->
+<book id="sample01" title="Sample Lesson" shell="nida81">
+  <page id="PINFO" n="1" kind="menu">
+    <p>Lesson menu. The blue bar is the book title attribute, not this page.</p>
+    <go id="start" to="P400" label="Begin"/>
+    <go id="fig" to="P1082" label="Figures"/>
+  </page>
+
+  <page id="P400" n="2">
+    <p>Page two. The picture link points at a carved BMP. The file name is the book id, the offset in the TBK, and the pixel size.</p>
+    <image src="../tbk_images/picture/10001001_066a9f_240x320_8bpp_fda22435a9ad.bmp"
+           x="500" y="36" w="240" h="320" role="figure"/>
+    <go id="next" to="P410"/>
+    <go id="back" to="PINFO"/>
+  </page>
+
+  <page id="P410" n="3">
+    <p>Page three. Same tag, second file. Shared shell art uses the 10001001 prefix; a course figure uses that course's book id.</p>
+    <image src="../tbk_images/picture/10001001_0024bf_580x387_8bpp_1e42452fd71e.bmp"
+           x="40" y="88" w="580" h="387" role="figure"/>
+    <go id="next" to="P1291"/>
+    <go id="back" to="P400"/>
+    <go id="fig" to="P1082" label="Figures"/>
+    <go id="quiz" to="Q6700" label="Quiz"/>
+  </page>
+
+  <page id="P1082" n="4" kind="figures">
+    <p>Figures for this lesson. A figure page is still a page id. Back returns to the page that opened it.</p>
+    <image src="../tbk_images/picture/10001001_079aff_574x220_8bpp_a564d9ce4eec.bmp"
+           x="40" y="88" w="574" h="220" role="figure"/>
+    <go id="back" to="last"/>
+  </page>
+
+  <page id="P1291" n="5" kind="quiz">
+    <p>A quiz page lists choices. The frame counts the answer. The page only says where each choice goes.</p>
+    <choice to="P1300" correct="yes">The output can drive several inputs</choice>
+    <choice to="P1292">The output can drive one input</choice>
+    <go id="back" to="P410"/>
+  </page>
+
+  <page id="P1300" n="6">
+    <p>Correct. The next pages are the continuation quiz: a choice, a number, then a typed answer.</p>
+    <go id="next" to="Q6700"/>
+    <go id="back" to="P1291"/>
+  </page>
+
+  <page id="P1292" n="7">
+    <p>Not that one. The other choice is still on the question page.</p>
+    <go id="back" to="P1291" label="Return"/>
+  </page>
+
+  <page id="Q6700" n="8" kind="quiz">
+    <p>How many other inputs can a fan-out of 5 drive?</p>
+    <quiz type="choice" test="1" number="1" help="P400">
+      <choice to="Q6700ok" correct="yes">5</choice>
+      <choice to="Q6700bad">2</choice>
+      <choice to="Q6700bad">10</choice>
+      <choice to="Q6700bad">1</choice>
+    </quiz>
+    <go id="back" to="P410"/>
+  </page>
+
+  <page id="Q6700ok" n="9">
+    <p>Correct. Fan-out 5 drives 5 inputs.</p>
+    <go id="next" to="Q6701" label="Next question"/>
+    <go id="back" to="Q6700"/>
+  </page>
+
+  <page id="Q6700bad" n="10">
+    <p>Not that count. The question is still open.</p>
+    <go id="back" to="Q6700" label="Return"/>
+  </page>
+
+  <page id="Q6701" n="11" kind="quiz">
+    <p>Typical TTL supply voltage, in volts.</p>
+    <quiz type="number" match="5" tolerance="0" ok="Q6701ok" bad="Q6701bad" help="P400"/>
+    <go id="back" to="Q6700"/>
+  </page>
+
+  <page id="Q6701ok" n="12">
+    <p>Correct. TTL uses 5 volts.</p>
+    <go id="next" to="Q6702"/>
+    <go id="back" to="Q6701"/>
+  </page>
+
+  <page id="Q6701bad" n="13">
+    <p>That value does not match. Tolerance is 0, so only 5 passes.</p>
+    <go id="back" to="Q6701" label="Return"/>
+  </page>
+
+  <page id="Q6702" n="14" kind="quiz">
+    <p>Name the logic family those voltages belong to.</p>
+    <quiz type="text" match="TTL" case="no" ok="PDONE" bad="Q6702bad"/>
+    <go id="back" to="Q6701"/>
+  </page>
+
+  <page id="PDONE" n="15" kind="finish">
+    <p>Congratulations on finishing:</p>
+    <booktitle/>
+    <go id="menu" to="PINFO" label="Lesson menu"/>
+  </page>
+
+  <page id="Q6702bad" n="16">
+    <p>Not the family name on the key.</p>
+    <go id="back" to="Q6702" label="Return"/>
+  </page>
+
+  <!-- copy from here to append a page
+  <page id="P420" n="8">
+    <p>New page text.</p>
+    <image src="../tbk_images/picture/BOOK_offset_WxH_bpp_hash.bmp"
+           x="40" y="88" w="240" h="320" role="figure"/>
+    <go id="next" to="P430"/>
+    <go id="back" to="P410"/>
+  </page>
+  -->
+</book>

@@ -1,0 +1,2683 @@
+{
+  "book": "/workspace/artifacts/courses/9E954D02.TBK",
+  "pages": 151,
+  "pages_with_handlers": 52,
+  "handlers": 87,
+  "opcode_bytes": [
+    {
+      "byte": "e0",
+      "count": 436
+    },
+    {
+      "byte": "91",
+      "count": 182
+    },
+    {
+      "byte": "83",
+      "count": 169
+    },
+    {
+      "byte": "e2",
+      "count": 164
+    },
+    {
+      "byte": "92",
+      "count": 143
+    },
+    {
+      "byte": "80",
+      "count": 133
+    },
+    {
+      "byte": "c5",
+      "count": 132
+    },
+    {
+      "byte": "90",
+      "count": 115
+    },
+    {
+      "byte": "88",
+      "count": 109
+    },
+    {
+      "byte": "b1",
+      "count": 109
+    },
+    {
+      "byte": "b3",
+      "count": 81
+    },
+    {
+      "byte": "ff",
+      "count": 73
+    },
+    {
+      "byte": "8e",
+      "count": 61
+    },
+    {
+      "byte": "af",
+      "count": 57
+    },
+    {
+      "byte": "95",
+      "count": 47
+    },
+    {
+      "byte": "87",
+      "count": 39
+    },
+    {
+      "byte": "dc",
+      "count": 28
+    },
+    {
+      "byte": "a2",
+      "count": 24
+    },
+    {
+      "byte": "f0",
+      "count": 22
+    },
+    {
+      "byte": "e1",
+      "count": 21
+    },
+    {
+      "byte": "ad",
+      "count": 21
+    },
+    {
+      "byte": "c8",
+      "count": 16
+    },
+    {
+      "byte": "b0",
+      "count": 14
+    },
+    {
+      "byte": "82",
+      "count": 14
+    },
+    {
+      "byte": "d1",
+      "count": 11
+    },
+    {
+      "byte": "8a",
+      "count": 10
+    },
+    {
+      "byte": "89",
+      "count": 9
+    },
+    {
+      "byte": "86",
+      "count": 9
+    },
+    {
+      "byte": "a5",
+      "count": 8
+    },
+    {
+      "byte": "96",
+      "count": 8
+    },
+    {
+      "byte": "84",
+      "count": 7
+    },
+    {
+      "byte": "ca",
+      "count": 7
+    },
+    {
+      "byte": "8b",
+      "count": 5
+    },
+    {
+      "byte": "bb",
+      "count": 5
+    },
+    {
+      "byte": "fb",
+      "count": 5
+    },
+    {
+      "byte": "fe",
+      "count": 5
+    },
+    {
+      "byte": "bf",
+      "count": 5
+    },
+    {
+      "byte": "97",
+      "count": 4
+    },
+    {
+      "byte": "9a",
+      "count": 4
+    },
+    {
+      "byte": "e3",
+      "count": 4
+    },
+    {
+      "byte": "b2",
+      "count": 3
+    },
+    {
+      "byte": "d3",
+      "count": 3
+    },
+    {
+      "byte": "94",
+      "count": 2
+    },
+    {
+      "byte": "bd",
+      "count": 2
+    },
+    {
+      "byte": "d9",
+      "count": 2
+    },
+    {
+      "byte": "93",
+      "count": 1
+    },
+    {
+      "byte": "c1",
+      "count": 1
+    },
+    {
+      "byte": "85",
+      "count": 1
+    },
+    {
+      "byte": "9f",
+      "count": 1
+    },
+    {
+      "byte": "9b",
+      "count": 1
+    },
+    {
+      "byte": "e7",
+      "count": 1
+    },
+    {
+      "byte": "c3",
+      "count": 1
+    },
+    {
+      "byte": "c6",
+      "count": 1
+    },
+    {
+      "byte": "a3",
+      "count": 1
+    },
+    {
+      "byte": "a6",
+      "count": 1
+    },
+    {
+      "byte": "c0",
+      "count": 1
+    },
+    {
+      "byte": "bc",
+      "count": 1
+    },
+    {
+      "byte": "ea",
+      "count": 1
+    },
+    {
+      "byte": "a9",
+      "count": 1
+    },
+    {
+      "byte": "a7",
+      "count": 1
+    },
+    {
+      "byte": "8d",
+      "count": 1
+    }
+  ],
+  "pages_detail": [
+    {
+      "page": "P0",
+      "file": 663104,
+      "captions": [],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "EnterPage",
+          "off": 602,
+          "goes": [],
+          "text": "To Handle EnterPage...4logical __import...4lastbook...4nextpage..... = .p...8.... = \"p10\"... .; = .. .F.....~= \"..\"..F.........\"P0\" ..8getLogoBook().......... __beenToP1 ...8= .. .",
+          "hex": "546f2048616e646c6520456e74657250616765e00992346c6f676963616c205f5f696d706f7274e00992346c617374626f6f6be00992346e65787470616765e0e009c514203d209170888eb038e009c515203d202270313022e0098320c53b203d20909420b246e0090983937e3d2022b1c122f0b246e009090990af80918322503022208890386765744c6f676f426f6f6b2829e00909b085e009090983205f5f6265656e546f503120888e90383d20909420b2"
+        }
+      ]
+    },
+    {
+      "page": "P10",
+      "file": 670258,
+      "captions": [
+        "Next"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 986,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ......................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e000009f04000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b301000000008b00"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 3268,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" .....}.................\"3.............................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e000007d030000020200000000000000000001000b223309000000009500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "page": "P100",
+      "file": 767702,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 773,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 1483,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .....}......END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f208091a5b1837de287b1a5e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P300",
+      "file": 772914,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P410",
+        "P300"
+      ],
+      "fields": [
+        "Integrated Circuits (ICs) are used in almost every electronic application today. If you have used a pocket calculator, you have used electronic circuits containing several IC's."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 379,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}......\"P400\"..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de290af809183225034303022e0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 1145,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .....}......END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f208091a5b1837de287b1a5e0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 1447,
+          "goes": [],
+          "text": "TO HANDLE buttonClick...4lastbook...4nextpage....=.p...8....=.p.............\"P310\" ..8\"nida81.tbk\"...>....t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be00992346c617374626f6f6be00992346e65787470616765e009c5133d9170888eb038e009c5123d9170888eb183e0e0090990af80918322503331302220889038226e69646138312e74626b22e009b03ee00987b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P410",
+      "file": 802704,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P420",
+        "P400"
+      ],
+      "fields": [
+        "ICs were made possible after the discovery of transistors. In this lesson you will find out how integrated circuits are used and what they are composed of."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P420",
+      "file": 815994,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P430",
+        "P410"
+      ],
+      "fields": [
+        "Not only will you learn how ICs work and how they are constructed, we are also going to look at the methods for identifying ICs using standard reference materials, otherwise known as Data Books."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P430",
+      "file": 830944,
+      "captions": [
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P420"
+      ],
+      "fields": [],
+      "handlers": []
+    },
+    {
+      "page": "P900",
+      "file": 1661228,
+      "captions": [
+        "Back",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 1289,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .....}......END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f208091a5b1837de287b1a5e0e0454e44"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1676,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" .....Q................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e000005107000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b301000000008b00"
+        }
+      ]
+    },
+    {
+      "page": "P1001",
+      "file": 1672054,
+      "captions": [
+        "Back",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 3086,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ......................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e00000d30c000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b301000000008b00"
+        }
+      ]
+    },
+    {
+      "page": "P1020",
+      "file": 1677656,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1030",
+        "P1001"
+      ],
+      "fields": [
+        "Integrated Circuits (ICs), first developed in 1959 by Texas Instruments, have revolutionized electronics. The Integrated Circuit was made possible by the invention of semiconductor devices."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1030",
+      "file": 1694252,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "Recall that semiconductor devices are created from doped materials. It is important to realize that resistors and capacitors are made of the same semiconducting materials as transistors and diodes. These resistors and capacitors do have some limitations."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 343,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 545,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .....}......END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f208091a5b1837de287b1a5e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1040",
+      "file": 1702286,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1050",
+        "P1020"
+      ],
+      "fields": [
+        "Inductors are also made of semiconducting material, but due to their large size they are not used often."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1050",
+      "file": 1704322,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P1020"
+      ],
+      "fields": [
+        "Which of the following semiconductor devices is NOT normally used due to size?"
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1044,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p1052\"...................................i.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703130353222e0e0a2e00000bb0400000f000e00fb040a000800000014001000ffff08fe0415008601690f1509d1100000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1456,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p1052\".....W............................f.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703130353222e0e0a2e00057060000ffff110097060a000900000014001200ffff089a061400860166121509bf130000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 2018,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area3\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p1060\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561332229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703130363022e0e02d2d7b486967686c6967687420436f6c"
+        }
+      ]
+    },
+    {
+      "page": "P1051",
+      "file": 1801676,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p1050\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703130353022203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P1052",
+      "file": 1803686,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "Diodes and resistors are not large and ARE normally used in integrated circuits."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1060",
+      "file": 1805836,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1070",
+        "P1050"
+      ],
+      "fields": [
+        "Integrated Circuits are referred to as IC's or chips. By integrating or combining one or more circuits on one device less space and money are used, and rel."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1070",
+      "file": 1814778,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1080",
+        "P1060"
+      ],
+      "fields": [
+        "To realize how small an IC is consider the computer you are using. It contains a large IC called a microprocessor. The microprocessor's size is approximately one inch by one inch, and about a quarter of an inch high. This small device is capable of performing thousands of tasks."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1080",
+      "file": 1824816,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1090",
+        "P1070"
+      ],
+      "fields": [
+        "The microprocessor consists of over a million transistors and other devices. Imagine having a million transistors on a printed circuit card. Your computer would probably fill an entire room and more than likely only perform simple math functions."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1090",
+      "file": 1837324,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1100",
+        "P1080"
+      ],
+      "fields": [],
+      "handlers": []
+    },
+    {
+      "page": "P1100",
+      "file": 1848840,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1110",
+        "P1090"
+      ],
+      "fields": [
+        "IC integration is classified by the number of components in the IC.  The microprocessor is ULSI (Ultra Large Scale Integration) and the operational amplifier is SSI. As technology advances additional classifications will be determined."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1110",
+      "file": 1852640,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P1090"
+      ],
+      "fields": [
+        "An IC containing 637 gates would be classified under what integration category?"
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1044,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p1112\".................................w.i.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703131313222e0e0a2e00000bb0400000f000e00fb040a000800000014001000ffff08fe0418007701690fbd06d1100000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1456,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p1112\"......W..........................w.f.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703131313222e0e0a2e0000057060000ffff110097060a000900000014001200ffff089a06170077016612bd06bf130000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 2018,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area3\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p1120\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561332229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703131323022e0e02d2d7b486967686c6967687420436f6c"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 2548,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p1112\"...........................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703131313222e0e0a2e000009b0a0000ffff1500b30a000002000000000000000000000000000000000000000100000002"
+        }
+      ]
+    },
+    {
+      "page": "P1111",
+      "file": 1856634,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p1110\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703131313022203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P1112",
+      "file": 1858694,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "The chip has 637 integrated components. Look at the chart below to determine it's classification."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1120",
+      "file": 1862748,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1130",
+        "P1110"
+      ],
+      "fields": [
+        "Next, we are going to discuss different types of IC construction. The four main ways of IC construction are:"
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1130",
+      "file": 1864608,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1140",
+        "P1120"
+      ],
+      "fields": [
+        "Monolithic components are made by placing all integrated components on a single piece of doped semiconductor material and by using doped deposits. This type of IC construction is used most often."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1140",
+      "file": 1871528,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1150",
+        "P1130"
+      ],
+      "fields": [
+        "Thin film construction is different than Monolithic. Instead of all the integrated components being made on doped material (substrate) they are placed on the insulating material (substrate). This material may be glass or ceramic."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1150",
+      "file": 1878164,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1160",
+        "P1130"
+      ],
+      "fields": [
+        "This provides good insulation and less power usage since the insulating material, which is known as the substrate, does not draw power. The doped material used in Monolithic construction will draw some power due to increased current flow."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1160",
+      "file": 1880278,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1130"
+      ],
+      "fields": [
+        "Thick film ICs have more than one substrate. Resistors and capacitors are formed on the main substrate while transistors are contained on their own separate substrates. The last type of construction technique we will mention is the Hybrid IC."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 973,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1170",
+      "file": 1889358,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1160"
+      ],
+      "fields": [
+        "The Hybrid IC is a mixture of both Monolithic and Thin film devices all deposited on a single ceramic platform. Even Thick film devices can be added for certain applications."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 727,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1180",
+      "file": 1900300,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P1160"
+      ],
+      "fields": [
+        "What terms would you use to describe the classification of the diagram shown?"
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1088,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p1182\".............'..............*._.Y.i.|.....",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703131383222e0e0a2e000e70400000f000e0027050a000800000014001000ffff082a055f005901690f7c0bd1100000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1500,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p1182\"..............................^.Y.f.|.....",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703131383222e0e0a2e00083060000ffff1100c3060a000900000014001200ffff08c6065e00590166127c0bbf130000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 2062,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area3\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p1190\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561332229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703131393022e0e02d2d7b486967686c6967687420436f6c"
+        }
+      ]
+    },
+    {
+      "page": "P1181",
+      "file": 1910580,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p1180\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703131383022203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P1182",
+      "file": 1912666,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "There are only 2 resistors and 2 transistors in this device. This indicates that the IC is SSI. The next classification is really based on the substrate, in this case a P-type semiconductor. Since nothing is labeled ceramic, glass, or insulated, this IC must be Monolithic."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P1190",
+      "file": 1916828,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1200",
+        "P1180"
+      ],
+      "fields": [
+        "ICs are normally classified under one of two main headings, linear or digital. Linear ICs are used in Analog situations and Digital ICs are used in digital applications."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1200",
+      "file": 1919382,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1910",
+        "P1190"
+      ],
+      "fields": [
+        "Below are some examples of Linear and Digital ICs. As you can see, there are many different classifications for ICs. It is important to remember that these are not all the types of IC classification, as there are hundreds."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1910",
+      "file": 1921496,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P1001",
+        "P1190"
+      ],
+      "fields": [
+        "This completes the information on IC CLASSIFICATIONS."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1920",
+      "file": 1924200,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1930",
+        "P1001"
+      ],
+      "fields": [
+        "1.  ICs have a classification which describes the number of\n     integrated components."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1930",
+      "file": 1928214,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1940",
+        "P1920"
+      ],
+      "fields": [
+        "2.  There are four main ways to construct an IC; Monolithic, Thin\n     film, Thick film and Hybrid."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1940",
+      "file": 1939854,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P1999",
+        "P1930"
+      ],
+      "fields": [
+        "3.  ICs are normally classified under one of two main headings;\n     linear or digital."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P1999",
+      "file": 1942314,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P1001",
+        "P1940"
+      ],
+      "fields": [
+        "You have completed the Summary. \nYou are about to return to the Objective Menu."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2001",
+      "file": 1944970,
+      "captions": [
+        "Back",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 3086,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ......................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e00000d30c000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b301000000008b00"
+        }
+      ]
+    },
+    {
+      "page": "P2020",
+      "file": 1950572,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2030",
+        "P2001"
+      ],
+      "fields": [
+        "As you have learned, there are four common methods for IC  construction; Monolithic, Thin film, Thick film, and Hybrid. The diagram below illustrates the construction of a typical Monolithic IC."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2030",
+      "file": 1962014,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2040",
+        "P2020"
+      ],
+      "fields": [
+        "Let's look at the method for Monolithic IC construction. A wafer of silicon is cut from a larger piece. The number of ICs that can be created from a wafer depend on the wafer's size, as well as the size of the IC's being cut. The number of ICs usually ranges from 25 to 100."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2040",
+      "file": 1977652,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2050",
+        "P2030"
+      ],
+      "fields": [
+        "The different layers of doped material are created by using different techniques; oxidation, photochemical, chemical, evaporation, and depositing. There are many other techniques that can be used. During the process all the IC's on the wafer are created at one time."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2050",
+      "file": 1987122,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2060",
+        "P2040"
+      ],
+      "fields": [
+        "On top of the wafer, wire is deposited to connect all the different components of the integrated circuit. The material used for this wire is normally aluminum or gold. The wafers are cut apart using a technique similar to cutting glass."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2060",
+      "file": 1997622,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2065",
+        "P2040"
+      ],
+      "fields": [],
+      "handlers": []
+    },
+    {
+      "page": "P2065",
+      "file": 2008560,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P2060"
+      ],
+      "fields": [
+        "Which of the following materials is NOT normally used as a wire deposit on the wafer?"
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1044,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p2067\".................................w.W.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703230363722e0e0a2e00000bb0400000f000e00fb040a000800000014001000ffff00fe041500770157120609bf130000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1456,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p2067\".....W..........................w.Z.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703230363722e0e0a2e00057060000ffff110097060a000900000014001200ffff009a06140077015a0f0609b3100000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 2018,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area2\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p2070\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561322229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703230373022e0e02d2d7b486967686c6967687420436f6c"
+        }
+      ]
+    },
+    {
+      "page": "P2066",
+      "file": 2011974,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p2065\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703230363522203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P2067",
+      "file": 2014034,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "Aluminum and Gold ARE the materials normally used for wire deposited on top of the wafer."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2070",
+      "file": 2016184,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2080",
+        "P2065",
+        "P2090",
+        "P2070"
+      ],
+      "fields": [
+        "There are three different factors to deal with when packaging an IC; packaging material, package shape, and pin arrangement. The packaging material for IC's can be ceramic, plastic, glass or metal.",
+        "There are many different shapes and pin arrangements used to package IC's. It is important to realize that the package type and pin arrangement needed depends on the application. Let's look at some different groups of package and pin types."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2090",
+      "file": 2052902,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2100",
+        "P2080"
+      ],
+      "fields": [
+        "The Can package is normally metal and glass with the pins connected in a fashion similar to a transistor. A tab is provided to identify pin 1 or an important pin."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2100",
+      "file": 2062498,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2110",
+        "P2090"
+      ],
+      "fields": [
+        "If the marked pin indicates pin number one, all other pins can be determined by counting in a counterclockwise direction. The diagram below illustrates this principle. It is important to realize that Can packages are not used for large integrated circuits."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2110",
+      "file": 2065134,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2120",
+        "P2090"
+      ],
+      "fields": [
+        "The next group of package types we will look at are DIPs, SIPs, and ZIPs. These three package types will be either made from plastic or ceramic. As you can see from the diagrams below, most space is used for the connection of external leads."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2120",
+      "file": 2075198,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2130",
+        "P2110"
+      ],
+      "fields": [
+        "The top and bottom half of the ICs are bonded together using an epoxy. Ceramic packages can be sealed better than plastic packages. A good seal will help prevent corrosion and undesirable effects."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2130",
+      "file": 2077330,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2110"
+      ],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2140",
+      "file": 2086816,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2150",
+        "P2130"
+      ],
+      "fields": [
+        "The IC shown below is in the SIP package, which stands for Single Inline Package due to the one straight row of pins. A dot or notched side indicates pin 1. All other pins are identified by counting away from pin 1."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2150",
+      "file": 2093074,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2160",
+        "P2140"
+      ],
+      "fields": [
+        "The IC shown below is in the ZIP package, which stands for Zigzag Inline Package due to the jagged row of pins. A dot or notched side indicates pin 1. All other pins are identified just like the SIP package since they still exit the package in a straight line."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2160",
+      "file": 2101858,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2170",
+        "P2150"
+      ],
+      "fields": [
+        "The next group of package types we will look at is the Flat Pack, and the Quad Flat Pack (QFP). Like the DIPs, SIPs, and ZIPs, these packages are made from either ceramic or plastic. The only major difference between the two groups is the pin arrangement."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2170",
+      "file": 2110744,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2180",
+        "P2160"
+      ],
+      "fields": [],
+      "handlers": []
+    },
+    {
+      "page": "P2180",
+      "file": 2116560,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2170"
+      ],
+      "fields": [
+        "The IC shown below is the Quad Flat Pack package. The Quad Flat Pack has pins on all four sides of the IC. Pin 1 is identified by a dot or notch. Count the pins counterclockwise starting at pin 1 to identify them."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2190",
+      "file": 2127372,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2200",
+        "P2180"
+      ],
+      "fields": [
+        "Flat Package ICs can be mounted in a hole on a PC board to allow both sides of an IC to effectively dissipate heat or be used for surface mounting on PC boards. Surface mount ICs do not have leads that extend through the PC board."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2200",
+      "file": 2149294,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2210",
+        "P2190"
+      ],
+      "fields": [
+        "The next group of package types are the SOJ, TSOP, and SOP packages.  Like the Flat Pack package, these packages are made from either ceramic or plastic. The only major difference between the two groups of ICs is size."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2210",
+      "file": 2155106,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2200"
+      ],
+      "fields": [
+        "The IC shown below is the Small-Outline J-lead package (SOJ). The SOJ has pins in the same arrangement as the DIP, however, the pins curl inward in the shape of a J. The pins are identified in the same manner as the DIP package."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2220",
+      "file": 2166722,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2230",
+        "P2210"
+      ],
+      "fields": [
+        "ICs that have pins shaped in a J are not normally soldered to a PC board. Instead, a socket is provided for the insertion of an IC. You will see later that the LCC package is very similar but larger than the SOJ."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2230",
+      "file": 2174312,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2240",
+        "P2220"
+      ],
+      "fields": [
+        "The IC shown below is the Thin Small-Outline Package (TSOP). The TSOP has pins in the same arrangement as the Flat Pack, however, it is much smaller. The pins on this IC are identified the same way as a Flat Pack IC. The diagram below illustrates this principle."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2240",
+      "file": 2185170,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2250",
+        "P2230"
+      ],
+      "fields": [
+        "The IC shown below is the Small-Outline Package (SOP). The SOP has pins in the same arrangement as the TSOP, however, the IC is slightly bigger. The pins can be identified in the same manner as the TSOP."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2250",
+      "file": 2198046,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2260",
+        "P2240"
+      ],
+      "fields": [
+        "The ICs in this group are normally used for surface mount PC boards. A surface mount IC is specially soldered to the top side of a PC board. This allows large circuits to be assembled on a small PC board, utilizing both sides of the board better."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2260",
+      "file": 2206358,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2270",
+        "P2250"
+      ],
+      "fields": [
+        "The last group of package types we will look at is the LCC and PGA package. Like the Quad Flat Pack, these packages are made from either ceramic or plastic. The only major difference is the size and pin arrangement."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2270",
+      "file": 2219658,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2280",
+        "P2260",
+        "P2285",
+        "P2270",
+        "PGA"
+      ],
+      "fields": [
+        "The IC shown below is the Leaded (or Leadless) Chip Carrier (LCC). The LCC has pins in the same arrangement as the SOJ, each lead being shaped like a J. Remember, these types of ICs are inserted into a socket.",
+        "The IC shown below is the Pin Grid Array (PGA) package. The PGA has pins that exit the bottom of the IC. For PGA ICs, pin assignment should be determined by examining the data book with the particular IC in it."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2285",
+      "file": 2285244,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P2280"
+      ],
+      "fields": [
+        "Identify the package type of the IC shown below."
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1044,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p2287\"...............................P.w.i.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703232383722e0e0a2e00000bb0400000f000e00fb040a000800000014001000ffff08fe0450007701690fd908d1100000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1456,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p2288\".....W........................O.w.f.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703232383822e0e0a2e00057060000ffff110097060a000900000014001200ffff089a064f0077016612d908bf130000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 2018,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area3\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p2290\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561332229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703232393022e0e02d2d7b486967686c6967687420436f6c"
+        }
+      ]
+    },
+    {
+      "page": "P2286",
+      "file": 2294918,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p2285\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703232383522203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P2287",
+      "file": 2296978,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "Remember, the DIP package has two rows of pins, hence the word Dual. The IC shown below has multiple pins exiting the bottom of the chip package. These pins are in a pin grid array."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2288",
+      "file": 2305762,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "Remember, the Flat-Pack has two rows of pins leaving straight out of  the package. The IC shown below has multiple pins exiting the bottom of the chip package. These pins are in a pin grid array."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P2290",
+      "file": 2314594,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2910",
+        "P2285"
+      ],
+      "fields": [
+        "As you can see, there are many different types of IC packages and pin arrangements. However, there are many more types than the ones we have discussed. These are just the basic package types. As industry needs change, different package types are likely to follow."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2910",
+      "file": 2330440,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P2001",
+        "P2290"
+      ],
+      "fields": [
+        "This completes the information on IC CIRCUIT CONSTRUCTION."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2920",
+      "file": 2333194,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2930",
+        "P2001"
+      ],
+      "fields": [
+        "1.  Monolithic ICs are created using different layers of doped\n     materials, and using different techniques; oxidation,\n     photochemical, chemical, evaporation, and depositing."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2930",
+      "file": 2344602,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P2940",
+        "P2920",
+        "P2999",
+        "P2930"
+      ],
+      "fields": [
+        "2.  There are three different factors to deal with when packaging\n     an IC; packaging material, package shape, pin arrangement.\n     The packaging material for IC's can be ceramic, plastic,\n     glass, or metal.",
+        "3.  For package shape and pin arrangement, there are many\n     different varieties. The illustration shows groups of some\n     different package types and pin arrangements. The\n     application will help to determine which package type and pin\n     arrangement will be used."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P2999",
+      "file": 2381378,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P2001",
+        "P2940"
+      ],
+      "fields": [
+        "You have completed the Summary. \nYou are about to return to the Objective Menu."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3001",
+      "file": 2384030,
+      "captions": [
+        "Back",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 3086,
+          "goes": [],
+          "text": "To Handle ButtonClick..4lastbook...=.p...8..4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ......................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be192346c617374626f6f6be2c5063d9170888eb038e292346e65787470616765e2c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0a2e00000d30c000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b301000000008b00"
+        }
+      ]
+    },
+    {
+      "page": "P3020",
+      "file": 2389608,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3030",
+        "P3001",
+        "P3020"
+      ],
+      "fields": [
+        "Knowing the electrical and functional characteristics of an IC is essential for proper operation. The operational information is not printed on the IC, but the information can be found by using the number printed on the IC.",
+        "Unless you have used this IC before, from just looking at the IC below you cannot determine the electrical or functional characteristics of this IC. There are two general ways that the information about this IC can be retrieved."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 8633,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3040",
+      "file": 2430552,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3020"
+      ],
+      "fields": [
+        "The first method we will look at is the data book. This method will give you the most information. Examine the IC and notice the classification number and manufacturer. In the example below, the classification number is SN74LS11 and the manufacturer is identified by the logo."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3050",
+      "file": 2449720,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "In most cases you will know the general application of the IC, in our example we know that we are using a digital gate IC. So far we know the make and general classification of the IC. We can use this to select the data book we need."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 287,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3060",
+      "file": 2454900,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "The data book we will use to reference this IC is the Nida Digital Gates TTL Logic data book. If you know that a particular company makes the IC, but are unsure of the IC type, use the numerical index to see if that IC is in that particular data book."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 535,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3070",
+      "file": 2473278,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "The numerical index lists the IC's contained in the book or a series of books, and what page or book contains the information. If the IC isn't in the data book, try another one from the same company."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 287,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3080",
+      "file": 2475352,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "Once you have located the data book containing the IC you are referencing, turn to the page indicated in the numerical index. At the top of the page you will see a list of IC's labeled. One of them should be the same as your IC."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 287,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3090",
+      "file": 2477458,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "Since one type of IC may have a few varieties with minor differences, all the types will be grouped together like the example below; SN54LS11, SN54S11, SN74LS11, a Triple 3-input AND gate."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 287,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3100",
+      "file": 2479500,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P3040"
+      ],
+      "fields": [
+        "Given the IC below, identify the function of the IC."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 1194,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area1\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p3110\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561312229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703331313022e0e02d2d7b486967686c6967687420436f6c"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 1724,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p3102\".....c........................J.J.J.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703331303222e0e0a2e00063070000ffff1100a3070a000900000014001200ffff08a6074a004a014a10880ec0120000"
+        },
+        {
+          "kind": "ButtonClick",
+          "off": 2136,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Aagain Page}........\"p3102\".............3...:............I...|...H...",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f657320805472792041616761696e20506167657df0e00990af80918322703331303222e0e0a20000ff080000ffff130033090b003a0000001400ffffffff00000049001b0f7c0bbc1848120000"
+        }
+      ]
+    },
+    {
+      "page": "P3101",
+      "file": 2489714,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p3100\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703331303022203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P3102",
+      "file": 2491724,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [
+        "From the data book page heading you should have determined that the IC had the same heading as the IC labels for the Hex Schmitt-Trigger Inverters."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3110",
+      "file": 2500974,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3100"
+      ],
+      "fields": [
+        "Now let's look at the information that is contained on the data book IC pages. While this information may be spread over many pages, the page shown below shows the general information contained in the data book."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3120",
+      "file": 2517746,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3110"
+      ],
+      "fields": [
+        "The description normally tells about; the operation of the IC, variations of different versions, and other useful data that may help in the use of the IC. In our example the description tells what the IC contains, and the temperature range for the operation of different versions."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3130",
+      "file": 2521102,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3120"
+      ],
+      "fields": [
+        "The package types show you the different packages and pin assignments for that IC. As you can see from our IC, the two diagrams show the correct pin out. The two different package types for this IC are DIP and LCC."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 359,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go ..t..}...t..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20809174b1837de287b174e0e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3140",
+      "file": 2537482,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3150",
+        "P3130"
+      ],
+      "fields": [
+        "For Digital ICs, data books also provide a logic diagram, logic symbol, and a function table if applicable. For our example all three of these are used. The logic  diagram and symbol represent two ways to illustrate the contents of the IC."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3150",
+      "file": 2552440,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3160",
+        "P3140"
+      ],
+      "fields": [
+        "While the logic diagram and symbol illustrate the contents of the IC, a schematic is provided to show all the components of the IC, not grouped into devices. The digital AND gates are shown as their actual components; resistors, diodes, and transistors."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3160",
+      "file": 2571044,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3170",
+        "P3150"
+      ],
+      "fields": [
+        "The operating voltage levels for inputs and outputs are listed in the Recommended Operating Conditions table. For example, this table shows the supply voltage should be adjusted to approximately 5V."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3170",
+      "file": 2575500,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3180",
+        "P3160"
+      ],
+      "fields": [
+        "The electrical characteristics table lists the IC conditions based on recommended operating voltage levels. Most of these values are used by an electrical engineer and not by a technician."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3180",
+      "file": 2580964,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3190",
+        "P3170"
+      ],
+      "fields": [
+        "The last section we are concerned with is the typical characteristics. This data is normally supplied for a linear (Analog) IC. Our IC is digital so this section contains no diagrams. The picture below illustrates some typical characteristic diagrams for a particular linear IC."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3190",
+      "file": 2594098,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3200",
+        "P3180"
+      ],
+      "fields": [
+        "It is important to realize that all the information we have covered may not be contained in every data book. Different manufacturers have different standards."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3200",
+      "file": 2613372,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3210",
+        "P3190"
+      ],
+      "fields": [
+        "Most data books contain a section called general information. In this section, other data printed on an IC may or may not be described and defined."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3210",
+      "file": 2615390,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3220",
+        "P3190"
+      ],
+      "fields": [
+        "Now that we have referenced an IC using a data book, let's reference an IC using our second resource, the IC technical guide and cross reference."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3220",
+      "file": 2626516,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3230",
+        "P3210"
+      ],
+      "fields": [
+        "This type of reference guide is normally published by companies that offer replacement ICs, which is why this type of reference is typically used by technicians or people troubleshooting circuits."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3230",
+      "file": 2628598,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3240",
+        "P3210"
+      ],
+      "fields": [
+        "This reference guide is a large index of part numbers for thousands of ICs. Let's reference the IC that we looked up in the data book, SN74LS11."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3240",
+      "file": 2633698,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3250",
+        "P3210"
+      ],
+      "fields": [
+        "After finding the IC in the list, a replacement or reference number  will be listed. In our case the number 74LS11. The next step is to look in the replacement part product list and locate the next number."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3250",
+      "file": 2635780,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3260",
+        "P3210"
+      ],
+      "fields": [
+        "Finding the replacement part in the product list will give us three things; IC description, pinout page number, and diagram number.  Let's look at the pinout and diagram for this IC."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3260",
+      "file": 2638688,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3270",
+        "P3250"
+      ],
+      "fields": [
+        "Going to page 112 we see the pinout for our IC. You can see that the pinout is the same as the one we found in the data book."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3270",
+      "file": 2647922,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3280",
+        "P3260"
+      ],
+      "fields": [
+        "Looking up the diagram number gives us a diagram showing the actual dimensions of the IC. It is important to realize that many reference guides will be different, but their basic overall use is the same."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3280",
+      "file": 2658326,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3290",
+        "P3270"
+      ],
+      "fields": [
+        "If a circuit you were troubleshooting contained a faulty IC, the reference guide can be used to purchase a replacement IC very easily."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3290",
+      "file": 2669424,
+      "captions": [
+        "Back"
+      ],
+      "goes": [
+        "P3280"
+      ],
+      "fields": [
+        "Which of the following references usually contains the most information about a particular IC?"
+      ],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 1044,
+          "goes": [],
+          "text": "To Handle ButtonClick.--{...z.tries}....incorrectEmbedded()..--{..lastpage}...4........ = .p......--{Goes .Try Again Page}........\"p3292\".................................h.Z.......",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be02d2d7b90c5917a8874726965737de00990ad696e636f7272656374456d6265646465642829e0e02d2d7b91dc6c617374706167657de0099234920dc50ce009c510203d209170888eb183e0e02d2d7b476f6573208054727920416761696e20506167657df0e00990af80918322703332393222e0e0a2e00000bb0400000f000e00fb040a000900000014001000ffff08fe04120068015a0fea15b3100000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 1606,
+          "goes": [],
+          "text": "TO HANDLE buttonClick..--{..response}...saveEmbedded(testno ....,.questionno ...., \"area2\")..--{..lastpage}..4....... = .p......--{..nextpage}..4....... = \"p3300\"..--{Highlight Col",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be0e02d2d7b91dc726573706f6e73657de290ad73617665456d62656464656428746573746e6f20888eb1832cf07175657374696f6e6e6f20888eb1832c202261726561322229e0e02d2d7b91dc6c617374706167657de29234920dc50be2c50e203d209170888e9183e1e02d2d7b87806e657874706167657de29234920dc50be2c50e203d2022703333303022e0e02d2d7b486967686c6967687420436f6c"
+        }
+      ]
+    },
+    {
+      "page": "P3291",
+      "file": 2672374,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 401,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Go .nextpage}..4.............--{Dehighlight Correct}.rgbfill ...\"correct\" ...\"p3290\" = 64,255,255...o..s...................................................",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b476f20806e657874706167657de29234920dc50be290af809183c513e02d2d7b4465686967686c6967687420436f72726563747de272676266696c6c2088909622636f7272656374222088918322703332393022203d2036342c3235352c323535e082c86fe0007302000002020000000000000000000100b301b30100000000830000000000000001009501950100000000840000000000000000"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 804,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage............9........................................................................................................U...",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e082c839e00000d103000002020000000000000000000100b301b3010000000086000000000000000100950195010000000087000000000000000000000000000000000000000000000000000100b301b3010000000088000005040b000b00000014000700ffff000000ffff550cca17"
+        }
+      ]
+    },
+    {
+      "page": "P3292",
+      "file": 2674434,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3310",
+        "P3290"
+      ],
+      "fields": [
+        "Remember, it is the data book that contains the most information about an IC. A Technical guide and Cross reference gives a little description, a pinout, and dimensions for an IC, so that you can determine if the available replacement part can be used for your application.",
+        "As you can see, IC reference materials provide valuable information on the electrical and functional characteristics of an IC."
+      ],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 402,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage..........END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50be0e0454e44"
+        },
+        {
+          "kind": "buttonClick",
+          "off": 752,
+          "goes": [],
+          "text": "TO HANDLE buttonClick.--{Returns .question ..}..4..lastpage........ ..END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be02d2d7b52657475726e7320807175657374696f6e20b1837de29234920d6c61737470616765e290af809183c50b20e2e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P3310",
+      "file": 2713858,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3910",
+        "P3300"
+      ],
+      "fields": [
+        "The reference material you use may be different from what we have discussed, however, most IC reference materials are structured the same way."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3910",
+      "file": 2715876,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P3001",
+        "P3300"
+      ],
+      "fields": [
+        "This completes the information on IC IDENTIFICATION."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3920",
+      "file": 2718580,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3930",
+        "P3001"
+      ],
+      "fields": [
+        "1.  There are two main types of reference material for identifying\n     ICs; the data book and the technical guide and cross\n     reference. A data book provides more information about an IC."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3930",
+      "file": 2738498,
+      "captions": [
+        "Next",
+        "Back"
+      ],
+      "goes": [
+        "P3999",
+        "P3920"
+      ],
+      "fields": [
+        "2.  A technical guide and cross reference will correspond\n     thousands ICs made by different manufacturers. They\n     normally provide a brief description, a pinout, and a diagram\n     showing the IC dimensions."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P3999",
+      "file": 2748402,
+      "captions": [
+        "Next",
+        "Back",
+        "Menu"
+      ],
+      "goes": [
+        "P3001",
+        "P3930"
+      ],
+      "fields": [
+        "You have completed the Summary. \nYou are about to return to the Objective Menu."
+      ],
+      "handlers": []
+    },
+    {
+      "page": "P10001",
+      "file": 2751004,
+      "captions": [
+        "Next",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 5346,
+          "goes": [],
+          "text": "To Handle ButtonClick...4lastbook...=.p...8...4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ....................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be0e192346c617374626f6f6be2c5063d9170888eb038e0e192346e65787470616765e3c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0e0a2e000a915000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b30100000000"
+        }
+      ]
+    },
+    {
+      "page": "P10002",
+      "file": 2759524,
+      "captions": [
+        "Next",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 5344,
+          "goes": [],
+          "text": "To Handle ButtonClick...4lastbook...=.p...8...4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ....................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be0e192346c617374626f6f6be2c5063d9170888eb038e0e192346e65787470616765e3c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0e0a2e000a715000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b30100000000"
+        }
+      ]
+    },
+    {
+      "page": "P10003",
+      "file": 2767254,
+      "captions": [
+        "Next",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 4288,
+          "goes": [],
+          "text": "To Handle ButtonClick...4lastbook...=.p...8...4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" ....................................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be0e192346c617374626f6f6be2c5063d9170888eb038e0e192346e65787470616765e3c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0e0a2e0008711000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b30100000000"
+        }
+      ]
+    },
+    {
+      "page": "P10004",
+      "file": 2773940,
+      "captions": [
+        "Next",
+        "Menu"
+      ],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "ButtonClick",
+          "off": 4274,
+          "goes": [],
+          "text": "To Handle ButtonClick...4lastbook...=.p...8...4nextpage...=.p..........\"P20001\" ..8\"nida81.tbk\" .....y..............................................................................",
+          "hex": "546f2048616e646c6520427574746f6e436c69636be0e192346c617374626f6f6be2c5063d9170888eb038e0e192346e65787470616765e3c5063d9170888eb183e290af809183225032303030312220889038226e69646138312e74626b2220e0e0a2e0007911000002020000000000000000000100b301b301000000008900000000000000010095019501000000008a000000000000000000000000000000000000000000000000000100b301b30100000000"
+        }
+      ]
+    },
+    {
+      "page": "P30000",
+      "file": 2955402,
+      "captions": [],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 928,
+          "goes": [],
+          "text": "TO HANDLE buttonClick....B.............\"Objective#\" ...\"P30000\" .\"\".END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be00987914292c8808eb183e0098a8d889096224f626a656374697665232220889183225033303030302220802222e0454e44"
+        }
+      ]
+    },
+    {
+      "page": "P30010",
+      "file": 2957728,
+      "captions": [],
+      "goes": [],
+      "fields": [],
+      "handlers": [
+        {
+          "kind": "buttonClick",
+          "off": 366,
+          "goes": [],
+          "text": "TO HANDLE buttonClick....B.......END",
+          "hex": "544f2048414e444c4520627574746f6e436c69636be00987914292c8808eb183e0454e44"
+        }
+      ]
+    }
+  ]
+}

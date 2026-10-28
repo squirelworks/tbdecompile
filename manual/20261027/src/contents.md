@@ -58,7 +58,7 @@ NE segment numbers are not Ghidra `CodeN` names. Segment 1 is `1000`, segment 2 
 
 ## What this record will not hold
 
-Binary dumps, SoftICE console logs, and personal correspondence stay out of this repository. Names of correspondents are masked. The correspondent already used in the public notes is JohnDoe1. `who-is-who` is not part of this record.
+Binary dumps, SoftICE console logs, and personal correspondence stay out of this repository. Names of correspondents are masked. The correspondent already used in the public notes is JohnDoe1. 
 
 ## Which older sentence to trust
 
@@ -1486,7 +1486,7 @@ A later stop in the same session was `43EF:2992`, `ASYMCTLPAUSE` (line 3606), no
 
 # 18. Where every loose sheet went
 
-The absorbed sheets now live under `tbworkingpapers/history/sheets/`. A row that says `tbwp0001/…` means `history/sheets/tbwp0001/…`. The manual source stays at `tbworkingpapers/sheets/tbwp0030/`. `tbwp0019`'s notes, and the seventeen renamed JSON files that still read, are in `history/sheets/tbwp0019/`. The rest of that dump does not read. It is still `tbworkingpapers/tbwp0019/`. `who-is-who` is not in this index and is not in this repository. The shelf is `tbworkingpapers/history/miscellaneous/`. Binary password deltas stay in the working papers, under `history/sheets/tbwp0027/`.
+The absorbed sheets are in `archive/trail/`. A row that says `tbwp0001/…` means `archive/trail/tbwp0001/…`. The 16 October manual source is `archive/sheets/tbwp0030/`. The volume that replaced it is `manual/`. The old viewers and the other tries are in `archive/efforts/`. Foolbook is the reader.
 
 A row marked superseded means the sheet still contains a sentence this record closed. Read the sheet for the function body if you need it. Read this record for the claim.
 

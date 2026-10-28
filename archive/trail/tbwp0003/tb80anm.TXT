@@ -1,0 +1,1181 @@
+10/13/26 4:42:54 AM
+
+
+----------------------------------------------------------------------
+Book "C:\TBK\tb80anm.sbk"
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+--	SYSTEM message handlers related to animations					--
+----------------------------------------------------------------------
+
+to handle linkSysbook
+	if target = self
+		-- This sysBook relies on the ToolBook runtime sysBook (TBx0R.SBK)
+
+		linkDLL "tbfile32.dll"
+			STRING getShortFileName32(STRING, WORD)
+		end
+
+		runtimeName = "tb80r.sbk"
+		if runtimeName is not in sysBooks
+			fName = sysToolBookDirectory & runtimeName
+			get getShortFileName32(fName, 1)
+			if it <> null
+				fName = it
+			end
+			put "," & fName after sysBooks
+		else
+			-- ensure we're in the right place (before the runtime system book)
+			systemBooks = sysBooks
+			anmName = "tb80anm.sbk"
+			get offset (anmName, systemBooks)
+			if it > 0
+				anmNum = itemCount (chars 1 to it of systemBooks)
+	
+				get offset (runtimeName, systemBooks)
+				if it > 0
+					runtimeNum = itemCount (chars 1 to it of systemBooks)
+
+					if anmNum > runtimeNum -- animation system book is after runtime system book
+						clear item anmNum of systemBooks
+
+						fName = sysToolBookDirectory & anmName
+						get getShortFileName32(fName, 1)
+						if it <> null
+							fName = it
+						end
+
+						put fName & "," before item runtimeNum of systemBooks
+
+						ssm = sysSuspendMessages
+						sysSuspendMessages = true
+						sysBooks = systemBooks
+						sysSuspendMessages = ssm
+					end
+				end
+			end
+		end
+
+		send setUpDlls
+	end
+end
+
+----------------------------------------------------------------------
+--	SYSTEM message handlers related to animations					--
+----------------------------------------------------------------------
+
+-- traps when an object is moved and repositions animation path if
+-- user has not selected fixed coordinate path for the the object
+to handle moved
+	SYSTEM s_anim_idleAnimations
+	LOCAL newPos, settingsTable[][]
+
+	if "anim_animationSettings" is in userProperties of target and target is not in s_anim_idleAnimations
+		clear sysError
+		ss = sysSuspend
+		sysSuspend = FALSE
+		settingsTable = anim_animationSettings of target
+		sysSuspend = ss
+		if sysError = null and name of this window <> "anim_edit"
+			if dimensions(settingsTable) <> null
+				set newPos to position of target
+				get anim_startPosition(1) of target
+				if it <> NULL
+					dx = item 1 of newPos - item 1 of it
+					dy = item 2 of newPos - item 2 of it
+					step i from 1 to item 1 of dimensions(settingsTable)
+						if settingsTable[i][13] = null
+							continue
+						end
+						if not settingsTable[i][13] and sysLevel is "Author" 
+							get anim_StartPosition(i) of target
+							get item 1 of it + dx,item 2 of it + dy
+							set anim_StartPosition(i) of target to it
+						end
+					end
+				end
+			end
+		end
+	end
+	forward
+end
+
+
+--------------------------------------------------------------
+--	These handlers are helper functions for startup			--
+--------------------------------------------------------------
+
+to handle setUpDlls
+	LOCAL LOGICAL sysSuspendState
+
+	-- for use instead of getTickCount()
+	-- it's more accurate in calculating durations
+	linkDLL "mmSystem.dll"
+		DWORD a_timeGetTime=timeGetTime()
+	end
+end
+
+--------------------------------------------------------------
+--	These scripts are for playing the animation of an object	--
+--------------------------------------------------------------
+
+to handle playAnimation animation, notifyObject, waitTillDone, options
+	SYSTEM s_anim_idleAnimations,s_anim_animationCache[][], animTimerID
+	LOCAL animationSettings[]
+
+	send setUpDlls
+
+	noRestart = ASYM_ItemInList ("noRestart", options)
+
+	if animation = NULL
+		animation = ASYM_AnimationNumber of target
+		if animation = null
+			animation = 1
+		end
+	else
+		if animation <> ASYM_AnimationNumber of target
+			-- We're playing a different animation to the one we have cached,
+			-- so clear all the cached information.
+			clear ASYM_AnimationState of target
+			clear ASYM_AnimationNumber of target
+			clear ASYM_AnimationNotifyObject of target
+			clear ASYM_AnimationNotifyViewer of target
+			clear ASYM_AnimationPosition of target
+			clear ASYM_AnimationStep of target
+
+			-- if we're playing a different animation, we always restart
+			noRestart = false
+		end
+	end
+
+	-- start only the items which actually have animations
+	animationSettings = objectAnimation(animation) of target
+	if dimensions(animationSettings) = 0
+		break playAnimation
+	end
+
+	theTarget = uniqueName of target
+
+	if itemcount(s_anim_idleAnimations) = 0 or animTimerID = NULL
+		send startAnimTimer
+	end
+	
+	-- if it's already being animated on idle then stop and restart
+	if theTarget is in s_anim_idleAnimations 
+		-- if requested not to restart this animation, then we bail
+		if noRestart
+			break
+		end
+
+		step i from 1 to itemCount(s_anim_idleAnimations)
+			mmYield
+			get item i of s_anim_idleAnimations
+			if it <> NULL and it = target
+				if s_anim_animationCache[i][3] <> NULL
+					send doneAnimatingNotify "Reset by play command", theTarget to theTarget in s_anim_animationCache[i][12]
+				end
+				break step
+			end
+		end
+	else
+		animCount = itemCount(s_anim_idleAnimations)
+		step i from 1 to animCount
+			if item i of s_anim_idleAnimations = NULL
+				break step
+			end
+		end
+
+		if i > animCount
+			-- i is already bigger than animCount so increment animCount
+			-- because we are going to add an animation	
+			increment animCount
+		end
+	end
+
+	item i of s_anim_idleAnimations = theTarget
+
+	isPaused = ASYM_AnimationState of target = "paused"
+	if isPaused
+		s_anim_animationCache[i][1] = a_timeGetTime() - ASYM_AnimationPosition of target
+		s_anim_animationCache[i][2] = ASYM_AnimationStep of target
+		clear ASYM_AnimationPosition of target
+		clear ASYM_AnimationStep of target
+	else
+		s_anim_animationCache[i][1] = a_timeGetTime()			--StartTime
+		s_anim_animationCache[i][2] = 0							--CurrentStep
+	end
+
+	s_anim_animationCache[i][3] = notifyObject				--Notify Object
+	step j from 4 to 11
+		s_anim_animationCache[i][j] = animationSettings[j]
+	end
+	s_anim_animationCache[i][12] = this window
+
+	-- move to the starting point and show first cel if any
+	if not isPaused
+		lockScreen of this window = TRUE
+		move theTarget to s_anim_animationCache[i][6]
+		if s_anim_animationCache[i][4]
+			hide objects of theTarget
+			show item 1 of objects of theTarget
+		end
+		lockscreen of this window = FALSE
+	end
+
+	if waitTillDone = TRUE
+		-- finish this animation before continuing
+		do
+			mmYield
+			step j from 1 to itemCount(s_anim_idleAnimations)
+				get item j of s_anim_idleAnimations
+				if it <> NULL
+					send playStep j to it in s_anim_animationCache[j][12]
+					get yieldApp()
+				end
+				if keyState(sysMediaBreakKey) = down 
+					step i from 1 to itemCount(s_anim_idleAnimations)
+						get item i of s_anim_idleAnimations
+						if it <> NULL
+							send stopAnimation "aborted by the user" to it in s_anim_animationCache[i][12]
+						end
+					end
+				end
+			end
+		until item i of s_anim_idleAnimations = NULL
+		-- potential infinite loop (when reps=forever) unless user presses Escape key to end
+	else
+		-- remember what animation is currently playing and set the state
+		ASYM_AnimationNumber of target = animation
+		ASYM_AnimationState of target = "playing"
+	end
+
+	if itemcount(s_anim_idleAnimations) = 0
+		send stopAnimTimer
+	end
+
+end
+
+-------------------
+
+to handle ASYM_Reset
+	-- If targeted at an object which has a path animation, stops the
+	-- animation. If targeted at a page, does a restore for all
+	-- animations on the page
+
+	obType = object of target
+
+	conditions
+	when obType = "page"
+		pageAnimObs = getObjectList (target, null, "anim_animationSettings")
+		while pageAnimObs <> null
+			pop pageAnimObs
+			send stopAnimation null, "restore" to it
+		end
+
+		bgAnimObs = getObjectList (parent of target, null, "anim_animationSettings")
+		while bgAnimObs <> null
+			pop bgAnimObs
+			send stopAnimation null, "restore" to it
+		end
+	when obType = "background"
+		animObs = getObjectList (target, null, "anim_animationSettings")
+		while animObs <> null
+			pop animObs
+			send stopAnimation null, "restore" to it
+		end
+	else
+		if not ASYM_ItemInList (obType, "viewer,book")
+			if charCount (getPropertyDimensions (target, "anim_animationSettings")) > 0
+				send stopAnimation null, "restore" to target
+			end
+		end
+	end
+
+	forward
+end
+
+-- much the same as stop animation, but doesn't cause notify
+to handle pauseAnimation status
+	SYSTEM s_anim_idleAnimations, s_anim_animationCache[][]
+
+	animOffset = animationCacheEntry (target)
+
+	if animOffset <> 0
+		ASYM_AnimationNotifyObject of target = s_anim_animationCache[animOffset][3]
+		ASYM_AnimationNotifyViewer of target = s_anim_animationCache[animOffset][12]
+		ASYM_AnimationState of target = "paused"
+		ASYM_AnimationPosition of target = a_timeGetTime() - s_anim_animationCache[animOffset][1] 
+		ASYM_AnimationStep of target = s_anim_animationCache[animOffset][2]
+		item animOffset of s_anim_idleAnimations = NULL
+		s_anim_animationCache[animOffset][1] = 0
+	end
+
+	send ASYM_CleanupAnimations
+end
+
+-- stops an animation done "During Idle" by removing it from the idle animations
+to handle stopAnimation status, options
+	SYSTEM s_anim_idleAnimations, s_anim_animationCache[][]
+
+	doRestore = ASYM_ItemInList ("restore", options)
+
+	animOffset = animationCacheEntry (target)
+
+	-- An object might not be in the animation list as it is paused - we still
+	-- want to restore it if requested
+	if doRestore = true
+		animNum = ASYM_AnimationNumber of target
+		if animNum = null
+			animNum = 1
+		end
+		send restoreAnimation target, animNum to target
+	end
+
+	if animOffset <> 0
+		item animOffset of s_anim_idleAnimations = NULL
+		s_anim_animationCache[animOffset][1] = 0
+	end
+
+	-- We want to send doneAnimatingNotify if the animation was actually
+	-- animating *OR* it was paused
+	animState = ASYM_AnimationState of target
+	if animOffset <> 0 or animState <> null
+		notifyObj = NULL
+		if animOffset <> 0
+			notifyObj = s_anim_animationCache[animOffset][3]
+			notifyViewer = s_anim_animationCache[animOffset][12]
+		else
+			notifyObj = ASYM_AnimationNotifyObject of target
+			notifyViewer = ASYM_AnimationNotifyViewer of target
+		end
+		if notifyObj = null
+			notifyObj = target
+		end
+		if notifyViewer = null
+			notifyViewer = targetWindow
+		end
+		send doneAnimatingNotify status,target to notifyObj in notifyViewer
+	end
+
+	clear ASYM_AnimationState of target
+	clear ASYM_AnimationNumber of target
+	clear ASYM_AnimationNotifyObject of target
+	clear ASYM_AnimationNotifyViewer of target
+	clear ASYM_AnimationPosition of target
+	clear ASYM_AnimationStep of target
+
+	send ASYM_CleanupAnimations
+end
+
+-- clears the system variables if there are no more animations
+to handle ASYM_CleanupAnimations
+	system s_anim_idleAnimations, s_anim_animationCache
+
+	--check to see if there are any animating objects
+	get itemCount(s_anim_idleAnimations)
+	step i from 1 to it
+		if item i of s_anim_idleAnimations <> NULL
+			break step
+		end
+	end
+
+	--if all entries are NULL then no animating objects
+	if i > it or it = 0
+		clear s_anim_idleAnimations
+		clear s_anim_animationCache		
+		send stopAnimTimer
+	end
+end
+
+-------------------
+
+-- lets users specify a Step number to move the object to
+to handle jumpToStep whichStep, whichAnimation
+	LOCAL animationSettings[]
+
+	if whichAnimation = NULL
+		whichAnimation = 1
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		if whichStep > animationSettings[9] 
+			whichStep = animationSettings[9]
+		end
+
+		if whichStep = 0
+			position of target = animationSettings[6]
+			size of target = animationSettings[15]
+			if animationSettings[4]
+				hide objects of target
+				show item 1 of objects of target
+			end
+		else
+			if whichStep < 0 
+				whichStep = 1
+			end
+			get items (whichStep)*4-3 to (whichStep)*4 of animationSettings[10]
+			increment item 1 of it by item 1 of animationSettings[6]
+			increment item 3 of it by item 1 of animationSettings[6]
+			increment item 2 of it by item 2 of animationSettings[6]
+			increment item 4 of it by item 2 of animationSettings[6]
+			if sysLevel = "Author" 
+				-- to fake out the moved/sized handlers
+				tempSuspendMessages = sysSuspendMessages
+				sysSuspendMessages = TRUE
+			end
+			bounds of target = it
+			if sysLevel = "Author" 
+				-- to fake out the moved/sized handlers
+				sysSuspendMessages = tempSuspendMessages
+			end
+			if animationSettings[4]
+				hide objects of target
+				send updateCel target, animationSettings[11],whichStep
+			end
+
+			anim_CurrentStep(whichAnimation) of target = whichStep
+		end
+	end
+end
+
+-------------------
+
+-- lets users specify a percent of the full path length to move the object to
+to handle jumpToPercent percentComplete, whichAnimation
+	LOCAL animationSettings[]
+
+	if whichAnimation = NULL
+		whichAnimation = 1
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		whichStep = round((percentComplete mod 1)*animationSettings[9])
+		if whichStep > animationSettings[9] 
+			whichStep = animationSettings[9]
+		end
+		if whichStep < 0 
+			whichStep = 0
+		end
+		get items (whichStep+1)*4-3 to (whichStep+1)*4 of animationSettings[10]
+		increment item 1 of it by item 1 of animationSettings[6]
+		increment item 3 of it by item 1 of animationSettings[6]
+		increment item 2 of it by item 2 of animationSettings[6]
+		increment item 4 of it by item 2 of animationSettings[6]
+		if sysLevel = "Author" 
+			-- to fake out the moved/sized handlers
+			tempSuspendMessages = sysSuspendMessages
+			sysSuspendMessages = TRUE
+		end
+		bounds of target = it
+		if sysLevel = "Author" 
+			-- to fake out the moved/sized handlers
+			sysSuspendMessages = tempSuspendMessages
+		end
+		if animationSettings[4]
+			hide objects of target
+			send updateCel target, animationSettings[11],whichStep
+		end
+
+		anim_CurrentStep(whichAnimation) of target = whichStep
+	end
+end
+
+-------------------
+
+-- plays the next Step in an animation
+-- called by playAnimation handler for "Without Yielding" animations
+-- called by idle handler for "During Idle" animations
+to handle playStep currentAnim
+	SYSTEM s_anim_idleAnimations, s_anim_animationCache[][]
+	LOCAL theTickCount,percentComplete,stepNumber,celNumber
+
+	theTickCount = a_timeGetTime()
+	if s_anim_animationCache[currentAnim][5]; -- showing all frames
+		stepNumber = s_anim_animationCache[currentAnim][2] + 1
+	else
+		-- check to see which Step it should be on
+		-- first what percent of the path should have been covered by now?
+		--   %complete = [elapsed time since start/duration selected for animation in mSec]
+		percentComplete = (theTickCount-s_anim_animationCache[currentAnim][1])/s_anim_animationCache[currentAnim][8]/1000
+	
+		--    get the Step number animation should be on
+		stepNumber = round(percentComplete*s_anim_animationCache[currentAnim][9])
+	end
+	
+	-- lock screen so move and cel animation update happen simultaneously
+	ls = lockScreen of this window
+	lockScreen of this window = TRUE
+	if itemcount(s_anim_animationCache[currentAnim][10]) = 8
+		pt1 = item 1 of s_anim_animationCache[currentAnim][10]
+		pt2 = item 2 of s_anim_animationCache[currentAnim][10]
+		pt3 = item 3 of s_anim_animationCache[currentAnim][10]
+		pt4 = item 4 of s_anim_animationCache[currentAnim][10]
+		pt5 = item 5 of s_anim_animationCache[currentAnim][10]
+		pt6 = item 6 of s_anim_animationCache[currentAnim][10]
+		pt7 = item 7 of s_anim_animationCache[currentAnim][10]
+		pt8 = item 8 of s_anim_animationCache[currentAnim][10]
+		flag = pt1 <> pt5 and pt2 <> pt6 and pt3 <> pt7 and pt4 <> pt8
+		if not flag
+			flag = ((s_anim_animationCache[currentAnim][8] * 1000) + s_anim_animationCache[currentAnim][1]) < theTickCount
+		end
+	else
+		flag = true
+	end
+	
+	conditions
+		when stepNumber >= (s_anim_animationCache[currentAnim][9] * s_anim_animationCache[currentAnim][7]) and \
+			s_anim_animationCache[currentAnim][7] <> 0 and \
+			flag
+			
+			-- it's at or past the end of the animation so
+			-- move to last Step of animation and stop animation
+			get s_anim_animationCache[currentAnim][9] * 4 + 1
+			get items it to it + 3 of s_anim_animationCache[currentAnim][10]
+			increment item 1 of it by item 1 of s_anim_animationCache[currentAnim][6]
+			increment item 2 of it by item 2 of s_anim_animationCache[currentAnim][6]
+			increment item 3 of it by item 1 of s_anim_animationCache[currentAnim][6]
+			increment item 4 of it by item 2 of s_anim_animationCache[currentAnim][6]
+			if it <> bounds of target
+				bounds of target = it
+			end
+			-- check for objects with built-in cel animation
+			if s_anim_animationCache[currentAnim][4]
+				send updateCel target,s_anim_animationCache[currentAnim][11],s_anim_animationCache[currentAnim][9],s_anim_animationCache[currentAnim][2]
+			end
+			-- clear animation from queue if it's on its last rep
+			send stopAnimation "successful" to target
+		else
+			-- get the point specified
+			get (stepNumber mod s_anim_animationCache[currentAnim][9]) -- point number to go to
+			get items (it+1)*4-3 to (it+1)*4 of s_anim_animationCache[currentAnim][10]
+			increment item 1 of it by item 1 of s_anim_animationCache[currentAnim][6]
+			increment item 2 of it by item 2 of s_anim_animationCache[currentAnim][6]
+			increment item 3 of it by item 1 of s_anim_animationCache[currentAnim][6]
+			increment item 4 of it by item 2 of s_anim_animationCache[currentAnim][6]
+			if it <> bounds of target
+				bounds of target = it
+			end
+			-- check for objects with built-in cel animation
+			if s_anim_animationCache[currentAnim][4]
+				send updateCel target,s_anim_animationCache[currentAnim][11],stepNumber,s_anim_animationCache[currentAnim][2]
+			end
+			-- update currentStep
+			s_anim_animationCache[currentAnim][2] = stepNumber
+	end
+	lockScreen of this window = ls
+end
+
+-------------------
+
+-- hides previous Cel and shows the next of the target being animated
+to handle updateCel theTarget, StepsPerCel, stepNumber,previousstepNumber
+	LOCAL CelNumberToShow,CelNumberToHide,CelCount
+
+	-- increment stepNumber so that Step 0 shows Cel 0
+	-- (Cel 0 corresponds to object 1 of the group)
+	increment stepNumber
+
+	-- calculate which CelNumber to show with regards to StepsPerCel setting
+
+	CelNumberToShow = (stepNumber+StepsPerCel-1) div StepsPerCel -- so CelNumber always starts at 1
+	CelCount = itemCount(objects of theTarget) -- total Cels in group
+	CelNumberToShow = CelNumberToShow mod CelCount -- Cel number to show next
+	if CelNumberToShow = 0 
+		-- i.e. n mod n = 0 in which case we want to show the last Cel #n not #0!
+		CelNumberToShow = CelCount
+	end
+	
+	if previousstepNumber <> NULL 
+		increment previousstepNumber
+		-- hide previous Cel shown
+		CelNumberToHide = (previousstepNumber+StepsPerCel-1) div StepsPerCel -- so CelNumber always starts at 1
+		CelNumberToHide = CelNumberToHide mod CelCount
+		if CelNumberToHide = 0 
+			-- i.e. n mod n = 0 in which case we want to show the last Cel #n not #0!
+			CelNumberToHide = CelCount
+		end
+	else
+		-- assume it's the previous one
+		if CelNumberToShow = 1 
+			CelNumberToHide = CelCount
+		else
+			CelNumberToHide = CelNumberToShow-1
+		end
+	end
+
+	if CelNumberToHide <> CelNumberToShow
+		hide item CelNumberToHide of objects of theTarget
+		show item CelNumberToShow of objects of theTarget
+	end
+end
+
+-------------------
+
+to handle doneAnimatingNotify status,whatObject
+	-- traps message so no SYSTEM error is generated when 
+	-- this message is sent to objects without this handler
+end
+
+-------------------
+
+-- sends an object with an animation to its starting position
+-- can be sent to an object or with a list of objects to restore
+to handle restoreAnimation objectList, animationList
+
+	if objectList = NULL 
+		objectList = target
+	end
+	if animationList = NULL 
+		step i from 1 to itemCount(objectList)
+			push 1 onto animationList
+		end
+	end
+
+	while itemCount(objectList) > 0
+		pop objectList into currentObject
+		pop animationList into currentAnim
+		send jumpToStep 0, currentAnim to currentObject
+	end
+end
+
+to get ASYM_CloseAllAnimations
+	send closeAllAnimations
+	return TRUE		--just to let caller know we were here
+end
+
+to handle closeAllAnimations
+	system s_anim_idleAnimations, s_anim_animationCache[][]
+
+	set sysCursor to 4
+	send stopAnimTimer
+	step i from 1 to itemCount(s_anim_idleAnimations)
+		get item i of s_anim_idleAnimations
+		if it <> null and isOpen of s_anim_animationCache[i][12]
+			send restoreAnimation to it in s_anim_animationCache[i][12]
+			send stopAnimation "aborted by the user" to it in s_anim_animationCache[i][12]
+		end
+	end
+	set sysCursor to default
+end
+
+----------------------------------------------------------------------
+--	these scripts are utilities getting and setting a single animation
+--  of an object.
+----------------------------------------------------------------------
+
+to get objectAnimation rowNum
+	LOCAL settingsTable[][], animationSettings[]
+
+	bs = ASYM_BlockSuspend()
+	settingsTable = anim_animationSettings of target
+	bs = ASYM_RestoreSuspend(bs)
+	if rowNum = NULL
+		rowNum = 1
+	end
+	if bs = NULL and settingsTable[rowNum][1] <> NULL
+		step i from 1 to item 2 of dimensions(settingsTable)
+			animationSettings[i] = settingsTable[rowNum][i]
+		end
+		animationSettings[14] = rowNum
+	end
+	return animationSettings
+end
+
+-------------------
+
+to set objectAnimation to animationSettings[]
+	LOCAL settingsTable[][]
+
+	clear sysError
+	ss = sysSuspend
+	sysSuspend = FALSE
+	settingsTable = anim_animationSettings of target
+	sysSuspend = ss
+	if sysError = NULL
+		step i from 1 to item 2 of dimensions(settingsTable)
+			settingsTable[animationSettings[14]][i] = animationSettings[i]
+		end
+	else
+		step i from 1 to dimensions(animationSettings)
+			settingsTable[1][i] = animationSettings[i]
+		end
+	end
+	anim_animationSettings of target = settingsTable
+end
+
+----------------------------------------------------------------------
+--	these scripts are utilities for working with animation settings
+--  outside of the editor interface
+----------------------------------------------------------------------
+
+to get animationCacheEntry theTarget
+	SYSTEM s_anim_idleAnimations
+
+	get itemCount(s_anim_idleAnimations)
+	if it > 1
+		get offset(theTarget,s_anim_idleAnimations)
+		if it <> 0 
+			get itemCount(chars 1 to it of s_anim_idleAnimations)
+		end
+	else
+		if it <> 0 and uniqueName of theTarget <> uniqueName of item 1 of s_anim_idleAnimations
+			it = 0
+		end
+	end
+	return it
+end
+
+
+------------------------
+-- Run Time Properties
+------------------------
+
+
+to get anim_Offset
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it = 0
+		return -1
+	else
+		return s_anim_animationCache[it][6]
+	end
+end
+
+to set anim_Offset to value
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType(POINT, value)
+		s_anim_animationCache[it][6] = value
+		sysError = 0
+	else
+		sysError = -1
+	end
+end
+
+-------------------
+
+to get anim_CurrentStep
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it = 0
+		return -1
+	else
+		return s_anim_animationCache[it][2]
+	end
+end
+
+to set anim_CurrentStep to value
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("WORD", value)
+		s_anim_animationCache[it][2] = value
+	end
+end
+
+------------------------
+-- Persistent Properties
+------------------------
+
+to get anim_NumRepetitions
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it = 0
+		animationSettings = objectAnimation(whichAnimation) of target
+		if dimensions(animationSettings) > 0
+			return animationSettings[7]
+		else
+			return -1
+		end
+	else
+		return s_anim_animationCache[it][7]
+	end
+end
+
+to set anim_NumRepetitions to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("WORD", value)
+		s_anim_animationCache[it][7] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[7] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_CelAnimation whichAnimation
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+
+	if whichAnimation = null
+		get animationCacheEntry(target)
+		if it <> 0
+			return s_anim_animationCache[it][4]
+		else
+			whichAnimation = 1
+		end
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		return animationSettings[4]
+	else
+		return -1
+	end
+end
+
+to set anim_CelAnimation to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("LOGICAL", value)
+		s_anim_animationCache[it][4] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[4] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_ShowAllSteps whichAnimation
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it = 0
+		animationSettings = objectAnimation(whichAnimation) of target
+		if dimensions(animationSettings) > 0
+			return animationSettings[5]
+		else
+			return -1
+		end
+	else
+		return s_anim_animationCache[it][5]
+	end
+end
+
+to set anim_ShowAllSteps whichAnimation to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("LOGICAL", value)
+		s_anim_animationCache[it][5] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[5] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_Duration whichAnimation
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it = 0
+		animationSettings = objectAnimation(whichAnimation) of target
+		if dimensions(animationSettings) > 0
+			return animationSettings[8]
+		else
+			return -1
+		end
+	else
+		return s_anim_animationCache[it][8]
+	end
+end
+
+to set anim_Duration whichAnimation to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("WORD", value)
+		s_anim_animationCache[it][8] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[8] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_NumSteps whichAnimation
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it = 0
+		animationSettings = objectAnimation(whichAnimation) of target
+		if dimensions(animationSettings) > 0
+			return animationSettings[9]
+		else
+			return -1
+		end
+	else
+		return s_anim_animationCache[it][9]
+	end
+end
+
+to set anim_NumSteps whichAnimation to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("WORD", value)
+		s_anim_animationCache[it][9] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[9] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_StepsPerCell whichAnimation
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it = 0
+		animationSettings = objectAnimation(whichAnimation) of target
+		if dimensions(animationSettings) > 0
+			return animationSettings[11]
+		else
+			return -1
+		end
+	else
+		return s_anim_animationCache[it][11]
+	end
+end
+
+to set anim_StepsPerCell whichAnimation to value
+	SYSTEM s_anim_animationCache[][]
+	LOCAL animationSettings[]
+
+	get animationCacheEntry(target)
+	if it <> 0 and isType("WORD", value)
+		s_anim_animationCache[it][11] = value
+	end
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[11] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+-------------------
+
+to get anim_StartPosition whichAnimation
+	LOCAL animationSettings[]
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		return animationSettings[6]
+	else
+		return NULL
+	end
+end
+
+to set anim_StartPosition whichAnimation to value
+	LOCAL animationSettings[]
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		animationSettings[6] = value
+		objectAnimation of target = animationSettings
+	end
+end
+
+
+-------------------------
+-- Read Only (persistent)
+-------------------------
+
+to get anim_StartSize whichAnimation
+	LOCAL animationSettings[]
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		return animationSettings[15]
+	else
+		return -1
+	end
+end
+
+to get anim_EndSize whichAnimation
+	LOCAL animationSettings[]
+
+	animationSettings = objectAnimation(whichAnimation) of target
+	if dimensions(animationSettings) > 0
+		return animationSettings[16]
+	else
+		return -1
+	end
+end
+
+-------------------------
+-- Read Only (run-time)
+-------------------------
+
+to get anim_StartTime
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it = 0
+		return -1
+	else
+		return s_anim_animationCache[it][1]
+	end
+end
+
+to get anim_elapsedTime
+	SYSTEM s_anim_animationCache[][]
+
+	get animationCacheEntry(target)
+	if it = 0
+		return -1
+	else
+		return a_timeGetTime() - s_anim_animationCache[it][1]
+	end
+end
+
+to get anim_currentTime
+	return a_timeGetTime()
+end
+
+-----------------------------------
+-- Timer stuff
+-----------------------------------
+
+to handle updateAnimations
+	system s_anim_idleAnimations, s_anim_animationCache[][]
+	
+	conditions
+		when keyState(sysMediaBreakKey) is down
+			step i from 1 to itemCount(s_anim_idleAnimations)
+				whatAnim = item i of s_anim_idleAnimations
+				if whatAnim <> NULL 
+					send stopAnimation "aborted by the user" to whatAnim in s_anim_animationCache[i][12]
+				end
+			end
+		when itemCount(s_anim_idleAnimations) > 0
+			step i from 1 to itemCount(s_anim_idleAnimations)
+				whatAnim = item i of s_anim_idleAnimations
+				if whatAnim <> NULL 
+					if isOpen of s_anim_animationCache[i][12]
+						send playStep i to whatAnim in s_anim_animationCache[i][12]
+					else
+						clear item i of s_anim_idleAnimations
+						if itemCount(s_anim_idleAnimations) = 0
+							send stopAnimTimer
+							break updateAnimations
+						end
+					end
+				end
+			end
+	end
+end
+
+-----------------------------
+
+to handle animTimer whatHandle, whatMsg, wparam
+	SYSTEM animTimerID, animTimer
+
+	if wparam = animTimerID
+		send updateAnimations self
+	end
+end
+
+-----------------------------
+
+to handle startAnimTimer
+	SYSTEM animTimerID, animTimer
+
+	linkDll "USER"
+		INT 	anim_setTimer =		SetTimer		(WORD,INT,WORD,DWORD)
+		INT 	anim_killTimer =	KillTimer		(WORD,INT)
+	end
+	
+    animTimer = 4843
+    animTimerID = anim_setTimer(sysClientHandle,animTimer,50,0) 		
+	if animTimerID = 0
+		msgTxt = ASYM_GetString("msgAnimCantSetUpAnimations", \
+				"Could not setup animation, no animations will play.")
+		msgCaption = ASYM_GetString("Path Animation")
+		get ASYM_MessageBox(msgTxt, msgCaption, "WARNING", "OK")
+	end
+
+	translateWindowMessage for sysWindowHandle
+	  	after 		0x001F 	send closeAllAnimations
+	end
+	translateWindowMessage for sysClientHandle
+	  	after 		0x0113 	send animTimer
+	end											
+end
+
+-------------------------------------
+
+to handle stopAnimTimer
+	SYSTEM animTimerID, animTimer
+
+	if animTimerID <> NULL
+		get anim_killTimer(sysClientHandle,animTimerID)
+	
+		clear animTimerID
+		clear animTimer
+	end
+	
+	untranslateWindowMessage 0x001F for sysWindowHandle
+	untranslateWindowMessage 0x0113 for sysClientHandle
+end
+	
+to handle author
+	send closeAllAnimations
+	forward
+end
+----------------------------------------------------------------------
+Field id 55 of Background id 0
+----------------------------------------------------------------------
+notifyBefore enterPage
+	system s_ASYM_ProductName
+
+	textline 1 of my text = "ToolBook II" && s_ASYM_ProductName && ASYM_CBTVersion (true, "minorVersion")
+	
+	copyRight = ASYM_CopyRight()
+	if copyRight <> null
+		textline 5 of my text = copyRight
+	end
+end
+2 objects with script, 1171 script lines

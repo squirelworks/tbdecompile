@@ -1,0 +1,1898 @@
+10/13/26 4:37:02 AM
+
+
+----------------------------------------------------------------------
+Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+to handle enterApplication
+	if syslevel <> reader
+		send reader
+	end
+	if "tb80r.sbk" is not in sysBooks
+		push "tb80r.sbk" onto sysBooks
+	end
+	
+	forward
+end
+-- Put any other initialization statements here
+
+--{Full Screen Application}
+
+--to handle reader
+--	hide menubar
+--	captionBar of mainWindow = none
+--	borderstyle of mainWindow = none
+--	state of mainWindow = maximized
+--	forward
+--end
+
+to handle author
+	show menubar
+	state of mainWindow = normal
+	captionBar of mainWindow = normal
+	borderstyle of mainWindow = thickframe
+	send sizeToPage
+	
+	forward
+end
+
+to handle enterBook
+	system maincaption
+  	caption of MainWindow = maincaption
+
+    if syslevel = "reader" then
+    set saveonclose of this book to no
+  else
+    set saveOnClose of this book to system
+  end if
+  
+  forward
+end enterBook
+
+to handle enterPage
+    set text of field "page#" of parent of this page to name of this page
+    
+    forward
+end
+
+to handle keyup key
+system lastbook
+  conditions 
+	when key = keyf1
+    	request "Do you want to go to the Key Map?" with "&Yes" or "&No"
+			if it is "Yes" then
+					open viewer "key map"
+					currentpage of viewer "key map" = page "P20000" of book "nida81.tbk" 
+					show viewer "key map"
+				break
+			send next
+			end if
+    when key = keyf2
+		request "Are you sure you want to Exit the Lesson?" with "&Yes" or "&No"
+			if it is "Yes" then
+				get EndExperiment()
+		       	get closeSession()
+    	    send exit  
+      		end if
+ 	when key = keyf4
+    	request "Do you want to go to the Lesson Menu?" with "&Yes" or "&No"
+    		if it is "Yes" then
+				get EndExperiment()
+				go to page "p900" of book lastbook
+      end if
+
+	when key = keyf5
+		get specialFunctions(key)
+
+	when key = keyf6
+		get specialFunctions(key)	
+
+	when key = keyf7
+		get specialFunctions(key)
+
+	when key = keyf8
+		get specialFunctions(key)
+
+    when key = keyf9
+      request "Are you sure you want to Bookmark the Lesson?" with "&Yes" or "&No"
+      if it is "Yes" then
+        get EndExperiment()
+      	get bookmarkSession()
+        send exit  
+      end if
+
+	--when key = keyf10
+	--	get specialFunctions(key)
+
+	when key = keyf11
+		get specialFunctions(key)
+
+when key = keyf12
+		get specialFunctions(key)
+	when key = keyEnter
+      	if  isObject(button("Next"))  then
+      		if  visible of button("Next") is true  and  enabled of button("Next") is true  then
+	      		send buttonClick to button "next"
+	      	end if
+      	end if
+    else
+      forward
+  end conditions
+end	
+
+
+----------------------------------------------------------------------
+Page id 0 ("P0") of Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ go to page (nextpage) of book(lastbook)
+end
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 34 (p. 2)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 34 (p. 2)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 23 ("Back") of Page id 35 (p. 3)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 22 ("Next") of Page id 35 (p. 3)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 24 ("Back") of Page id 36 (p. 4)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 23 ("Next") of Page id 36 (p. 4)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 24 ("Back") of Page id 55 (p. 5)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 23 ("Next") of Page id 55 (p. 5)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 4
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 42 (p. 6)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ go to page nextpage of book lastbook
+end
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 42 (p. 6)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ go to page nextpage of book lastbook
+end
+
+----------------------------------------------------------------------
+Button id 26 ("Back") of Page id 37 (p. 7)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 25 ("Next") of Page id 37 (p. 7)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 26 ("Back") of Page id 45 (p. 8)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 25 ("Next") of Page id 45 (p. 8)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 26 ("Back") of Page id 54 (p. 9)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 25 ("Next") of Page id 54 (p. 9)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 26 ("Back") of Page id 56 (p. 10)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 25 ("Next") of Page id 56 (p. 10)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 27 ("Back") of Page id 39 (p. 11)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 26 ("Next") of Page id 39 (p. 11)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Back") of Page id 40 (p. 12)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 30 ("Next") of Page id 40 (p. 12)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Back") of Page id 52 (p. 13)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 30 ("Next") of Page id 52 (p. 13)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Back") of Page id 60 (p. 14)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 30 ("Next") of Page id 60 (p. 14)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 32 ("Back") of Page id 49 (p. 15)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Next") of Page id 49 (p. 15)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 32 ("Back") of Page id 50 (p. 16)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Next") of Page id 50 (p. 16)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 32 ("Back") of Page id 53 (p. 17)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Next") of Page id 53 (p. 17)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 32 ("Back") of Page id 85 (p. 18)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Next") of Page id 85 (p. 18)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 43 (p. 19)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 43 (p. 19)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 8 ("Back") of Page id 17 (p. 20)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 7 ("Next") of Page id 17 (p. 20)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Page id 25 ("P12000") of Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+To handle enterpage
+	system trainersettings
+	system ntries
+	
+	ntries = 0
+	
+	set text of field cnlv to item 1 of trainersettings
+	set text of field cplv to item 2 of trainersettings
+	
+	set text of field cac1 to "OFF"
+	set text of field cdc1 to "OFF"
+	set text of field cac2 to "OFF"
+	set text of field cdc2 to "OFF"
+	set text of field cspk to "OFF"
+	set text of field cdc3 to "OFF"
+	set text of field cfil to "OFF"
+	
+	trainersettings = uppercase(trainersettings)
+	step i from 1 to charCount(trainersettings)
+		if char i of trainersettings is ","  then
+			set char i of trainersettings to " "
+		end if
+	end step
+	
+	step i from 3 to wordCount(trainersettings)
+		temp = word i of trainersettings
+		conditions
+			when temp is "AC1"
+				set text of field cac1 to "ON"		
+			when temp is "DC1"
+				set text of field cdc1 to "ON"		
+			when temp is "AC2"
+				set text of field cac2 to "ON"		
+			when temp is "DC2"
+				set text of field cdc2 to "ON"		
+			when temp is "SPK"
+				set text of field cspk to "ON"		
+			when temp is "DC3"
+				set text of field cdc3 to "ON"		
+			when temp is "FIL"
+				set text of field cfil to "ON"		
+		end conditions
+	end step
+	
+	send updatesettings to self
+	forward
+end
+
+to handle updatesettings
+	local array onoff[2]
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	get readSwitches130a()
+	
+	onoff[1] = "OFF"
+	onoff[2] = "ON"
+
+	set text of field "AC1"	to onoff[1 + word 1 of it] 
+	set text of field "DC1"	to onoff[1 + word 2 of it] 
+	set text of field "AC2"	to onoff[1 + word 3 of it] 
+	set text of field "DC2"	to onoff[1 + word 4 of it] 
+	set text of field "SPK"	to onoff[1 + word 5 of it] 
+	set text of field "DC3"	to onoff[1 + word 6 of it] 
+	set text of field "Fil" to onoff[1 + word 7 of it] 
+	
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+	if text of field "AC1" = text of field "Cac1" 
+		set strokecolor of field "AC1" to red
+	else
+		set strokecolor of field "AC1" to blue
+	end if
+	if text of field "DC1" = text of field "Cdc1" 
+		set strokecolor of field "DC1" to red
+	else
+		set strokecolor of field "DC1" to blue
+	end if
+	if text of field "AC2" = text of field "Cac2" 
+		set strokecolor of field "AC2" to red
+	else
+		set strokecolor of field "AC2" to blue
+	end if
+		if text of field "DC2" = text of field "Cdc2" 
+		set strokecolor of field "DC2" to red
+	else
+		set strokecolor of field "DC2" to blue
+	end if
+		if text of field "SPK" = text of field "CSpk" 
+		set strokecolor of field "SPK" to red
+	else
+		set strokecolor of field "SPK" to blue
+	end if
+		if text of field "DC3" = text of field "Cdc3" 
+		set strokecolor of field "DC3" to red
+	else
+		set strokecolor of field "DC3" to blue
+	end if
+		if text of field "Fil" = text of field "Cfil" 
+		set strokecolor of field "Fil" to red
+	else
+		set strokecolor of field "Fil" to blue
+	end if
+end
+	
+----------------------------------------------------------------------
+Button id 32 ("CheckVoltages") of Page id 25 (p. 21)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+end
+----------------------------------------------------------------------
+Button id 31 ("Retry") of Page id 25 (p. 21)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ system trainersettings
+ system ntries
+ 
+ get verifyvoltages130a(word 1 of trainersettings, word 2 of trainersettings, 0.3)
+
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+		increment ntries
+		if ntries = 4 then
+		go to page "p12050" 
+		else
+		send updatesettings to this page
+		end if
+		break
+ 	end conditions
+
+	temp = trainersettings
+	clear word 1 of temp
+	clear word 1 of temp
+ get verifyswitches130a(temp)
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+ 		increment ntries
+		if ntries = 4 then
+ 		go to page "p12050" 
+ 		else
+ 		send updatesettings to this page
+ 		end if
+ 		break
+end conditions
+	
+	get setupAndGotoBook(nextpage, lastbook)
+end
+----------------------------------------------------------------------
+Button id 33 of Page id 25 (p. 21)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 34 of Page id 25 (p. 21)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 35 of Page id 25 (p. 21)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Page id 41 ("P12001") of Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+To handle enterpage
+	system trainersettings
+	
+	set text of field cac1 to "OFF"
+	set text of field cdc1 to "OFF"
+	set text of field cac2 to "OFF"
+	set text of field cdc2 to "OFF"
+	set text of field cspk to "OFF"
+	set text of field cdc3 to "OFF"
+	set text of field cfil to "OFF"
+	
+	trainersettings = uppercase(trainersettings)
+	step i from 1 to charCount(trainersettings)
+		if char i of trainersettings is ","  then
+			set char i of trainersettings to " "
+		end if
+	end step
+	
+	step i from 3 to wordCount(trainersettings)
+		temp = word i of trainersettings
+		conditions
+			when temp is "AC1"
+				set text of field cac1 to "ON"		
+			when temp is "DC1"
+				set text of field cdc1 to "ON"		
+			when temp is "AC2"
+				set text of field cac2 to "ON"		
+			when temp is "DC2"
+				set text of field cdc2 to "ON"		
+			when temp is "SPK"
+				set text of field cspk to "ON"		
+			when temp is "DC3"
+				set text of field cdc3 to "ON"		
+			when temp is "FIL"
+				set text of field cfil to "ON"		
+		end conditions
+	end step
+	
+	send updatesettings to self
+	forward
+end
+
+to handle updatesettings
+	local array onoff[2]
+
+	get readSwitches130a()
+	
+	onoff[1] = "OFF"
+	onoff[2] = "ON"
+
+	set text of field "AC1"	to onoff[1 + word 1 of it] 
+	set text of field "DC1"	to onoff[1 + word 2 of it] 
+	set text of field "AC2"	to onoff[1 + word 3 of it] 
+	set text of field "DC2"	to onoff[1 + word 4 of it] 
+	set text of field "SPK"	to onoff[1 + word 5 of it] 
+	set text of field "DC3"	to onoff[1 + word 6 of it] 
+	set text of field "Fil" to onoff[1 + word 7 of it] 
+	
+	
+	if text of field "AC1" = text of field "Cac1" 
+		set strokecolor of field "AC1" to red
+	else
+		set strokecolor of field "AC1" to blue
+	end if
+	if text of field "DC1" = text of field "Cdc1" 
+		set strokecolor of field "DC1" to red
+	else
+		set strokecolor of field "DC1" to blue
+	end if
+	if text of field "AC2" = text of field "Cac2" 
+		set strokecolor of field "AC2" to red
+	else
+		set strokecolor of field "AC2" to blue
+	end if
+		if text of field "DC2" = text of field "Cdc2" 
+		set strokecolor of field "DC2" to red
+	else
+		set strokecolor of field "DC2" to blue
+	end if
+		if text of field "SPK" = text of field "CSpk" 
+		set strokecolor of field "SPK" to red
+	else
+		set strokecolor of field "SPK" to blue
+	end if
+		if text of field "DC3" = text of field "Cdc3" 
+		set strokecolor of field "DC3" to red
+	else
+		set strokecolor of field "DC3" to blue
+	end if
+		if text of field "Fil" = text of field "Cfil" 
+		set strokecolor of field "Fil" to red
+	else
+		set strokecolor of field "Fil" to blue
+	end if
+end
+	
+----------------------------------------------------------------------
+Button id 31 ("Retry") of Page id 41 (p. 22)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ system trainersettings
+
+ get verifyswitches130a(temp)
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+ 		--go to page "P12000" of book "nida71.tbk"
+ 		send updatesettings to this page
+ 		break
+end conditions
+	
+	get setupAndGotoBook(nextpage, lastbook)
+	
+end
+----------------------------------------------------------------------
+Button id 33 of Page id 41 (p. 22)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 35 of Page id 41 (p. 22)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Page id 58 ("P12002") of Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+To handle enterpage
+	forward
+	system trainersettings
+	system ntries
+
+	ntries = 0
+	
+	set text of field cnlv to item 1 of trainersettings
+	set text of field cplv to item 2 of trainersettings
+	
+	set text of field cac1 to "OFF"
+	set text of field cdc1 to "OFF"
+	set text of field cac2 to "OFF"
+	set text of field cdc2 to "OFF"
+	set text of field cspk to "OFF"
+	set text of field cdc3 to "OFF"
+	set text of field cfil to "OFF"
+	
+	trainersettings = uppercase(trainersettings)
+	step i from 1 to charCount(trainersettings)
+		if char i of trainersettings is ","  then
+			set char i of trainersettings to " "
+		end if
+	end step
+	
+	step i from 3 to wordCount(trainersettings)
+		temp = word i of trainersettings
+		conditions
+			when temp is "AC1"
+				set text of field cac1 to "ON"		
+			when temp is "DC1"
+				set text of field cdc1 to "ON"		
+			when temp is "AC2"
+				set text of field cac2 to "ON"		
+			when temp is "DC2"
+				set text of field cdc2 to "ON"		
+			when temp is "SPK"
+				set text of field cspk to "ON"		
+			when temp is "DC3"
+				set text of field cdc3 to "ON"		
+			when temp is "FIL"
+				set text of field cfil to "ON"		
+		end conditions
+	end step
+	
+	send updatesettings to self
+end
+
+to handle updatesettings
+	local array onoff[2]
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	get readSwitches130a()
+	
+	onoff[1] = "OFF"
+	onoff[2] = "ON"
+
+	set text of field "AC1"	to onoff[1 + word 1 of it] 
+	set text of field "DC1"	to onoff[1 + word 2 of it] 
+	set text of field "AC2"	to onoff[1 + word 3 of it] 
+	set text of field "DC2"	to onoff[1 + word 4 of it] 
+	set text of field "SPK"	to onoff[1 + word 5 of it] 
+	set text of field "DC3"	to onoff[1 + word 6 of it] 
+	set text of field "Fil" to onoff[1 + word 7 of it] 
+	
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+	if text of field "AC1" = text of field "Cac1" 
+		set strokecolor of field "AC1" to red
+	else
+		set strokecolor of field "AC1" to blue
+	end if
+	if text of field "DC1" = text of field "Cdc1" 
+		set strokecolor of field "DC1" to red
+	else
+		set strokecolor of field "DC1" to blue
+	end if
+	if text of field "AC2" = text of field "Cac2" 
+		set strokecolor of field "AC2" to red
+	else
+		set strokecolor of field "AC2" to blue
+	end if
+		if text of field "DC2" = text of field "Cdc2" 
+		set strokecolor of field "DC2" to red
+	else
+		set strokecolor of field "DC2" to blue
+	end if
+		if text of field "SPK" = text of field "CSpk" 
+		set strokecolor of field "SPK" to red
+	else
+		set strokecolor of field "SPK" to blue
+	end if
+		if text of field "DC3" = text of field "Cdc3" 
+		set strokecolor of field "DC3" to red
+	else
+		set strokecolor of field "DC3" to blue
+	end if
+		if text of field "Fil" = text of field "Cfil" 
+		set strokecolor of field "Fil" to red
+	else
+		set strokecolor of field "Fil" to blue
+	end if
+end
+	
+----------------------------------------------------------------------
+Button id 38 of Page id 58 (p. 23)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 32 ("CheckVoltages") of Page id 58 (p. 23)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+end
+----------------------------------------------------------------------
+Button id 31 ("Retry") of Page id 58 (p. 23)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ system trainersettings
+ system ntries
+   
+ get verifyvoltages130a(word 1 of trainersettings, word 2 of trainersettings, 0.3)
+
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+		increment ntries
+		if ntries = 4 then
+		go to page "p12050" 
+		else
+		send updatesettings to this page
+		end if
+		break
+ 	end conditions
+
+	temp = trainersettings
+	clear word 1 of temp
+	clear word 1 of temp
+ get verifyswitches130a(temp)
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+ 		increment ntries
+		if ntries = 4 then
+ 		go to page "p12050" 
+ 		else
+ 		send updatesettings to this page
+ 		end if
+ 		break
+end conditions
+	
+	get setupAndGotoBook(nextpage, lastbook)
+	
+end
+----------------------------------------------------------------------
+Button id 35 of Page id 58 (p. 23)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 34 of Page id 58 (p. 23)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 37 of Page id 58 (p. 23)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Page id 59 ("P12003") of Book "C:\TBK\nida81.tbk"
+----------------------------------------------------------------------
+To handle enterpage
+	forward
+	system trainersettings
+	system ntries
+	
+	ntries = 0
+	
+	set text of field cnlv to item 1 of trainersettings
+	set text of field cplv to item 2 of trainersettings
+	
+	set text of field cac1 to "OFF"
+	set text of field cdc1 to "OFF"
+	set text of field cac2 to "OFF"
+	set text of field cdc2 to "OFF"
+	set text of field cspk to "OFF"
+	set text of field cdc3 to "OFF"
+	set text of field cfil to "OFF"
+	
+	trainersettings = uppercase(trainersettings)
+	step i from 1 to charCount(trainersettings)
+		if char i of trainersettings is ","  then
+			set char i of trainersettings to " "
+		end if
+	end step
+	
+	step i from 3 to wordCount(trainersettings)
+		temp = word i of trainersettings
+		conditions
+			when temp is "AC1"
+				set text of field cac1 to "ON"		
+			when temp is "DC1"
+				set text of field cdc1 to "ON"		
+			when temp is "AC2"
+				set text of field cac2 to "ON"		
+			when temp is "DC2"
+				set text of field cdc2 to "ON"		
+			when temp is "SPK"
+				set text of field cspk to "ON"		
+			when temp is "DC3"
+				set text of field cdc3 to "ON"		
+			when temp is "FIL"
+				set text of field cfil to "ON"		
+		end conditions
+	end step
+	
+	send updatesettings to self
+end
+
+to handle updatesettings
+	local array onoff[2]
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	get readSwitches130a()
+	
+	onoff[1] = "OFF"
+	onoff[2] = "ON"
+
+	set text of field "AC1"	to onoff[1 + word 1 of it] 
+	set text of field "DC1"	to onoff[1 + word 2 of it] 
+	set text of field "AC2"	to onoff[1 + word 3 of it] 
+	set text of field "DC2"	to onoff[1 + word 4 of it] 
+	set text of field "SPK"	to onoff[1 + word 5 of it] 
+	set text of field "DC3"	to onoff[1 + word 6 of it] 
+	set text of field "Fil" to onoff[1 + word 7 of it] 
+	
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+	if text of field "AC1" = text of field "Cac1" 
+		set strokecolor of field "AC1" to red
+	else
+		set strokecolor of field "AC1" to blue
+	end if
+	if text of field "DC1" = text of field "Cdc1" 
+		set strokecolor of field "DC1" to red
+	else
+		set strokecolor of field "DC1" to blue
+	end if
+	if text of field "AC2" = text of field "Cac2" 
+		set strokecolor of field "AC2" to red
+	else
+		set strokecolor of field "AC2" to blue
+	end if
+		if text of field "DC2" = text of field "Cdc2" 
+		set strokecolor of field "DC2" to red
+	else
+		set strokecolor of field "DC2" to blue
+	end if
+		if text of field "SPK" = text of field "CSpk" 
+		set strokecolor of field "SPK" to red
+	else
+		set strokecolor of field "SPK" to blue
+	end if
+		if text of field "DC3" = text of field "Cdc3" 
+		set strokecolor of field "DC3" to red
+	else
+		set strokecolor of field "DC3" to blue
+	end if
+		if text of field "Fil" = text of field "Cfil" 
+		set strokecolor of field "Fil" to red
+	else
+		set strokecolor of field "Fil" to blue
+	end if
+end
+	
+----------------------------------------------------------------------
+Button id 32 ("CheckVoltages") of Page id 59 (p. 24)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+	
+	get readVoltages130a()
+	
+	set text of field "nlv" to word 1 of it
+	set text of field "plv" to word 2 of it
+	set text of field "nlvstatus" to word 1 of it
+	set text of field "plvstatus" to word 2 of it
+	
+	if text of field "nlvstatus" = text of field "Cnlv" 
+		set strokecolor of field "nlvstatus" to red
+	else
+		set strokecolor of field "nlvstatus" to blue
+	end if
+	if text of field "plvstatus" = text of field "Cplv" 
+		set strokecolor of field "plvstatus" to red
+	else
+		set strokecolor of field "plvstatus" to blue
+	end if
+end
+----------------------------------------------------------------------
+Button id 31 ("Retry") of Page id 59 (p. 24)
+----------------------------------------------------------------------
+to handle buttonclick
+ system lastbook
+ system nextpage
+ system trainersettings
+ system ntries
+ 
+ get verifyvoltages130a(word 1 of trainersettings, word 2 of trainersettings, 0.3)
+
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+		increment ntries
+		if ntries = 4 then
+		go to page "p12050" 
+		else
+		send updatesettings to this page
+		end if
+		break
+ 	end conditions
+
+	temp = trainersettings
+	clear word 1 of temp
+	clear word 1 of temp
+ get verifyswitches130a(temp)
+ 	conditions
+ 	when it is 60 
+	 	go to page "P12060" of book "nida71.tbk"
+	when it is 64 
+ 		increment ntries
+		if ntries = 4 then
+ 		go to page "p12050" 
+ 		else
+ 		send updatesettings to this page
+ 		end if
+ 		break
+end conditions
+	
+	get setupAndGotoBook(nextpage, lastbook)
+	
+end
+----------------------------------------------------------------------
+Button id 38 of Page id 59 (p. 24)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 37 of Page id 59 (p. 24)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 36 of Page id 59 (p. 24)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 35 of Page id 59 (p. 24)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("ErrorBox") of Background id 8
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 11 ("Back") of Page id 26 (p. 25)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 10 ("Next") of Page id 26 (p. 25)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("ErrorBox") of Background id 26
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 21 ("Back") of Page id 69 (p. 26)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 20 ("Next") of Page id 69 (p. 26)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 28 ("Back") of Page id 70 (p. 27)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system lastpage
+		go to page (lastpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 27 ("Next") of Page id 70 (p. 27)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system lastpage
+		go to page (lastpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("ErrorBox") of Background id 27
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 35 ("Back") of Page id 71 (p. 28)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 34 ("Next") of Page id 71 (p. 28)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("ErrorBox") of Background id 28
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 42 ("Back") of Page id 72 (p. 29)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 41 ("Next") of Page id 72 (p. 29)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Field id 44 ("Selection3") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection3"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection3")  then
+		send mouseleave to button "selection3"
+	end if
+end
+to handle buttonDown
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to false
+	end if
+end
+
+----------------------------------------------------------------------
+Button id 43 ("selection3") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+  go to page "P22030"
+
+END
+
+----------------------------------------------------------------------
+Group id 45 ("Selection2") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+  go to page "P22020"
+
+END
+
+----------------------------------------------------------------------
+Field id 39 ("Selection2") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+----------------------------------------------------------------------
+Group id 40 ("Selection2") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+  go to page "P22020"
+
+END
+
+----------------------------------------------------------------------
+Field id 33 ("Selection1") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+----------------------------------------------------------------------
+Group id 34 ("Selection1") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+    go to page "P22010"
+
+END
+
+----------------------------------------------------------------------
+Button id 18 ("Back") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system lastpage
+		go to page (lastpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 17 ("Next") of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system lastpage
+		go to page (lastpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 24 of Page id 29 (p. 30)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system lastpage
+		go to page (lastpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 16 of Page id 30 (p. 31)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 30 (p. 31)
+----------------------------------------------------------------------
+to handle buttonclick
+ go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 30 (p. 31)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 16 of Page id 31 (p. 32)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 7 ("Back") of Page id 31 (p. 32)
+----------------------------------------------------------------------
+to handle buttonclick
+ go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 6 ("Next") of Page id 31 (p. 32)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 16 of Page id 32 (p. 33)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 8 ("Back") of Page id 32 (p. 33)
+----------------------------------------------------------------------
+to handle buttonclick
+ go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 7 ("Next") of Page id 32 (p. 33)
+----------------------------------------------------------------------
+to handle buttonclick
+	go to page "P22000"
+end
+
+----------------------------------------------------------------------
+Button id 32 ("Back") of Page id 73 (p. 34)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 31 ("Next") of Page id 73 (p. 34)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 41 of Page id 73 (p. 34)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 39 ("Back") of Page id 74 (p. 35)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 38 ("Next") of Page id 74 (p. 35)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 29
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 137 ("Back") of Page id 75 (p. 36)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 136 ("Next") of Page id 75 (p. 36)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+   go to page "P22060"
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 30
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 149 ("Back") of Page id 76 (p. 37)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+  go to page "P22050"
+  
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 148 ("Next") of Page id 76 (p. 37)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22070"
+
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 31
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 166 ("Back") of Page id 77 (p. 38)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22060"
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 165 ("Next") of Page id 77 (p. 38)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22080"
+
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 32
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 182 ("Back") of Page id 78 (p. 39)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22070"
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 181 ("Next") of Page id 78 (p. 39)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 33
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 308 ("Back") of Page id 79 (p. 40)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 307 ("Next") of Page id 79 (p. 40)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+		go to page "P22110"
+end buttonClick
+
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 34
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 427 ("Back") of Page id 80 (p. 41)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22100"
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 426 ("Next") of Page id 80 (p. 41)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22120"
+
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 35
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 447 ("Back") of Page id 81 (p. 42)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22110"
+  
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 446 ("Next") of Page id 81 (p. 42)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22130"
+
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 36
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 478 ("Back") of Page id 82 (p. 43)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+  go to page "P22120"
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 477 ("Next") of Page id 82 (p. 43)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+		go to page (nextpage) of book(lastbook)   
+end buttonClick
+
+127 objects with script, 1398 script lines

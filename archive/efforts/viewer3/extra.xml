@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog title="Viewer3">
+  <main id="v3" title="Viewer3">
+    <sub id="v3s0" title="New lessons">
+      <course id="sample" title="Viewer3 sample" file="../viewer3/courses/sample.xml"/>
+    </sub>
+  </main>
+</catalog>

@@ -1,0 +1,124 @@
+122 handlers
+
+TO HANDLE buttonClickà	BÈ±àEND
+TO HANDLE buttonClickà	BÈ±à	"Objective#" "P30000" ""àEND
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà	4lastpageà	¯ÅàEND
+TO HANDLE buttonClickà	4lastpageà	¯ÅàEND
+TO HANDLE buttonClickà	4lastpageà	¯ÅàEND
+TO HANDLE buttonClickà	4lastpageà	¯ÅàEND
+TO HANDLE buttonClickà	4lastpageà	¯ÅàENDà
+TO HANDLE buttonClickà	4lastpageà	¯ÅàENDàà
+TO HANDLE buttonClickà	4lastpageà	¯ÅàENDà
+TO HANDLE buttonClickà	4lastpageà	¯ÅàENDàà
+TO HANDLE buttonClickà--{Go t±}â¯"P400"ààENDàà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà	4lastbookà	4nextpageà	Å=p°8à	Å=p±àà		¯"P31
+TO HANDLE buttonClickà	4lastpageà	Å=p±à	¯"p330"àENDààà
+TO HANDLE buttonClickà	4lastpageà	Å=p±à	¯"P340"àENDà
+TO HANDLE buttonClickà	4lastpageà	Å=p±à	¯"p350"àENDà
+TO HANDLE buttonClickà	4lastpageà	Å=p±à	¯"P360"àENDà
+TO HANDLE buttonClickà--{Go ¥±}â±¥ààENDàà
+TO HANDLE buttonClickà--{Go t±}â±tààENDà

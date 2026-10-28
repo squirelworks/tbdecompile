@@ -1,0 +1,302 @@
+=== Book.script ===
+to handle enterSystem cmdLine
+	system int ntries
+	system string firstResponse
+		
+	ntries = 0
+	firstResponse = ""
+	
+	if "tb80r.sbk" is not in sysBooks
+		push "tb80r.sbk" onto sysBooks
+	end
+
+	if "nc81base.sbk" is not in sysBooks
+		push "nc81base.sbk" onto sysBooks
+		get initializebase(cmdLine)
+	end
+	if "nc81test.sbk" is not in sysBooks
+		push "nc81test.sbk" onto sysBooks
+		get initializetest()
+	end
+	if "nc81recs.sbk" is not in sysBooks
+		push "nc81recs.sbk" onto sysBooks
+		get initializerecs()	
+	end	
+	if "nc81trnr.sbk" is not in sysBooks
+		push "nc81trnr.sbk" onto sysBooks
+		get initializetrnr()	
+	end	
+	
+	get openSession()	
+	if it is 1  then
+		get gotoPageList()
+	end if
+	
+	forward
+end
+
+to handle enterApplication
+	system logical __import
+	
+	--if syslevel <> reader
+	--	send reader
+	--end
+	
+	__import = false
+	
+	forward
+end
+-- Put any other initialization statements here
+
+--{Full Screen Application}
+
+to handle author
+	show menubar
+	state of mainWindow = normal
+	captionBar of mainWindow = normal
+	borderstyle of mainWindow = thickframe
+	send sizeToPage
+	set syschangeDB to true
+	
+	forward
+end
+
+to handle reader
+
+	set syschangeDB to false
+	
+	forward
+end
+
+to handle enterBook
+	system maincaption
+
+	__beenToP1 of this book = false
+
+	maincaption = caption of MainWindow
+    if syslevel = "reader" then
+	    set saveonclose of this book to no
+	else
+		set saveOnClose of this book to system
+	end if
+  
+	if "nc81base.sbk" is not in sysBooks
+		push "nc81base.sbk" onto sysBooks
+		get initializebase()
+	end
+	if "nc81test.sbk" is not in sysBooks
+		push "nc81test.sbk" onto sysBooks
+		get initializetest()
+	end
+	if "nc81recs.sbk" is not in sysBooks
+		push "nc81recs.sbk" onto sysBooks
+		get initializerecs()	
+	end	
+	if "nc81trnr.sbk" is not in sysBooks
+		push "nc81trnr.sbk" onto sysBooks
+		get initializetrnr()	
+	end	
+	
+  	forward
+end enterBook
+
+to handle enterPage
+  if isobject(field "page#" of parent of this page) then 
+     set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward
+end
+
+to handle keyup key
+	system int __quizHelp
+	system int __quizDisableMenuKey
+	
+	if  __quizHelp = 0  then
+		conditions 
+			when key = keyf1
+		    	request "Do you want to go to the Key Map?" with "&Yes" or "&No"
+				if it is "Yes" then
+					open viewer "key map"
+					currentpage of viewer "key map" = page "P20000" of book "nida81.tbk" 
+					show viewer "key map"
+					break
+					send next
+				end if
+			when key = keyf2
+				request "Are you sure you want to Exit the Lesson?" with "&Yes" or "&No"
+				if it is "Yes" then
+					get EndExperiment()
+			       	get closeSession()
+    	    	send exit  
+	      		end if
+			when key = keyf4
+				if  __quizDisableMenuKey = 0  then
+					request "Do you want to go to the Lesson Menu?" with "&Yes" or "&No"
+			   		if it is "Yes" then
+						get EndExperiment()
+						get gotoMenuPage()
+					end if
+				end if
+			when key = keyf5
+				get specialFunctions(key)
+			when key = keyf6
+				get specialFunctions(key)	
+			when key = keyf7
+				get specialFunctions(key)
+			when key = keyf8
+				get specialFunctions(key)
+		    when key = keyf9
+		    	if getExperimentStatus() = 1  then
+		    		beep(1)
+		    	else
+					request "Are you sure you want to Bookmark the Lesson?" with "&Yes" or "&No"
+					if it is "Yes" then
+						get EndExperiment()
+						get bookmarkSession()
+						send exit  
+					end if
+				end if
+			--when key = keyf10
+				--get specialFunctions(key)
+			when key = keyf11
+				get specialFunctions(key)
+			when key = keyf12
+				get specialFunctions(key)
+			when key = keyEnter
+      			if  isObject(button("Next"))  then
+			      	send buttonClick to button "next"
+				end if
+	    else
+			forward
+		end conditions
+	else
+		conditions
+			when key = keyEnter
+      			if  isObject(button("Next"))  then
+			      	send buttonClick to button "next"
+				end if
+			when key = keyF5
+				get returnToQuiz()				
+		else
+			forward
+		end conditions
+	end if
+end
+
+=== Background0.script ===
+To handle Buttonclick
+ 
+ send next
+
+End
+
+=== Background1.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background11.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background2.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background23.script ===
+to handle enterPage
+	if  sysLevel = author  then
+		set text of field "PageText" to name of this page
+	end if
+	
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+to handle buttonClick
+
+	get handleQuizClick(target)
+	
+end
+
+
+
+=== Background24.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+to handle buttonClick
+	if  target is button "OK" of parent of this page  then
+		send okClicked to this page
+	end if
+end
+
+=== Background27.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background28.script ===
+To handle Buttonclick
+ 
+ send next
+
+End
+
+=== Background29.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background3.script ===
+to handle enterPage
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background4.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+
+=== Background5.script ===
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end

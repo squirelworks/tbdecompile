@@ -1,0 +1,3744 @@
+10/13/26 4:37:24 AM
+
+
+----------------------------------------------------------------------
+Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterSystem cmdLine
+	system int ntries
+	system string firstResponse
+		
+	ntries = 0
+	firstResponse = ""
+	
+	if "tb80r.sbk" is not in sysBooks
+		push "tb80r.sbk" onto sysBooks
+	end
+
+	if "nc81base.sbk" is not in sysBooks
+		push "nc81base.sbk" onto sysBooks
+		get initializebase(cmdLine)
+	end
+	if "nc81test.sbk" is not in sysBooks
+		push "nc81test.sbk" onto sysBooks
+		get initializetest()
+	end
+	if "nc81recs.sbk" is not in sysBooks
+		push "nc81recs.sbk" onto sysBooks
+		get initializerecs()	
+	end	
+	if "nc81trnr.sbk" is not in sysBooks
+		push "nc81trnr.sbk" onto sysBooks
+		get initializetrnr()	
+	end	
+	
+	get openSession()	
+	if it is 1  then
+		get gotoPageList()
+	end if
+	
+	forward
+end
+
+to handle enterApplication
+	system logical __import
+	
+	--if syslevel <> reader
+	--	send reader
+	--end
+	
+	__import = false
+	
+	forward
+end
+-- Put any other initialization statements here
+
+--{Full Screen Application}
+
+to handle author
+	show menubar
+	state of mainWindow = normal
+	captionBar of mainWindow = normal
+	borderstyle of mainWindow = thickframe
+	send sizeToPage
+	set syschangeDB to true
+	
+	forward
+end
+
+to handle reader
+
+	set syschangeDB to false
+	
+	forward
+end
+
+to handle enterBook
+	system maincaption
+
+	__beenToP1 of this book = false
+
+	maincaption = caption of MainWindow
+    if syslevel = "reader" then
+	    set saveonclose of this book to no
+	else
+		set saveOnClose of this book to system
+	end if
+  
+	if "nc81base.sbk" is not in sysBooks
+		push "nc81base.sbk" onto sysBooks
+		get initializebase()
+	end
+	if "nc81test.sbk" is not in sysBooks
+		push "nc81test.sbk" onto sysBooks
+		get initializetest()
+	end
+	if "nc81recs.sbk" is not in sysBooks
+		push "nc81recs.sbk" onto sysBooks
+		get initializerecs()	
+	end	
+	if "nc81trnr.sbk" is not in sysBooks
+		push "nc81trnr.sbk" onto sysBooks
+		get initializetrnr()	
+	end	
+	
+  	forward
+end enterBook
+
+to handle enterPage
+  if isobject(field "page#" of parent of this page) then 
+     set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward
+end
+
+to handle keyup key
+	system int __quizHelp
+	system int __quizDisableMenuKey
+	
+	if  __quizHelp = 0  then
+		conditions 
+			when key = keyf1
+		    	request "Do you want to go to the Key Map?" with "&Yes" or "&No"
+				if it is "Yes" then
+					open viewer "key map"
+					currentpage of viewer "key map" = page "P20000" of book "nida81.tbk" 
+					show viewer "key map"
+					break
+					send next
+				end if
+			when key = keyf2
+				request "Are you sure you want to Exit the Lesson?" with "&Yes" or "&No"
+				if it is "Yes" then
+					get EndExperiment()
+			       	get closeSession()
+    	    	send exit  
+	      		end if
+			when key = keyf4
+				if  __quizDisableMenuKey = 0  then
+					request "Do you want to go to the Lesson Menu?" with "&Yes" or "&No"
+			   		if it is "Yes" then
+						get EndExperiment()
+						get gotoMenuPage()
+					end if
+				end if
+			when key = keyf5
+				get specialFunctions(key)
+			when key = keyf6
+				get specialFunctions(key)	
+			when key = keyf7
+				get specialFunctions(key)
+			when key = keyf8
+				get specialFunctions(key)
+		    when key = keyf9
+		    	if getExperimentStatus() = 1  then
+		    		beep(1)
+		    	else
+					request "Are you sure you want to Bookmark the Lesson?" with "&Yes" or "&No"
+					if it is "Yes" then
+						get EndExperiment()
+						get bookmarkSession()
+						send exit  
+					end if
+				end if
+			--when key = keyf10
+				--get specialFunctions(key)
+			when key = keyf11
+				get specialFunctions(key)
+			when key = keyf12
+				get specialFunctions(key)
+			when key = keyEnter
+      			if  isObject(button("Next"))  then
+			      	send buttonClick to button "next"
+				end if
+	    else
+			forward
+		end conditions
+	else
+		conditions
+			when key = keyEnter
+      			if  isObject(button("Next"))  then
+			      	send buttonClick to button "next"
+				end if
+			when key = keyF5
+				get returnToQuiz()				
+		else
+			forward
+		end conditions
+	end if
+end
+----------------------------------------------------------------------
+sharedscript id 103 ("Quiz Page")
+----------------------------------------------------------------------
+to handle enterPage
+	system int __quizTimed
+	system int __quizPass
+	
+	if  sysLevel = author  then
+		get setupQuizPage(pageNumber of this page)
+	end if
+end
+
+to handle buttonClick
+	get handleQuizClick(target)
+
+end
+
+to handle keyUp
+end
+
+to handle keyDown key
+	if key = keyF5 or key = keyF7  then
+		get handleQuizKey(key)
+	end if
+end	
+
+to handle keyChar key
+	if  key = keyF3  then
+	else
+		get handleQuizKey(key)
+	end if
+end
+
+
+----------------------------------------------------------------------
+sharedscript id 102 ("Question Accept")
+----------------------------------------------------------------------
+to handle buttonClick
+	local int i
+	local int error
+	local string temp
+	local int review
+	
+	local int score
+	local string response
+	
+	response = text of field "response"
+	
+	if  response = ""  then
+		beep 1
+		focus = field "response"
+		break
+	end if
+	
+	if  response = answer of this page  then
+		score = 100
+	else
+		score = 0
+	end if
+
+	error = storeQuestionResponse(testNo of this page, questionNo of this page, response, score)
+	  
+	review = getQuestionReview()
+	i = getNextQuestion()
+	if  i = -1  then
+		if  review = 0  then
+			temp = "P10300"
+		else
+	    	temp = "P10300"
+	    end if
+	else
+		temp = "P" & (10100 + i)
+	end if
+  
+	go to page temp
+end
+----------------------------------------------------------------------
+sharedscript id 101 ("Question Response")
+----------------------------------------------------------------------
+to handle keyChar key
+	local string r
+	local vObject
+	
+	if key = keyEnter  then
+		break
+	end if
+	
+	if  getQuizMode() = 0  then	
+		r = uppercase(ansiToChar(key))
+		conditions
+			when r is in "A,B,C,D,E,F"
+				vObject = r
+				if  isObject(field(vObject))  then
+					text of target = r
+					focus = target
+					caretLocation = 1,1
+					break
+				end if
+		end conditions
+	end if
+	
+	beep 1
+end
+----------------------------------------------------------------------
+sharedscript id 100 ("Question Page")
+----------------------------------------------------------------------
+to handle EnterPage
+	local int review
+	local int i
+	local vObject
+	local string temp
+	system logical __import
+	
+
+	if  (sysLevel = "reader")  and  (__import = false)  then	
+		focus = field "response"
+		review = getQuestionReview()
+		conditions
+			when review = 0
+				set visible of button "JumpBack" to false
+				set visible of button "Accept" to false
+				set visible of button "Back" to false
+				set visible of button "JumpForward" to false
+				set visible of button "Forward" to false
+			when review = 1
+				set visible of button "JumpBack" to false
+				set visible of button "Back" to false
+				set visible of button "JumpForward" to true
+			when review = 2
+				set visible of button "JumpBack" to true
+				set visible of button "Back" to true
+				set visible of button "JumpForward" to true
+		end conditions
+		set text of field "Response" to getQuestionResponse()
+		set text of field "Index" to getQuestionIndex() & "."	
+	else
+		set visible of button "JumpBack" to true
+		set visible of button "Accept" to true
+		set visible of button "Back" to true
+		set visible of button "JumpForward" to true
+		set visible of button "Forward" to true
+		set text of field "Response" to "?"
+		set text of field "Index" to "999."	
+	end if
+	
+	if getQuizMode() = 0  then
+	--set visible of button "Accept" to true
+		step i from 1 to 5
+			vObject = AnsiToChar(CharToAnsi("A") + i - 1)
+			if isObject(field(vObject))  then
+				set strokeColor of field(vObject) to white
+			end if	
+		end step
+	else
+		if  sysLevel = "author"  then
+			set visible of button "Accept" to true
+		else
+			set visible of button "Accept" to false
+		end if
+		step i from 1 to 5
+			vObject = AnsiToChar(CharToAnsi("A") + i - 1)
+			if isObject(field(vObject))  then
+				temp = AnsiToChar(CharToAnsi("A") + i - 1)
+				if  answer of this page = temp  then
+					set strokeColor of field(vObject) to green
+				else
+					set strokeColor of field(vObject) to white
+				end if
+			end if	
+		end step
+	end if
+	set text of field "page#" of this background to name of this page
+end
+
+
+to handle leavePage
+	step i from 1 to 5
+		vObject = AnsiToChar(CharToAnsi("A") + i - 1)
+		if isObject(field(vObject))  then
+			set strokeColor of field(vObject) to white
+		end if	
+	end step
+	
+	set text of field "response" to ""
+end
+
+to handle buttonClick
+	local int i
+	local vObject
+
+	if getQuizMode() = 0  then	
+		step i from 1 to 5
+			vObject = AnsiToChar(CharToAnsi("A") + i - 1)
+			if isObject(field(vObject))  then
+				if target = field(vObject)  then
+					send keyChar(CharToAnsi("A") + i - 1) to field "Response"
+					break
+				end if
+			end if	
+		end step
+	end if
+end
+
+to handle keyUp key
+	if  getQuizMode() = 0  then
+		conditions
+			when key is keyEnter
+				send buttonClick to button "Accept"
+		end conditions
+	end if
+end
+
+
+----------------------------------------------------------------------
+Background id 0 ("Logo") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+To handle Buttonclick
+ 
+ send next
+
+End
+----------------------------------------------------------------------
+Page id 868 ("P0") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+To Handle EnterPage
+	system logical __import
+	system lastbook
+	system nextpage
+
+	lastbook = name of this book
+	nextpage = "p10"
+	if  __import = false  then
+		if sysLevel = "reader"  then
+			go to page "P0" of book getLogoBook()
+		else
+			if  __beenToP1 of this book = false  then
+				__beenToP1 of this book = true
+				if  isObject(page "P1")  then
+					go to page "P1"
+				end if
+			end if
+		end if
+	end if
+end
+
+To Handle Reader
+	forward
+	send enterpage to self
+end
+----------------------------------------------------------------------
+Background id 28 ("Logo") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+To handle Buttonclick
+ 
+ send next
+
+End
+----------------------------------------------------------------------
+Background id 27 ("Title") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 6 ("TitleBox") of Background id 27
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Page id 1024 ("P10") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	if syslevel = reader then 
+		set text of field "First"  to "Hello" && getFirst() & ", this lesson is about:" 
+	else
+		set text of field "First" to "Hello, this lesson is about:"
+	end if
+	
+	get setSection("Intro")
+	
+	forward
+end enterPage 
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 1024 (p. 3)
+----------------------------------------------------------------------
+to handle buttonClick
+	send next
+end
+
+----------------------------------------------------------------------
+Button id 3 ("Help") of Page id 1024 (p. 3)
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Background id 1 ("Solid") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 11 ("Back") of Page id 870 (p. 4)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+
+END
+
+
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 870 (p. 4)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+
+END
+
+
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 871 (p. 5)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+
+END
+
+
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 871 (p. 5)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to next page}
+  go to page "P400"
+
+END
+
+
+----------------------------------------------------------------------
+Field id 17 ("Selection1") of Page id 871 (p. 5)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 18 ("Selection1") of Page id 871 (p. 5)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	system lastbook
+	system nextpage
+	lastbook=name of this book
+	nextpage=name of this page
+
+		go to page "P310" of book "nida81.tbk"
+	break
+	send next
+
+END
+
+----------------------------------------------------------------------
+Background id 2 ("Text") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 7 ("Back") of Page id 872 (p. 6)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P300")
+end
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 872 (p. 6)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P410")
+end
+----------------------------------------------------------------------
+Background id 3 ("Overlay") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 873 (p. 7)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P400")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 873 (p. 7)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P420")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 874 (p. 8)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P400")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 874 (p. 8)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P430")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 875 (p. 9)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P400")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 875 (p. 9)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P440")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 876 (p. 10)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P430")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 876 (p. 10)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P450")
+end
+----------------------------------------------------------------------
+Background id 29 ("IntroEnd") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 0 ("Menu") of Page id 1026 (p. 11)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 1026 (p. 11)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P440")
+end
+----------------------------------------------------------------------
+Page id 878 ("P900") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get setupMenuPageLocal()
+	get setSection("Menu")	
+	forward
+end
+
+to handle author
+	forward
+
+	get setupMenuPageLocal()
+end
+
+to handle reader
+	forward
+
+	get setupMenuPageLocal()
+end
+
+----------------------------------------------------------------------
+Field id 31 ("Exit") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "exit"
+end
+
+to handle mouseleave
+	if  isObject(button "exit")  then
+		send mouseleave to button "exit"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Exit")  then
+		set invert of button "Exit" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Exit")  then
+		set invert of button "Exit" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 32 ("Exit") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle buttonClick
+	send keyup keyF2 to this page
+end
+----------------------------------------------------------------------
+Field id 27 ("Selection T") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selectiont"
+end
+
+to handle mouseleave
+	if  isObject(button "Selectiont")  then
+		send mouseleave to button "selectiont"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selectiont")  then
+		set invert of button "Selectiont" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selectiont")  then
+		set invert of button "Selectiont" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 28 ("Selection T") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle buttonClick
+	get setSection(text of field "selection T")
+	get gotoQuizPage()
+end
+----------------------------------------------------------------------
+Field id 23 ("selection 2") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 24 ("Selection 2") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+To handle ButtonClick
+	get setSection(text of field "selection 2")
+	--{Go to Second Objective Menu}
+    go to page "p2001"
+end
+----------------------------------------------------------------------
+Field id 19 ("selection 1") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 20 ("Selection 1") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+To handle ButtonClick
+	get setSection(text of field "selection 1")
+	--{Go to First Objective Menu}
+    go to page "P1001"
+end
+----------------------------------------------------------------------
+Button id 16 ("Help") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Button id 4 ("Back") of Page id 878 (p. 12)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+
+END
+
+
+----------------------------------------------------------------------
+Button id 25 ("Menu") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Button id 10 ("Help") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Field id 17 ("Selection2") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 18 ("selection2") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+To handle ButtonClick
+  --{Go to First Objective Menu}
+    go to page "p1920"
+end
+----------------------------------------------------------------------
+Field id 13 ("selection1") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 14 ("selection1") of Page id 879 (p. 13)
+----------------------------------------------------------------------
+To handle ButtonClick
+  --{Go to First Objective Menu}
+    go to page "p1040"
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 880 (p. 14)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1001")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 880 (p. 14)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1050")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 881 (p. 15)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 881 (p. 15)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1060")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 882 (p. 16)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 882 (p. 16)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1070")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 883 (p. 17)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 883 (p. 17)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1080")
+end
+----------------------------------------------------------------------
+Hotword id 4 ("tolerance") of Page id 884 (p. 18)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{Goes to Definiton Page}
+  system string lastpage
+    lastpage = name of this page
+    go to page "p1085"
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 884 (p. 18)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 884 (p. 18)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1090")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 885 (p. 19)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1040")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 885 (p. 19)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1090")
+end
+----------------------------------------------------------------------
+Hotword id 6 ("tolerance") of Page id 885 (p. 19)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{Goes to Definiton Page}
+  system string lastpage
+    lastpage = name of this page
+    go to page "p1085"
+end
+----------------------------------------------------------------------
+Background id 4 ("Definition") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 5 ("DefinitionBox") of Background id 4
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Page id 886 ("P1085") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 8 ("HelpBack") of Page id 886 (p. 20)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to lastpage}
+  system string lastpage
+  go to page (P1082)
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 7 ("HelpNext") of Page id 886 (p. 20)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to lastpage}
+  system string lastpage
+  go to page (P1082)
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 887 (p. 21)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1082")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 887 (p. 21)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1100")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 888 (p. 22)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1090")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 888 (p. 22)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1110")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 889 (p. 23)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1090")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 889 (p. 23)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1120")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 890 (p. 24)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1110")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 890 (p. 24)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1130")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 891 (p. 25)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1120")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 891 (p. 25)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 892 (p. 26)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1130")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 892 (p. 26)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1150")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 893 (p. 27)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 893 (p. 27)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1160")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 894 (p. 28)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 894 (p. 28)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1170")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 895 (p. 29)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 895 (p. 29)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1180")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 896 (p. 30)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 896 (p. 30)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1190")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 897 (p. 31)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1140")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 897 (p. 31)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1200")
+end
+----------------------------------------------------------------------
+Hotword id 4 ("propagation delay") of Page id 898 (p. 32)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{Goes to Definiton Page}
+  system string lastpage
+    lastpage = name of this page
+    go to page "p1205"
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 898 (p. 32)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1190")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 898 (p. 32)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Page id 899 ("P1205") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 8 ("HelpBack") of Page id 899 (p. 33)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1207")
+end
+----------------------------------------------------------------------
+Button id 7 ("HelpNext") of Page id 899 (p. 33)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1207")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 900 (p. 34)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1190")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 900 (p. 34)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Hotword id 6 ("propagation delay") of Page id 900 (p. 34)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{Goes to Definiton Page}
+  system string lastpage
+    lastpage = name of this page
+    go to page "p1205"
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 901 (p. 35)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1207")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 901 (p. 35)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1220")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 902 (p. 36)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 902 (p. 36)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1230")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 903 (p. 37)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 903 (p. 37)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1236")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 904 (p. 38)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 904 (p. 38)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1240")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 905 (p. 39)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 905 (p. 39)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1246")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 906 (p. 40)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 906 (p. 40)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1250")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 907 (p. 41)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 907 (p. 41)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1256")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 908 (p. 42)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 908 (p. 42)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1260")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 909 (p. 43)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1210")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 909 (p. 43)
+----------------------------------------------------------------------
+to handle buttonClick
+	set text of field "A" of page "P1270" to "0"
+	set text of field "B" of page "P1270" to "1"
+	set text of field "out" of page "P1270" to "1"
+forward
+	go to page("P1270")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 910 (p. 44)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1260")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 910 (p. 44)
+----------------------------------------------------------------------
+to handle buttonClick
+  if sysLevel = reader
+	forward
+	set text of field "A" to "1"
+	set text of field "B" to "0"
+	set text of field "out" to "1"
+	pause 2 seconds
+	set text of field "A" to "0"
+	set text of field "B" to "0"
+	set text of field "out" to "1"
+	pause 2 seconds
+	set text of field "A" to "1"
+	set text of field "B" to "1"
+	set text of field "out" to "0"
+	get flushMessageQueue()
+	forward
+  end if
+	go to page("P1280")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 911 (p. 45)
+----------------------------------------------------------------------
+to handle buttonClick
+	set text of field "A" of page "P1270" to "0"
+	set text of field "B" of page "P1270" to "1"
+	set text of field "out" of page "P1270" to "1"
+forward
+	go to page("P1270")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 911 (p. 45)
+----------------------------------------------------------------------
+to handle buttonClick
+
+	go to page("P1290")
+end
+----------------------------------------------------------------------
+Background id 5 ("Question") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Page id 912 ("P1290") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Group id 70 ("incorrect") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p1292"
+
+end
+
+----------------------------------------------------------------------
+Field id 8 ("incorrect2") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get IncorrectEmbedded
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p1292"
+
+end
+
+----------------------------------------------------------------------
+Group id 71 ("incorrect") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p1292"
+
+end
+
+----------------------------------------------------------------------
+Field id 9 ("correct") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area3")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p1300"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p1291"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Group id 72 ("correct") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area3")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p1300"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p1291"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 912 (p. 46)
+----------------------------------------------------------------------
+to handle buttonClick
+	set text of field "A" of page "P1270" to "0"
+	set text of field "B" of page "P1270" to "1"
+	set text of field "out" of page "P1270" to "1"
+forward
+	go to page("P1270")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 913 (p. 47)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 913 (p. 47)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p1290" = 64,255,255
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 914 (p. 48)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 914 (p. 48)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 915 ("P1300") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Group id 74 ("incorrect") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p1302"
+
+end
+
+----------------------------------------------------------------------
+Field id 34 ("incorrect2") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get IncorrectEmbedded
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p1292"
+
+end
+
+----------------------------------------------------------------------
+Group id 54 ("incorrect") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p1304"
+
+end
+
+----------------------------------------------------------------------
+Field id 12 ("correct") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area3")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p1300"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p1291"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Group id 32 ("correct") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area3")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p1310"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p1301"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 915 (p. 49)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1290")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 916 (p. 50)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 916 (p. 50)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p1300" = 64,255,255
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 917 (p. 51)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 917 (p. 51)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 918 (p. 52)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 918 (p. 52)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Return to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 919 ("P1310") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Field id 9 ("correct") of Page id 919 (p. 53)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area2")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p1910"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p1311"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Field id 8 ("incorrect2") of Page id 919 (p. 53)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p1312"
+
+end
+
+----------------------------------------------------------------------
+Field id 7 ("incorrect1") of Page id 919 (p. 53)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p1312"
+
+end
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 919 (p. 53)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1300")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 920 (p. 54)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 920 (p. 54)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p1310" = 64,255,255
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 921 (p. 55)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 921 (p. 55)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 922 ("P1910") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle leavepage
+   get SetMenuFlag(1)
+end leavePage
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 922 (p. 56)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1310")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 922 (p. 56)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1001")
+end
+----------------------------------------------------------------------
+Button id 4 ("Back") of Page id 923 (p. 57)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1001")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 923 (p. 57)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1930")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 924 (p. 58)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1920")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 924 (p. 58)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1940")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 925 (p. 59)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1920")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 925 (p. 59)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1950")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 926 (p. 60)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1940")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 926 (p. 60)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1960")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 927 (p. 61)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1950")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 927 (p. 61)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1970")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 928 (p. 62)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1960")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 928 (p. 62)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1999")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 929 (p. 63)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1970")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 929 (p. 63)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P1001")
+end
+----------------------------------------------------------------------
+Button id 24 ("Menu") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Button id 9 ("Help") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+To Handle ButtonClick
+ system lastbook
+  lastbook=name of this book
+  system nextpage
+  nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+end
+
+----------------------------------------------------------------------
+Field id 16 ("Selection2") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 17 ("selection2") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+To handle ButtonClick
+  --{Go to Second Objective Menu}
+    go to page "p2920"
+end
+----------------------------------------------------------------------
+Field id 12 ("selection1") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 13 ("selection1") of Page id 930 (p. 64)
+----------------------------------------------------------------------
+To handle ButtonClick
+  --{Go to Second Objective Menu}
+    go to page "p2040"
+end
+----------------------------------------------------------------------
+Button id 4 ("Back") of Page id 931 (p. 65)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2001")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 931 (p. 65)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2050")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 932 (p. 66)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 932 (p. 66)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2060")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 933 (p. 67)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2040")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 933 (p. 67)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2070")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 934 (p. 68)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2040")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 934 (p. 68)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2080")
+end
+----------------------------------------------------------------------
+Hotword id 6 ("impedance") of Page id 934 (p. 68)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{Goes to Definiton Page}
+  system string lastpage
+    lastpage = name of this page
+    go to page "p2075"
+end
+----------------------------------------------------------------------
+Page id 935 ("P2075") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 8 ("HelpBack") of Page id 935 (p. 69)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to lastpage}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 7 ("HelpNext") of Page id 935 (p. 69)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to lastpage}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+ 
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 936 (p. 70)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2070")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 936 (p. 70)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2090")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 937 (p. 71)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2070")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 937 (p. 71)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2100")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 938 (p. 72)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2070")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 938 (p. 72)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2110")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 939 (p. 73)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2100")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 939 (p. 73)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2120")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 940 (p. 74)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2100")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 940 (p. 74)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2130")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 941 (p. 75)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2120")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 941 (p. 75)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2140")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 942 (p. 76)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2130")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 942 (p. 76)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2150")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 943 (p. 77)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2130")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 943 (p. 77)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2160")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 944 (p. 78)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2150")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 944 (p. 78)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2170")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 945 (p. 79)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2150")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 945 (p. 79)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2180")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 946 (p. 80)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2170")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 946 (p. 80)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2190")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 947 (p. 81)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2170")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 947 (p. 81)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2200")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 948 (p. 82)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2170")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 948 (p. 82)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2210")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 949 (p. 83)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2170")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 949 (p. 83)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2220")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 950 (p. 84)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2210")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 950 (p. 84)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2230")
+end
+----------------------------------------------------------------------
+Page id 951 ("P2230") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Field id 9 ("correct") of Page id 951 (p. 85)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area1")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p2240"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p2231"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Field id 8 ("incorrect2") of Page id 951 (p. 85)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p2232"
+
+end
+
+----------------------------------------------------------------------
+Field id 7 ("incorrect1") of Page id 951 (p. 85)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p2232"
+
+end
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 951 (p. 85)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2210")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 952 (p. 86)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 952 (p. 86)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p2230" = 64,255,255
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 7 ("Back") of Page id 953 (p. 87)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 6 ("Next") of Page id 953 (p. 87)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 954 ("P2240") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Field id 9 ("correct") of Page id 954 (p. 88)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area2")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p2250"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p2241"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Field id 8 ("incorrect2") of Page id 954 (p. 88)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Aagain Page}  
+	go to page "p2242"
+
+end
+
+----------------------------------------------------------------------
+Field id 7 ("incorrect1") of Page id 954 (p. 88)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p2242"
+
+end
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 954 (p. 88)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2230")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 955 (p. 89)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 955 (p. 89)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p2240" = 64,255,255
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 956 (p. 90)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 956 (p. 90)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 957 ("P2250") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+
+  if isobject(field "page#" of parent of this page) then 
+  set text of field "page#" of parent of this page to name of this page
+  end if   
+  forward  
+
+--{Dehighlight Correct}
+  rgbfill of field "correct" = 64,255,255
+
+end
+----------------------------------------------------------------------
+Field id 9 ("incorrect") of Page id 957 (p. 91)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p2252"
+
+end
+
+----------------------------------------------------------------------
+Field id 8 ("correct") of Page id 957 (p. 91)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+
+--{save response}
+  get saveEmbedded(testno of this page,  questionno of this page, "area3")
+
+--{save lastpage}
+  system string lastpage
+  lastpage = name of this page 
+ 
+--{send to nextpage}
+  system string nextpage
+  nextpage = "p2910"
+
+--{Highlight Color}
+    rgbfill of field "correct" = 255,255,63
+
+--{Go to correct page}
+  go to page "p2251"
+
+end buttonclick
+
+----------------------------------------------------------------------
+Field id 7 ("incorrect1") of Page id 957 (p. 91)
+----------------------------------------------------------------------
+To Handle ButtonClick
+--{increment number of tries}
+	get incorrectEmbedded()
+
+--{save lastpage}
+	system string lastpage
+	lastpage = name of this page
+
+--{Goes to Try Again Page}  
+	go to page "p2252"
+
+end
+
+----------------------------------------------------------------------
+Button id 6 ("Back") of Page id 957 (p. 91)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2240")
+end
+----------------------------------------------------------------------
+Button id 5 ("Back") of Page id 958 (p. 92)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 4 ("Next") of Page id 958 (p. 92)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Go to nextpage}
+  system string nextpage
+  go to page nextpage
+--{Dehighlight Correct}
+  rgbfill of field "correct" of page "p2250" = 64,255,255
+end buttonClick
+
+----------------------------------------------------------------------
+Button id 3 ("Back") of Page id 959 (p. 93)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage 
+  
+END
+
+
+----------------------------------------------------------------------
+Button id 2 ("Next") of Page id 959 (p. 93)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+--{Returns to question page}
+  system string lastpage
+  go to page lastpage
+
+END
+
+
+----------------------------------------------------------------------
+Page id 960 ("P2910") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle leavepage
+   get SetMenuFlag(2)
+end leavePage
+
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 960 (p. 94)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2250")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 960 (p. 94)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2001")
+end
+----------------------------------------------------------------------
+Button id 4 ("Back") of Page id 961 (p. 95)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2001")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 961 (p. 95)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2930")
+end
+----------------------------------------------------------------------
+Button id 2 ("Back") of Page id 962 (p. 96)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2920")
+end
+----------------------------------------------------------------------
+Button id 1 ("Next") of Page id 962 (p. 96)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2940")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 963 (p. 97)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2930")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 963 (p. 97)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2950")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 964 (p. 98)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2930")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 964 (p. 98)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2999")
+end
+----------------------------------------------------------------------
+Button id 1 ("Back") of Page id 965 (p. 99)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2930")
+end
+----------------------------------------------------------------------
+Button id 0 ("Next") of Page id 965 (p. 99)
+----------------------------------------------------------------------
+to handle buttonClick
+	go to page("P2001")
+end
+----------------------------------------------------------------------
+Background id 11 ("Solid") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+----------------------------------------------------------------------
+Button id 19 ("Help") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+To Handle ButtonClick
+
+ system lastbook
+  lastbook=name of this book
+
+ system nextpage
+   nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+
+end
+
+----------------------------------------------------------------------
+Field id 31 ("selection3") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection3"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection3")  then
+		send mouseleave to button "selection3"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 32 ("selection3") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle buttonClick
+	send keyup keyF2 to this page
+end
+
+----------------------------------------------------------------------
+Field id 27 ("Selection2") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 28 ("selection2") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle buttonClick
+	system lastbook
+	system nextpage
+	
+	lastbook = name of this book
+	nextpage = name of this page
+
+	go to page "P10020" of book "nida81.tbk"
+end
+
+----------------------------------------------------------------------
+Field id 23 ("selection1") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 24 ("selection1") of Page id 993 (p. 100)
+----------------------------------------------------------------------
+to handle buttonClick
+	local int error
+	system int __quizHelp
+	
+	if  __quizHelp = 1  then
+		request "You are already in the quiz review!"
+		break
+	end if
+
+	error = setupQuizEx("Assessment", 2, "P10301", "P10302", "P10303")
+	if  error = 1  then
+		request "You have already attempted the quiz the maximum number of times!  Contact your instructor."
+		break
+	end
+	
+	get clearpool()
+	error = addObjectiveToPool(1, 110, 119, 6)    
+	error = addObjectiveToPool(2, 120, 129, 4)
+
+	if setuppool() = -1 then
+		request "Insufficient questions in pool!"
+		break
+	end if			 		
+	get gotoNextQuestionEx()
+
+end buttonClick
+----------------------------------------------------------------------
+Button id 18 ("Help") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+To Handle ButtonClick
+
+ system lastbook
+  lastbook=name of this book
+
+ system nextpage
+   nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+
+end
+
+----------------------------------------------------------------------
+Field id 31 ("selection3") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection3"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection3")  then
+		send mouseleave to button "selection3"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection3")  then
+		set invert of button "Selection3" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 32 ("selection3") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle buttonClick
+	send keyup keyF2 to this page
+end
+
+----------------------------------------------------------------------
+Field id 27 ("Selection2") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 28 ("selection2") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle buttonClick
+	system lastbook
+	system nextpage
+	
+	lastbook = name of this book
+	nextpage = name of this page
+
+	go to page "P10020" of book "nida81.tbk"
+end
+
+----------------------------------------------------------------------
+Field id 23 ("selection1") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 24 ("selection1") of Page id 994 (p. 101)
+----------------------------------------------------------------------
+to handle buttonClick
+	local int error
+	system int __quizHelp
+	
+	if  __quizHelp = 1  then
+		request "You are already in the quiz review!"
+		break
+	end if
+
+	error = setupQuizEx("Pre-Test", 2, "P10301", "P10302", "P10303")
+	if  error = 1  then
+		request "You have already attempted the quiz the maximum number of times!  Contact your instructor."
+		break
+	end
+	
+	get clearpool()
+	error = addObjectiveToPool(1, 110, 119, 6)    
+	error = addObjectiveToPool(2, 120, 129, 4)
+
+	if setuppool() = -1 then
+		request "Insufficient questions in pool!"
+		break
+	end if			 		
+	
+	get gotoNextQuestionEx()
+
+end buttonClick
+----------------------------------------------------------------------
+Button id 40 ("Menu") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Button id 19 ("Help") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+To Handle ButtonClick
+
+ system lastbook
+  lastbook=name of this book
+
+ system nextpage
+   nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+
+end
+
+----------------------------------------------------------------------
+Field id 28 ("Selection2") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 29 ("selection2") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+to handle buttonClick
+	system lastbook
+	system nextpage
+	
+	lastbook = name of this book
+	nextpage = name of this page
+
+	go to page "P10020" of book "nida81.tbk"
+end
+
+----------------------------------------------------------------------
+Field id 24 ("selection1") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 25 ("selection1") of Page id 995 (p. 102)
+----------------------------------------------------------------------
+to handle buttonClick
+	local int error
+	system int __quizHelp
+	
+	if  __quizHelp = 1  then
+		request "You are already in the quiz review!"
+		break
+	end if
+
+	error = setupQuizEx("Post-Test", 2, "P10301", "P10302", "P10303")
+	if  error = 1  then
+		request "You have already attempted the quiz the maximum number of times!  Contact your instructor."
+		break
+	end
+	
+	get clearpool()
+	error = addObjectiveToPool(1, 110, 119, 6)    
+	error = addObjectiveToPool(2, 120, 129, 4)
+
+	if setuppool() = -1 then
+		request "Insufficient questions in pool!"
+		break
+	end if			 		
+	
+	get gotoNextQuestionEx()
+
+end buttonClick
+----------------------------------------------------------------------
+Button id 40 ("Menu") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Button id 19 ("Help") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+To Handle ButtonClick
+
+ system lastbook
+  lastbook=name of this book
+
+ system nextpage
+   nextpage=name of this page
+  go to page "P20001" of book "nida81.tbk" 
+
+end
+
+----------------------------------------------------------------------
+Field id 28 ("Selection2") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection2"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection2")  then
+		send mouseleave to button "selection2"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection2")  then
+		set invert of button "Selection2" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 29 ("selection2") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+to handle buttonClick
+	system lastbook
+	system nextpage
+	
+	lastbook = name of this book
+	nextpage = name of this page
+
+	go to page "P10020" of book "nida81.tbk"
+end
+
+----------------------------------------------------------------------
+Field id 24 ("selection1") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+to handle mouseenter
+	send mouseenter to button "selection1"
+end
+
+to handle mouseleave
+	if  isObject(button "Selection1")  then
+		send mouseleave to button "selection1"
+	end if
+end
+
+to handle buttonDown
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to true
+	end if
+end
+
+to handle buttonUp
+	if  isObject(button "Selection1")  then
+		set invert of button "Selection1" to false
+	end if
+end
+
+
+----------------------------------------------------------------------
+Group id 25 ("selection1") of Page id 996 (p. 103)
+----------------------------------------------------------------------
+to handle buttonClick
+	local int error
+	system int __quizHelp
+	
+	if  __quizHelp = 1  then
+		request "You are already in the quiz review!"
+		break
+	end if
+
+	error = setupQuizEx("Quiz", 2, "P10301", "P10302", "P10303")
+	if  error = 1  then
+		request "You have already attempted the quiz the maximum number of times!  Contact your instructor."
+		break
+	end
+	
+	get clearpool()
+	error = addObjectiveToPool(1, 110, 119, 6)    
+	error = addObjectiveToPool(2, 120, 129, 4)
+
+	if setuppool() = -1 then
+		request "Insufficient questions in pool!"
+		break
+	end if			 		
+	get gotoNextQuestionEx()
+
+end buttonClick
+----------------------------------------------------------------------
+Background id 23 ("Test") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	if  sysLevel = author  then
+		set text of field "PageText" to name of this page
+	end if
+	
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+to handle buttonClick
+
+	get handleQuizClick(target)
+	
+end
+
+
+----------------------------------------------------------------------
+Background id 24 ("Test2") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	get clearPagelist()
+	get addToPageList()
+	
+	forward
+end
+
+to handle buttonClick
+	if  target is button "OK" of parent of this page  then
+		send okClicked to this page
+	end if
+end
+----------------------------------------------------------------------
+Page id 1017 ("P10301") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	if not isObject(button "A")  then
+		forward
+		break 
+	end if
+
+	set checked of button "A" to false
+	set checked of button "B" to false
+	
+	if  sysLevel = author  then
+		set text of field "stem" to "You skipped X question(s).  Do you want to _________"
+		set enabled of button "A" to true
+		set enabled of field "A" to true
+	else
+		skipped = getSkippedCount()
+		conditions
+			when  skipped = 0
+				set text of field "stem" to "You skipped" && skipped && "questions.  Do you want to _________"
+				set enabled of button "A" to false
+				set enabled of field "A" to false
+				set checked of button "B" to true
+			when  skipped = 1
+				set text of field "stem" to "You skipped" && skipped && "question.  Do you want to _________"
+				set enabled of button "A" to true
+				set enabled of field "A" to true
+		else
+			set text of field "stem" to "You skipped" && skipped && "questions.  Do you want to _________"
+			set enabled of button "A" to true
+			set enabled of field "A" to true
+		end conditions
+	end if
+	
+	if isObject(field "Index" of parent of this page)  then
+		set text of field "Index" of parent of this page to "End of Test"
+	end if
+	
+	if isObject(button "Back" of parent of this page)  then
+		set enabled of button "Back" of parent of this page to false
+	end
+	if isObject(button "OK" of parent of this page)  then
+		set enabled of button "OK" of parent of this page to true
+	end
+	if isObject(button "Help" of parent of this page)  then
+		set enabled of button "Help" of parent of this page to false
+	end
+	if isObject(button "Skip" of parent of this page)  then
+		set enabled of button "Skip" of parent of this page to false
+	end
+	if isObject(button "Next" of parent of this page)  then
+		set enabled of button "Next" of parent of this page to false
+	end
+
+	forward	
+end
+
+to handle buttonClick
+	conditions
+		when target is button "A"  or  target is field "A" 
+			set checked of button "A" to true
+			set checked of button "B" to false
+		when target is button "B"  or  target is field "B"
+			set checked of button "A" to false
+			set checked of button "B" to true
+	end conditions
+end 
+
+to handle okClicked
+	conditions
+		when  checked of button "A" = true
+			get startCompletionPass()
+		when  checked of button "B" = true
+			go to page "P10303"
+	else
+		beep(1)
+	end conditions
+end
+
+to handle keyUp
+end 
+
+to handle keyDown key
+	if  key = keyF7  then
+		get handleQuizKey(key)
+	end if
+end	
+
+----------------------------------------------------------------------
+Page id 1018 ("P10302") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	system int __quizPass
+
+	if not isObject(button "A")  then
+		forward
+		break 
+	end if
+			
+	set checked of button "A" to false
+	set checked of button "B" to false
+	set checked of button "C" to false
+	
+	if  sysLevel = author  then
+		set text of field "stem" to "You skipped X question(s).  Do you want to _________"
+		set enabled of button "A" to true
+		set enabled of field "A" to true
+	else
+		skipped = getSkippedCount()
+		conditions
+			when  skipped = 0
+				set text of field "stem" to "You skipped" && skipped && "questions.  Do you want to _________"
+				set enabled of button "A" to false
+				set enabled of field "A" to false
+			when  skipped = 1
+				set text of field "stem" to "You skipped" && skipped && "question.  Do you want to _________"
+				set enabled of button "A" to true
+				set enabled of field "A" to true
+		else
+			set text of field "stem" to "You skipped" && skipped && "questions.  Do you want to _________"
+			set enabled of button "A" to true
+			set enabled of field "A" to true
+		end conditions
+		if  __quizPass > 2  then
+			set enabled of button "A" to false
+			set enabled of field "A" to false
+		end if
+	end if
+	
+	
+	if isObject(field "Index" of parent of this page)  then
+		set text of field "Index" of parent of this page to "End of Test"
+	end if
+	
+	if isObject(button "Back" of parent of this page)  then
+		set enabled of button "Back" of parent of this page to false
+	end
+	if isObject(button "OK" of parent of this page)  then
+		set enabled of button "OK" of parent of this page to true
+	end
+	if isObject(button "Help" of parent of this page)  then
+		set enabled of button "Help" of parent of this page to false
+	end
+	if isObject(button "Skip" of parent of this page)  then
+		set enabled of button "Skip" of parent of this page to false
+	end
+	if isObject(button "Next" of parent of this page)  then
+		set enabled of button "Next" of parent of this page to false
+	end
+
+	forward	
+end
+
+to handle buttonClick
+	conditions
+		when target is button "A"  or  target is field "A" 
+			set checked of button "A" to true
+			set checked of button "B" to false
+			set checked of button "C" to false
+		when target is button "B"  or  target is field "B"
+			set checked of button "A" to false
+			set checked of button "B" to true
+			set checked of button "C" to false
+		when target is button "C"  or  target is field "C"
+			set checked of button "A" to false
+			set checked of button "B" to false
+			set checked of button "C" to true
+	end conditions
+end 
+
+to handle okClicked
+	conditions
+		when  checked of button "A" = true
+			get startCompletionPass()
+		when  checked of button "B" = true
+			get startChangePass()
+		when  checked of button "C" = true
+			go to page "P10303"
+	else
+		beep(1)
+	end conditions
+end
+
+to handle keyUp
+end
+
+to handle keyDown key
+	if  key = keyF7  then
+		get handleQuizKey(key)
+	end if
+end	
+
+
+----------------------------------------------------------------------
+Page id 1019 ("P10303") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	system int __quizCritique
+	system int __quizPass
+
+	if not isObject(button "A")  then
+		break 
+	end if
+
+	if  sysLevel = reader  then
+		get closeQuizTimer()
+		if  __quizPass <= 3  then
+			get saveQuizResults()
+		end if
+		set text of field "Stem"  to "The test is complete and your score is" && getquizscore() & "%.  Do you want to _________"
+	else
+		set text of field "Stem" to "The test is complete and your score is XX%.  Do you want to _________"
+	end if
+
+	set checked of button "A" to false
+	set enabled of button "A" to true
+	set enabled of field "A" to true
+	set checked of button "B" to false
+	
+	if  sysLevel = reader  then
+		if  __quizCritique = 0  or  (__quizCritique = 1  and  getQuizScore() = 100)  then
+			set enabled of button "A" to false
+			set enabled of field "A" to false
+			set checked of button "B" to true
+		end if
+	end if
+	
+	if isObject(field "Index" of parent of this page)  then
+		set text of field "Index" of parent of this page to "End of Test"
+	end if
+	
+	if isObject(button "Back" of parent of this page)  then
+		set enabled of button "Back" of parent of this page to false
+	end
+	if isObject(button "OK" of parent of this page)  then
+		set enabled of button "OK" of parent of this page to true
+	end
+	if isObject(button "Help" of parent of this page)  then
+		set enabled of button "Help" of parent of this page to false
+	end
+	if isObject(button "Skip" of parent of this page)  then
+		set enabled of button "Skip" of parent of this page to false
+	end
+	if isObject(button "Next" of parent of this page)  then
+		set enabled of button "Next" of parent of this page to false
+	end
+	
+	set text of field "Time" of parent of this page to "Time"
+
+	forward	
+end
+
+to handle buttonClick
+	conditions
+		when target is button "A"  or  target is field "A" 
+			set checked of button "A" to true
+			set checked of button "B" to false
+		when target is button "B"  or  target is field "B"
+			set checked of button "A" to false
+			set checked of button "B" to true
+	end conditions
+end 
+
+to handle okClicked
+	system int __quizAssessment
+	system int __lessonMode
+
+	conditions
+		when  checked of button "A" = true
+			get startCritiquePass()
+		when  checked of button "B" = true
+			score = getQuizScore()
+			if  __lessonMode = 0  and  __quizAssessment = 2  then
+				request "You have successfully passed the assessment test!"
+				get closeSession()
+				send exit
+				break
+			end if
+			if  score = 100  then 
+				get gotoMenuPage()
+			else
+				go to page "P10410"
+			end if
+	else
+		beep(1)
+	end conditions
+end
+
+to handle keyUp
+end
+
+to handle keyDown key
+	if  key = keyF7  then
+		get handleQuizKey(key)
+	end if
+end	
+
+----------------------------------------------------------------------
+Page id 990 ("P10410") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+	step i from 1 to 5
+		if  isObject(field("Review" && i))  then
+			if  sysLevel = "reader"  then
+				if  getObjectiveScore(i) = 100 then
+					set visible of group("Review" && i) to false
+				else
+					set visible of group("Review" && i) to true
+				end if
+			else
+				set visible of group("Review" && i) to true
+			end if
+		end if 
+	end step
+forward
+end
+----------------------------------------------------------------------
+Button id 13 ("Menu") of Page id 990 (p. 127)
+----------------------------------------------------------------------
+to handle buttonClick
+	get gotoMenuPage()
+end
+
+----------------------------------------------------------------------
+Page id 1020 ("PINFO") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	set text of field "version" to "Version: " & __nidaVersion of this book
+	
+	forward
+end
+----------------------------------------------------------------------
+Page id 1021 ("PQINFO") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterPage
+	set text of field "version" to "Version: " & __nidaVersion of this book
+	
+	forward
+end
+----------------------------------------------------------------------
+Page id 1022 ("P30000") of Book "C:\TBK\9e954d01.tbk"
+----------------------------------------------------------------------
+to handle enterpage
+system int __quizHelp
+system string __quizReviewPage
+
+
+if __quizHelp = 1  then
+	tn = testno of page __quizReviewPage
+	obj = text of field("selection" && tn) of page "P900"
+	set text of field "Objective#" to obj
+else
+	set text of field "Objective#" to "??"
+end if
+
+forward
+
+end
+----------------------------------------------------------------------
+Button id 11 of Page id 1022 (p. 130)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	send keyup keyF5 to this page
+	set text of field "Objective#" of page "P30000" to ""
+END
+----------------------------------------------------------------------
+Button id 11 of Page id 1023 (p. 131)
+----------------------------------------------------------------------
+TO HANDLE buttonClick
+	send keyup keyF5 to this page
+END
+302 objects with script, 2714 script lines

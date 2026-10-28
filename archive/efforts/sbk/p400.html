@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>P400</title>
+<canvas id="stage" width="720" height="420"></canvas>
+<script type="module">
+import * as shapes from "./shapes.js";
+
+// Words read from 9e954d01.tbk page P400, file 0xBD028.
+// Field records sit just before the label text: x, y, id, 0, w, h.
+const fields = [
+  { kind: "field", x: 0x0247, y: 0x000c, w: 0x60, h: 0x50, text: "Digital circuits and the IC chip are usually thought of as one and the same." },
+  { kind: "field", x: 0x00a1, y: 0x0273, w: 0x20, h: 0x0e, text: "74LS174N  E825" },
+  { kind: "field", x: 0x0019, y: 0x029f, w: 0x20, h: 0x10, text: "Digital" },
+  { kind: "field", x: 0x00c1, y: 0x02cb, w: 0x20, h: 0x07, text: "Input" },
+  { kind: "field", x: 0x00a9, y: 0x02f7, w: 0x20, h: 0x08, text: "Output" },
+  { kind: "field", x: 0x0659, y: 0x0031, w: 0x20, h: 0x0c, text: "INTRODUCTION" },
+];
+
+// The chip body is painted here. It is not a bitmap.
+// The label record anchors it. The body, pins, and box are shape calls.
+const chip = fields.find((f) => f.text.startsWith("74LS174N"));
+const drawn = [
+  { kind: "rectangle", x: 8, y: 650, w: 70, h: 52 },
+  { kind: "line", x1: 78, y1: 676, x2: 120, y2: 676 },
+  { kind: "paintObject", x: chip.x - 8, y: chip.y - 10, w: 96, h: 36 },
+];
+const pins = [];
+for (let i = 0; i < 8; i += 1) {
+  const x = chip.x + i * 12;
+  pins.push([x, chip.y - 18, x, chip.y - 8]);
+  pins.push([x, chip.y + 28, x, chip.y + 38]);
+}
+
+const canvas = document.getElementById("stage");
+const ctx = canvas.getContext("2d");
+ctx.fillStyle = "#1d4e89";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+ctx.strokeStyle = "#f4f1e8";
+ctx.fillStyle = "#f4f1e8";
+ctx.font = "12px sans-serif";
+
+const xs = fields.map((f) => f.x);
+const ys = fields.map((f) => f.y);
+const minX = Math.min(...xs);
+const minY = Math.min(...ys);
+const maxX = Math.max(...fields.map((f) => f.x + f.w));
+const maxY = Math.max(...fields.map((f) => f.y + f.h));
+const scale = Math.min(680 / (maxX - minX), 380 / (maxY - minY));
+
+const xs = [...fields, ...drawn].map((f) => f.x ?? f.x1);
+const ys = [...fields, ...drawn].map((f) => f.y ?? f.y1);
+const minX = Math.min(...xs);
+const minY = Math.min(...ys);
+const maxX = Math.max(...fields.map((f) => f.x + f.w), ...drawn.map((f) => (f.x ?? f.x1) + (f.w || 0)));
+const maxY = Math.max(...fields.map((f) => f.y + f.h), ...drawn.map((f) => (f.y ?? f.y1) + (f.h || 0)));
+const scale = Math.min(680 / (maxX - minX), 380 / (maxY - minY));
+
+function px(x) { return 20 + (x - minX) * scale; }
+function py(y) { return 20 + (y - minY) * scale; }
+
+ctx.save();
+ctx.fillStyle = "#111";
+const body = drawn[2];
+shapes.paintObject(ctx, px(body.x), py(body.y), body.w * scale, body.h * scale);
+ctx.strokeStyle = "#f4f1e8";
+ctx.fillStyle = "#f4f1e8";
+shapes.rectangle(ctx, px(drawn[0].x), py(drawn[0].y), drawn[0].w * scale, drawn[0].h * scale);
+shapes.line(ctx, px(drawn[1].x1), py(drawn[1].y1), px(drawn[1].x2), py(drawn[1].y2));
+ctx.strokeStyle = "#ddd";
+for (const [x1, y1, x2, y2] of pins) shapes.line(ctx, px(x1), py(y1), px(x2), py(y2));
+ctx.restore();
+
+for (const item of fields) {
+  shapes.field(ctx, px(item.x), py(item.y), item.w * scale, item.h * scale, item.text);
+}
+</script>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book id="sample" title="Viewer3 sample">
+  <page id="P0" n="1">
+    <p>This book uses the viewer2 tags. Viewer2 can open it.</p>
+    <note>A note is viewer3 only. Viewer2 skips it.</note>
+    <callout x="40" y="180">Callout, same stage origin as an image.</callout>
+    <go id="next" to="PDONE"/>
+  </page>
+  <page id="PDONE" n="2">
+    <p>Finished:</p>
+    <booktitle/>
+    <go id="back" to="P0"/>
+  </page>
+</book>

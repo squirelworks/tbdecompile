@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>P420 Logic Families</title>
+<style>
+  body { margin: 0; background: #6ea8e0; font: 13px sans-serif; }
+  .win { width: 640px; margin: 24px auto; background: #1d4e89; border: 2px solid #9bb; }
+  .title { background: linear-gradient(#4a8fd4, #1d5aa8); color: #fff; padding: 4px 8px; font-weight: 700; }
+  .pid { color: #fff; padding: 4px 8px; }
+  .stage { position: relative; height: 380px; margin: 0 8px 8px; }
+  .box { position: absolute; left: 36px; top: 16px; right: 36px; height: 78px; background: #8a8a8a; border: 3px solid #ddd; border-radius: 6px; color: #fff; display: flex; align-items: center; text-align: center; justify-content: center; padding: 8px 16px; }
+  .chip { position: absolute; width: 150px; height: 42px; background: #111; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; top: 168px; }
+  .pin { position: absolute; width: 5px; height: 10px; background: #eee; }
+  .wire { position: absolute; background: #ddd; }
+  .cell { position: absolute; left: 268px; top: 268px; width: 70px; height: 48px; background: #d8d8d8; border: 2px solid #fff; color: #123; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .flame { position: absolute; left: 390px; top: 128px; font-size: 28px; }
+  .nav { position: absolute; bottom: 6px; width: 22px; height: 18px; background: #d7d7d7; border: 1px solid #fff; color: #234; text-align: center; }
+  .back { left: 4px; } .next { right: 4px; }
+</style>
+<div class="win">
+  <div class="title">Nida Corporation - Logic Families</div>
+  <div class="pid">P420</div>
+  <div class="stage">
+    <div class="box">Applying 10 volts to one IC might be normal. Applying the same 10 volts to a different IC can cause damage.</div>
+    <div class="chip" id="a" style="left:90px"></div>
+    <div class="chip" id="b" style="left:340px">74LS174N E825</div>
+    <div class="flame">&#128293;</div>
+    <div class="wire" style="left:240px;top:186px;width:100px;height:2px"></div>
+    <div class="wire" style="left:300px;top:186px;width:2px;height:82px"></div>
+    <div class="cell">10V</div>
+    <div class="nav back">&#9664;</div>
+    <div class="nav next">&#9654;</div>
+  </div>
+</div>
+<script>
+const stage = document.querySelector(".stage");
+for (const chip of document.querySelectorAll(".chip")) {
+  const left = parseInt(chip.style.left, 10);
+  for (let i = 0; i < 8; i++) {
+    for (const top of [158, 210]) {
+      const pin = document.createElement("div");
+      pin.className = "pin";
+      pin.style.left = (left + 10 + i * 16) + "px";
+      pin.style.top = top + "px";
+      stage.appendChild(pin);
+    }
+  }
+}
+</script>

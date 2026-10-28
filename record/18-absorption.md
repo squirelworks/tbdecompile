@@ -1,6 +1,6 @@
 # 18. Where every loose sheet went
 
-The absorbed sheets now live under `tbworkingpapers/history/sheets/`. A row that says `tbwp0001/…` means `history/sheets/tbwp0001/…`. The manual source stays at `tbworkingpapers/sheets/tbwp0030/`. `tbwp0019`'s notes, and the seventeen renamed JSON files that still read, are in `history/sheets/tbwp0019/`. The rest of that dump does not read. It is still `tbworkingpapers/tbwp0019/`. `who-is-who` is not in this index and is not in this repository. The shelf is `tbworkingpapers/history/miscellaneous/`. Binary password deltas stay in the working papers, under `history/sheets/tbwp0027/`.
+The absorbed sheets are in `archive/trail/`. A row that says `tbwp0001/…` means `archive/trail/tbwp0001/…`. The 16 October manual source is `archive/sheets/tbwp0030/`. The volume that replaced it is `manual/`. `tbwp0019`'s notes are in `archive/trail/tbwp0019/`. The old viewers, the early runtimes, and the other tries are in `archive/efforts/`. Foolbook is the reader. These are not a second one.
 
 A row marked superseded means the sheet still contains a sentence this record closed. Read the sheet for the function body if you need it. Read this record for the claim.
 

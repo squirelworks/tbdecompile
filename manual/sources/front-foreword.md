@@ -20,4 +20,3 @@ Chapter 16.5 is the author session in which `ssssssssssss.tbk` became password-p
 
 TBWorldview is its own binder. It is not reprinted here. Where that binder still draws ordinal 51 on book open, this volume and Appendix B win.
 
-`who-is-who` is not in this volume.

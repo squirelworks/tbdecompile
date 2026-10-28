@@ -58,7 +58,7 @@ NE segment numbers are not Ghidra `CodeN` names. Segment 1 is `1000`, segment 2 
 
 ## What this record will not hold
 
-Binary dumps, SoftICE console logs, and personal correspondence stay out of this repository. Names of correspondents are masked. The correspondent already used in the public notes is JohnDoe1. `who-is-who` is not part of this record.
+Binary dumps, SoftICE console logs, and personal correspondence stay out of this repository. Names of correspondents are masked. The correspondent already used in the public notes is JohnDoe1. 
 
 ## Which older sentence to trust
 

@@ -1,0 +1,74 @@
+TO HANDLE buttonClick
+	send keyup keyF5 to this page
+END
+---
+TO HANDLE buttonClick
+	send keyup keyF5 to this page
+	set text of field "Objective#" of page "P30000" to ""
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---
+TO HANDLE buttonClick
+--{Go to previous page}
+  send previous
+END
+---
+TO HANDLE buttonClick
+--{Go to next page}
+  send next
+END
+---

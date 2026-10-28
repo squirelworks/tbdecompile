@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>P410 Logic Families</title>
+<style>
+  body { margin: 0; background: #6ea8e0; font: 13px sans-serif; }
+  .win { width: 640px; margin: 24px auto; background: #1d4e89; border: 2px solid #9bb; box-shadow: 0 8px 24px #0006; }
+  .title { background: linear-gradient(#4a8fd4, #1d5aa8); color: #fff; padding: 4px 8px; font-weight: 700; }
+  .pid { color: #fff; padding: 4px 8px; }
+  .stage { position: relative; height: 380px; margin: 0 8px 8px; }
+  .box { position: absolute; left: 36px; top: 18px; right: 36px; height: 78px; background: #8a8a8a; border: 3px solid #ddd; border-radius: 6px; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 20px; }
+  .chip { position: absolute; width: 132px; height: 42px; background: #111; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .pin { position: absolute; width: 5px; height: 10px; background: #eee; }
+  .nav { position: absolute; bottom: 6px; width: 22px; height: 18px; background: #d7d7d7; border: 1px solid #fff; color: #234; text-align: center; }
+  .back { left: 4px; } .next { right: 4px; }
+</style>
+<div class="win">
+  <div class="title">Nida Corporation - Logic Families</div>
+  <div class="pid">P410</div>
+  <div class="stage">
+    <div class="box">But, are all ICs the same? Do they all operate on the same voltages?</div>
+    <div class="chip" id="c1" style="left:78px;top:150px"></div>
+    <div class="chip" id="c2" style="left:360px;top:150px">74LS174N<br>E825</div>
+    <div class="chip" id="c3" style="left:220px;top:250px"></div>
+    <div class="nav back">&#9664;</div>
+    <div class="nav next">&#9654;</div>
+  </div>
+</div>
+<script>
+const stage = document.querySelector(".stage");
+for (const chip of document.querySelectorAll(".chip")) {
+  const left = parseInt(chip.style.left, 10);
+  const top = parseInt(chip.style.top, 10);
+  for (let i = 0; i < 8; i++) {
+    for (const edge of [top - 10, top + 42]) {
+      const pin = document.createElement("div");
+      pin.className = "pin";
+      pin.style.left = (left + 8 + i * 15) + "px";
+      pin.style.top = edge + "px";
+      stage.appendChild(pin);
+    }
+  }
+}
+</script>

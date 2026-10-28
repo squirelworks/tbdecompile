@@ -1,0 +1,10 @@
+HIT 'vgah' cipher=a38893a1 at 0xc6c8
+HIT 'ap1' cipher=8e9183 at 0xefb9
+HIT 'db9' cipher=91838b at 0xf4e1
+HIT 'iud' cipher=969696 at 0x4a44
+HIT 'lxg' cipher=999999 at 0x48d8
+HIT 't57' cipher=a17689 at 0x9cdd
+HIT 'vga' cipher=a38893 at 0xc6c8
+HIT '3p1' cipher=809183 at 0xc374
+HIT '3ro' cipher=8093a1 at 0xc113
+HIT '9e4' cipher=868686 at 0x4a40

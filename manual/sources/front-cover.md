@@ -12,4 +12,3 @@ The record, the lookups, and the command cards.
 
 One file, and the same book in parts. No part reaches 100 pages.
 
-`who-is-who` is not in this volume.

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ATT Master</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #d4d0c8; color: #000;
+    font: 16px/1.4 Tahoma, "MS Sans Serif", sans-serif; }
+  body { display: flex; align-items: center; justify-content: center; }
+  .window { width: 960px; background: #d4d0c8; border: 2px solid;
+    border-color: #fff #404040 #404040 #fff; box-shadow: 1px 1px 0 #000; }
+  .title { background: #000080; color: #fff; padding: 3px 6px; font-weight: bold;
+    display: flex; justify-content: space-between; align-items: center; }
+  #booktitle { flex: 1; color: #fff; }
+  .title button, button { font: 14px Tahoma, sans-serif; background: #d4d0c8;
+    border: 2px solid; border-color: #fff #404040 #404040 #fff; padding: 2px 10px; }
+  button:active { border-color: #404040 #fff #fff #404040; }
+  .modules { display: flex; gap: 8px; padding: 8px; }
+  .mod { flex: 1; min-width: 0; }
+  .mod h2 { margin: 0 0 4px; font: bold 14px Tahoma, sans-serif; }
+  .list { height: 280px; overflow-y: scroll; background: #fff;
+    border: 2px solid; border-color: #808080 #fff #fff #808080; }
+  .list button { display: block; width: 100%; text-align: left; border: 0;
+    background: #fff; padding: 3px 6px; font: 14px Tahoma, sans-serif; }
+  .list button.on { background: #000080; color: #fff; }
+  .bar { display: flex; gap: 8px; padding: 0 8px 8px; align-items: center; }
+  .stage { position: relative; height: 420px; margin: 4px; background: #fff;
+    border: 2px solid; border-color: #808080 #fff #fff #808080; overflow: hidden; }
+  .stage p, .stage .note { margin: 12px 16px; }
+  .stage .note { color: #404040; font-size: 14px; }
+  .callout { position: absolute; font: bold 14px Tahoma, sans-serif; color: #000080; }
+  .finish-title { margin: 8px 16px 16px; font-size: 22px; font-weight: bold; }
+  .stage img { position: absolute; image-rendering: pixelated; }
+  .choices, .jumps, form.answer { position: absolute; left: 16px; bottom: 12px;
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  form.answer input { font: 14px Tahoma, sans-serif; border: 2px solid;
+    border-color: #808080 #fff #fff #808080; padding: 2px 4px; }
+  .status { display: flex; align-items: center; gap: 8px; padding: 4px 6px;
+    border-top: 2px solid; border-color: #fff #808080 #808080 #fff; }
+  .status .caption { flex: 1; padding: 1px 6px; border: 1px solid;
+    border-color: #808080 #fff #fff #808080; }
+  .status .count { min-width: 72px; text-align: center; border: 1px solid;
+    border-color: #808080 #fff #fff #808080; }
+  dialog { border: 2px solid; border-color: #fff #404040 #404040 #fff; background: #d4d0c8;
+    font: 14px Tahoma, sans-serif; }
+  dialog menu { display: flex; gap: 8px; justify-content: flex-end; padding: 0; }
+  .hidden { display: none; }
+  .filebtn input { display: none; }
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="title"><span id="booktitle">ATT Master</span><button id="exit" type="button">Exit</button></div>
+  <div id="catalog">
+    <div class="modules">
+      <section class="mod"><h2>Main Course List</h2><div class="list" id="mains"></div></section>
+      <section class="mod"><h2>Modules</h2><div class="list" id="subs"></div></section>
+      <section class="mod"><h2>Course List</h2><div class="list" id="courses"></div></section>
+    </div>
+    <div class="bar">
+      <button id="open" type="button" disabled>Open</button>
+      <label class="filebtn">Open book file <input id="bookfile" type="file" accept=".xml,text/xml"></label>
+    </div>
+  </div>
+  <div id="lesson" class="hidden">
+    <div class="stage" id="stage"></div>
+    <div class="status">
+      <span class="caption" id="caption">Ready</span>
+      <button id="back" type="button">Back</button>
+      <span class="count" id="count">0 / 0</span>
+      <button id="next" type="button">Next</button>
+      <button id="coursesbtn" type="button">Courses</button>
+    </div>
+  </div>
+</div>
+<dialog id="ask">
+  <p id="asktext"></p>
+  <menu>
+    <button value="yes" type="button">Yes</button>
+    <button value="no" type="button">No</button>
+  </menu>
+</dialog>
+<script>
+const stage = document.getElementById("stage");
+const ask = document.getElementById("ask");
+const catalogUrl = new URL("../viewer2/course.xml", location.href);
+let bookUrl = catalogUrl;
+let pages = new Map();
+let order = [];
+let current = null;
+let history = [];
+let mains = [];
+let mainId = null;
+let subId = null;
+let courseId = null;
+let catalogTitle = "ATT Master";
+
+function goEl(page, id) {
+  return [...page.querySelectorAll("go")].find(g => g.getAttribute("id") === id);
+}
+function setTitle(text) {
+  document.getElementById("booktitle").textContent = text || "";
+  document.title = text || "";
+}
+function show(id, remember) {
+  const page = pages.get(id);
+  if (!page) return;
+  if (remember && current) history.push(current);
+  current = id;
+  stage.replaceChildren();
+  for (const p of page.querySelectorAll(":scope > p")) {
+    const el = document.createElement("p");
+    el.textContent = p.textContent;
+    stage.append(el);
+  }
+  for (const n of page.querySelectorAll(":scope > note")) {
+    const el = document.createElement("p");
+    el.className = "note";
+    el.textContent = n.textContent;
+    stage.append(el);
+  }
+  if (page.querySelector(":scope > booktitle")) {
+    const el = document.createElement("p");
+    el.className = "finish-title";
+    el.textContent = document.getElementById("booktitle").textContent;
+    stage.append(el);
+  }
+  for (const im of page.querySelectorAll(":scope > image")) {
+    if (im.getAttribute("role") === "chrome") continue;
+    const el = document.createElement("img");
+    el.src = new URL(im.getAttribute("src"), bookUrl).href;
+    el.alt = im.getAttribute("src").split("/").pop();
+    const x = im.getAttribute("x"), y = im.getAttribute("y");
+    if (x == null || y == null) el.style.position = "static";
+    else { el.style.left = x + "px"; el.style.top = y + "px"; }
+    if (im.getAttribute("w")) el.width = +im.getAttribute("w");
+    if (im.getAttribute("h")) el.height = +im.getAttribute("h");
+    stage.append(el);
+  }
+  for (const c of page.querySelectorAll(":scope > callout")) {
+    const el = document.createElement("div");
+    el.className = "callout";
+    el.textContent = c.textContent;
+    el.style.left = (c.getAttribute("x") || "16") + "px";
+    el.style.top = (c.getAttribute("y") || "16") + "px";
+    stage.append(el);
+  }
+  const jumps = document.createElement("div");
+  jumps.className = "jumps";
+  for (const g of page.querySelectorAll(":scope > go")) {
+    if (g.getAttribute("id") === "next" || g.getAttribute("id") === "back") continue;
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = g.getAttribute("label") || g.getAttribute("id");
+    b.addEventListener("click", () => follow(g));
+    jumps.append(b);
+  }
+  if (jumps.childElementCount) stage.append(jumps);
+  const quiz = page.querySelector(":scope > quiz");
+  if (quiz) renderQuiz(page, quiz);
+  else {
+    const choices = document.createElement("div");
+    choices.className = "choices";
+    for (const c of page.querySelectorAll(":scope > choice")) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.textContent;
+      b.addEventListener("click", () => show(c.getAttribute("to"), true));
+      choices.append(b);
+    }
+    if (choices.childElementCount) stage.append(choices);
+  }
+  document.getElementById("count").textContent = (page.getAttribute("n") || "?") + " / " + order.length;
+  document.getElementById("caption").textContent = page.getAttribute("id");
+  document.getElementById("next").disabled = !goEl(page, "next");
+  document.getElementById("back").disabled = !goEl(page, "back") && history.length === 0;
+}
+function grade(quiz, raw) {
+  const type = quiz.getAttribute("type") || "text";
+  const match = quiz.getAttribute("match") || "";
+  if (type === "number") {
+    const got = Number(raw), want = Number(match), tol = Number(quiz.getAttribute("tolerance") || "0");
+    return raw.trim() !== "" && Number.isFinite(got) && Math.abs(got - want) <= tol;
+  }
+  const a = raw.trim().replace(/\s+/g, " "), b = match.trim().replace(/\s+/g, " ");
+  return quiz.getAttribute("case") === "no" ? a.toLowerCase() === b.toLowerCase() : a === b;
+}
+function renderQuiz(page, quiz) {
+  const type = quiz.getAttribute("type") || "choice";
+  if (type === "choice") {
+    const box = document.createElement("div");
+    box.className = "choices";
+    for (const c of quiz.querySelectorAll(":scope > choice")) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.textContent;
+      b.addEventListener("click", () => show(c.getAttribute("to"), true));
+      box.append(b);
+    }
+    stage.append(box);
+    return;
+  }
+  const form = document.createElement("form");
+  form.className = "answer";
+  const input = document.createElement("input");
+  input.type = type === "number" ? "number" : "text";
+  input.step = "any";
+  const check = document.createElement("button");
+  check.type = "submit";
+  check.textContent = "Check";
+  form.append(input, check);
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    show(quiz.getAttribute(grade(quiz, input.value) ? "ok" : "bad"), true);
+  });
+  stage.append(form);
+  input.focus();
+}
+function follow(g) {
+  if (!g) return;
+  const to = g.getAttribute("to");
+  if (to === "last") { const prev = history.pop(); if (prev) show(prev, false); return; }
+  show(to, true);
+}
+function loadBook(xmlText, url) {
+  bookUrl = url;
+  const doc = new DOMParser().parseFromString(xmlText, "application/xml");
+  if (doc.querySelector("parsererror")) { stage.textContent = "Course XML did not parse."; return; }
+  const book = doc.querySelector("book");
+  if (!book) { stage.textContent = "No book element."; return; }
+  setTitle(book.getAttribute("title") || "");
+  pages = new Map();
+  order = [];
+  for (const page of book.querySelectorAll(":scope > page")) {
+    pages.set(page.getAttribute("id"), page);
+    order.push(page.getAttribute("id"));
+  }
+  history = [];
+  document.getElementById("catalog").classList.add("hidden");
+  document.getElementById("lesson").classList.remove("hidden");
+  show(order[0], false);
+}
+function fill(list, items, selected, onpick) {
+  list.replaceChildren();
+  for (const item of items) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = item.title;
+    if (item.id === selected) b.className = "on";
+    b.addEventListener("click", () => onpick(item));
+    b.addEventListener("dblclick", () => { onpick(item); if (list.id === "courses") document.getElementById("open").click(); });
+    list.append(b);
+  }
+}
+function showSubs() {
+  const main = mains.find(m => m.id === mainId);
+  subId = main && main.subs[0] ? main.subs[0].id : null;
+  fill(document.getElementById("subs"), main ? main.subs : [], subId, pickSub);
+  showCourses();
+}
+function showCourses() {
+  const main = mains.find(m => m.id === mainId);
+  const sub = main && main.subs.find(s => s.id === subId);
+  courseId = null;
+  document.getElementById("open").disabled = true;
+  fill(document.getElementById("courses"), sub ? sub.courses : [], null, (course) => {
+    courseId = course.id;
+    document.getElementById("open").disabled = false;
+    document.querySelectorAll("#courses button").forEach(b => b.classList.toggle("on", b.textContent === course.title));
+  });
+}
+function pickSub(sub) {
+  subId = sub.id;
+  fill(document.getElementById("subs"), mains.find(m => m.id === mainId).subs, subId, pickSub);
+  showCourses();
+}
+function pickMain(main) {
+  mainId = main.id;
+  fill(document.getElementById("mains"), mains, mainId, pickMain);
+  showSubs();
+}
+function mainsFrom(xmlText) {
+  const doc = new DOMParser().parseFromString(xmlText, "application/xml");
+  const catalog = doc.querySelector("catalog");
+  if (!catalog) return [];
+  return [...catalog.querySelectorAll(":scope > main")].map(main => ({
+    id: main.getAttribute("id"),
+    title: main.getAttribute("title"),
+    subs: [...main.querySelectorAll(":scope > sub")].map(sub => ({
+      id: sub.getAttribute("id"),
+      title: sub.getAttribute("title"),
+      courses: [...sub.querySelectorAll(":scope > course")].map(course => ({
+        id: course.getAttribute("id"),
+        title: course.getAttribute("title"),
+        file: course.getAttribute("file")
+      }))
+    }))
+  }));
+}
+function loadCatalog(xmlText) {
+  const doc = new DOMParser().parseFromString(xmlText, "application/xml");
+  const catalog = doc.querySelector("catalog");
+  catalogTitle = (catalog && catalog.getAttribute("title")) || "ATT Master";
+  setTitle(catalogTitle);
+  mains = mainsFrom(xmlText);
+  mainId = mains[0] && mains[0].id;
+  fill(document.getElementById("mains"), mains, mainId, pickMain);
+  showSubs();
+}
+document.getElementById("open").addEventListener("click", () => {
+  const main = mains.find(m => m.id === mainId);
+  const sub = main && main.subs.find(s => s.id === subId);
+  const course = sub && sub.courses.find(c => c.id === courseId);
+  if (!course) return;
+  const url = new URL(course.file, catalogUrl);
+  fetch(url, { cache: "no-store" }).then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(t => loadBook(t, url))
+    .catch(() => {
+      stage.textContent = "Could not read " + course.file + ".";
+      document.getElementById("catalog").classList.add("hidden");
+      document.getElementById("lesson").classList.remove("hidden");
+    });
+});
+document.getElementById("bookfile").addEventListener("change", () => {
+  const f = document.getElementById("bookfile").files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = () => loadBook(String(reader.result || ""), new URL(f.name, location.href));
+  reader.readAsText(f);
+});
+document.getElementById("coursesbtn").addEventListener("click", () => {
+  document.getElementById("lesson").classList.add("hidden");
+  document.getElementById("catalog").classList.remove("hidden");
+  setTitle(catalogTitle);
+});
+document.getElementById("next").addEventListener("click", () => follow(goEl(pages.get(current), "next")));
+document.getElementById("back").addEventListener("click", () => {
+  const g = goEl(pages.get(current), "back");
+  if (g) follow(g); else if (history.length) show(history.pop(), false);
+});
+document.getElementById("exit").addEventListener("click", () => {
+  document.getElementById("asktext").textContent = "Are you sure you want to Exit the Lesson?";
+  ask.showModal();
+});
+ask.addEventListener("click", (ev) => { if (ev.target.value) ask.close(); });
+
+fetch(catalogUrl).then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(base => fetch(new URL("extra.xml", location.href)).then(r => r.ok ? r.text() : "").then(extra => {
+    loadCatalog(base);
+    if (extra) mains = mains.concat(mainsFrom(extra));
+    fill(document.getElementById("mains"), mains, mainId, pickMain);
+  }))
+  .catch(() => { stage.textContent = "Could not read ../viewer2/course.xml. Serve the artifacts folder."; });
+</script>
+</body>
+</html>
